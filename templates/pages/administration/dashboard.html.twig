@@ -1,0 +1,146 @@
+{% extends './pages/administration/admin.base.html.twig'%} {%block body%}
+<div
+  class="main-panel ps-container ps-theme-default"
+  data-ps-id="9576a09e-ccdc-dd28-e305-b113575cd664"
+>
+  <!-- Navbar -->
+  <nav
+    class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top"
+    id="navigation-example"
+  >
+    <div class="container-fluid">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        aria-controls="navigation-index"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+        data-target="#navigation-example"
+      >
+        <span class="sr-only">Toggle navigation</span>
+        <span class="navbar-toggler-icon icon-bar"></span>
+        <span class="navbar-toggler-icon icon-bar"></span>
+        <span class="navbar-toggler-icon icon-bar"></span>
+      </button>
+    </div>
+  </nav>
+  <!-- End Navbar -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-4 col-md-12">
+          <div class="card">
+            <div class="card-header card-header-primary">
+              <h4 class="card-title">Derniers inscrits</h4>
+              <p>(total : 22)</p>
+            </div>
+            <div class="card-body table-responsive">
+              <table class="table table-hover">
+                <thead class="text-warning">
+                  <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Langue mat.</th>
+                    <th>Apprend le</th>
+                    <th>Inscrit depuis</th>
+                    <th>Cartes créées</th>
+                    <th>Decks crées</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Lulu</td>
+                    <td>Français</td>
+                    <td>Anglais</td>
+                    <td>13/12/2020</td>
+                    <td>12</td>
+                    <td>2</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-12">
+          <div class="card">
+            <div class="card-header card-header-info">
+              <h4 class="card-title">Dernières cards</h4>
+              <p>(total : 22)</p>
+            </div>
+            <div class="card-body table-responsive">
+              <table class="table table-hover">
+                <thead class="text-warning">
+                  <tr>
+                    <th>ID</th>
+                    <th>Langue</th>
+                    <th>Catégorie</th>
+                    <th>Créé le</th>
+                    <th>Auteur</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Anglais</td>
+                    <td>Vocabulaire</td>
+                    <td>13/12/2020</td>
+                    <td>Lulu</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-12">
+          <div class="card">
+            <div class="card-header card-header-warning">
+              <h4 class="card-title">Derniers decks</h4>
+              <p>(total : 22)</p>
+            </div>
+            <div class="card-body table-responsive">
+              <table class="table table-hover">
+                <thead class="text-warning">
+                  <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Langue</th>
+                    <th>Créé le</th>
+                    <th>Auteur</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Animaux de la ferme</td>
+                    <td>Anglais</td>
+                    <td>13/12/2020</td>
+                    <td>Lulu</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px">
+    <div
+      class="ps-scrollbar-x"
+      tabindex="0"
+      style="left: 0px; width: 0px"
+    ></div>
+  </div>
+  <div class="ps-scrollbar-y-rail" style="top: 0px; right: 0px">
+    <div
+      class="ps-scrollbar-y"
+      tabindex="0"
+      style="top: 0px; height: 0px"
+    ></div>
+  </div>
+</div>
+
+{% endblock body %}
