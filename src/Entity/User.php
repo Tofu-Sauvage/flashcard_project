@@ -52,29 +52,29 @@ class User implements UserInterface
     private $image;
 
     /**
-     * @ORM\OneToMany(targetEntity=deck::class, mappedBy="author")
+     * @ORM\OneToMany(targetEntity=Deck::class, mappedBy="author")
      */
     private $decks;
 
     /**
-     * @ORM\OneToMany(targetEntity=card::class, mappedBy="author")
+     * @ORM\OneToMany(targetEntity=Card::class, mappedBy="author")
      */
     private $cards;
 
     /**
-     * @ORM\ManyToMany(targetEntity=deck::class, inversedBy="fans")
+     * @ORM\ManyToMany(targetEntity=Deck::class, inversedBy="fans")
      * @ORM\JoinTable(name="favorites_fans")
      */
     private $favorites;
 
     /**
-     * @ORM\ManyToOne(targetEntity=language::class, inversedBy="users")
+     * @ORM\ManyToOne(targetEntity=Language::class, inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
      */
     private $language_native;
 
     /**
-     * @ORM\ManyToOne(targetEntity=language::class)
+     * @ORM\ManyToOne(targetEntity=Language::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $language_learn;

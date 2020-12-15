@@ -1,7 +1,7 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
-
+index:
+   path: /
+   controller: App\Controller\HomeController::homeAction
+   
 admin-dashboard:
   path: /admin/dashboard
   controller: App\Controller\AdminController::indexAction
