@@ -27,31 +27,80 @@
   </head>
   <body class="dark-edition">
     <div class="wrapper">
-        {% include './pages/administration/components/sidebar.html.twig' %}
-
-      {% block body %} {% endblock body %}
+      {% include './pages/administration/components/sidebar.html.twig' %}
+      <div
+        class="main-panel ps-container ps-theme-default"
+        data-ps-id="9576a09e-ccdc-dd28-e305-b113575cd664"
+      >
+        <!-- Navbar -->
+        <nav
+          class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top"
+          id="navigation-example"
+        >
+          <div class="container-fluid">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              aria-controls="navigation-index"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+              data-target="#navigation-example"
+            >
+              <span class="sr-only">Toggle navigation</span>
+              <span class="navbar-toggler-icon icon-bar"></span>
+              <span class="navbar-toggler-icon icon-bar"></span>
+              <span class="navbar-toggler-icon icon-bar"></span>
+            </button>
+          </div>
+        </nav>
+        <!-- End Navbar -->
+        {% block body %} {% endblock body %}
+        <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px">
+          <div
+            class="ps-scrollbar-x"
+            tabindex="0"
+            style="left: 0px; width: 0px"
+          ></div>
+        </div>
+        <div class="ps-scrollbar-y-rail" style="top: 0px; right: 0px">
+          <div
+            class="ps-scrollbar-y"
+            tabindex="0"
+            style="top: 0px; height: 0px"
+          ></div>
+        </div>
+      </div>
     </div>
 
     <!--   Core JS Files   -->
-    <script src="{{ asset('/assets/js/core/jquery.min.js')}}"></script>
-    <script src="{{ asset('/assets/js/core/popper.min.js')}}"></script>
-    <script src="{{ asset('/assets/js/bootstrap-material-design.js')}}"></script>
+    <script src="{{ asset('/assets/js/core/jquery.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/core/popper.min.js') }}"></script>
+    <script src="{{
+        asset('/assets/js/bootstrap-material-design.js')
+      }}"></script>
 
     <script src="https://unpkg.com/default-passive-events"></script>
 
     <!--  Notifications Plugin, full documentation here: http://bootstrap-notify.remabledesigns.com/    -->
-    <script src="{{ asset('/assets/js/plugins/bootstrap-notify.js')}}"></script>
+    <script src="{{
+        asset('/assets/js/plugins/bootstrap-notify.js')
+      }}"></script>
 
     <!--  Charts Plugin, full documentation here: https://gionkunz.github.io/chartist-js/ -->
-    <script src="{{ asset('/assets/js/core/chartist.min.js')}}"></script>
+    <script src="{{ asset('/assets/js/core/chartist.min.js') }}"></script>
 
     <!-- Plugin for Scrollbar documentation here: https://github.com/utatti/perfect-scrollbar -->
-    <script src="{{ asset('/assets/js/plugins/perfect-scrollbar.jquery.min.js')}}"></script>
+    <script src="{{
+        asset('/assets/js/plugins/perfect-scrollbar.jquery.min.js')
+      }}"></script>
 
     <!-- Demo init -->
-    <script src="{{ asset('/assets/js/plugins/demo.js')}}"></script>
+    <script src="{{ asset('/assets/js/plugins/demo.js') }}"></script>
 
     <!-- Material Dashboard Core initialisations of plugins and Bootstrap Material Design Library -->
-    <script src="{{ asset('/assets/js/material-dashboard.js?v=2.1.0')}}"></script>
+    <script src="{{
+        asset('/assets/js/material-dashboard.js?v=2.1.0')
+      }}"></script>
   </body>
 </html>

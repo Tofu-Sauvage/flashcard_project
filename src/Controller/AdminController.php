@@ -12,10 +12,12 @@ class AdminController extends AbstractController
 {
   public function indexAction(UserRepository $userRepository, CardRepository $cardRepository, DeckRepository $deckRepository, LanguageRepository $languageRepository)
   {
-    $users = $userRepository->findAll();
-    $languages = $languageRepository->findAll();
-    $cards = $cardRepository->findAll();
-    $decks = $deckRepository->findAll();
-    return $this->render('./pages/administration/dashboard.html.twig', ['users'=>$users, 'languages'=>$languages, 'cards'=>$cards, 'decks'=> $decks]);
+    $lastUsers = $userRepository->findLastestUsers();
+    $lastCards = $cardRepository->findLatestCards();
+    $lastDecks = $deckRepository->findLastestDecks();
+    $allUsers =  $userRepository->findAll();
+    $allCards = $cardRepository->findAll();
+    $allDecks = $deckRepository->findAll();
+    return $this->render('./pages/administration/dashboard.html.twig', ['users'=>$lastUsers,'cards'=>$lastCards, 'decks'=> $lastDecks, 'allUsers'=>$allUsers, 'allCards'=>$allCards, 'allDecks'=>$allDecks]);
   }
 }

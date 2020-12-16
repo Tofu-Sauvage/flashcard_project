@@ -1,175 +1,141 @@
 {% extends './pages/administration/admin.base.html.twig'%} {%block body%}
-<div
-  class="main-panel ps-container ps-theme-default"
-  data-ps-id="9576a09e-ccdc-dd28-e305-b113575cd664"
->
-  <!-- Navbar -->
-  <nav
-    class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top"
-    id="navigation-example"
-  >
-    <div class="container-fluid">
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        aria-controls="navigation-index"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-        data-target="#navigation-example"
-      >
-        <span class="sr-only">Toggle navigation</span>
-        <span class="navbar-toggler-icon icon-bar"></span>
-        <span class="navbar-toggler-icon icon-bar"></span>
-        <span class="navbar-toggler-icon icon-bar"></span>
-      </button>
-    </div>
-  </nav>
-  <!-- End Navbar -->
-  <div class="content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-lg-4 col-md-12">
-          <div class="card">
-            <div class="card-header card-header-primary">
-              <h4 class="card-title">Derniers inscrits</h4>
-              <p>
-                (total : {% set count = 0 %} {% for user in users %} {% set
-                count = count + 1 %} {% endfor %}
-                {{ count }}
-                )
-              </p>
-            </div>
-            <div class="card-body table-responsive">
-              <table class="table table-hover">
-                <thead class="text-warning">
-                  <tr>
-                    <th>ID</th>
-                    <th>Nom</th>
-                    <th>Langue mat.</th>
-                    <th>Apprend le</th>
-                    <th>Inscrit depuis</th>
-                    <th>Cartes créées</th>
-                    <th>Decks crées</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for user in users %}
-                  <tr>
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.name }}</td>
-                    <td>
-                      {{ user.languageNative.name }}
-                    </td>
-                    <td>
-                      {{ user.languageLearn.name }}
-                    </td>
-                    <td>{{user.createdAt | date("d/m/Y") }}</td>
-                    <td class="text-center">
-                      {% set count = 0 %} {% for card in user.cards %} {% set
-                      count = count + 1 %} {% endfor %}
-                      {{ count }}
-                    </td>
-                    <td class="text-center">
-                      {% set count = 0 %} {% for deck in user.decks %} {% set
-                      count = count + 1 %} {% endfor %}
-                      {{ count }}
-                    </td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
+
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-4 col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title">Derniers inscrits</h4>
+            <p>
+              (total : {% set count = 0 %} {% for user in allUsers %} {% set
+              count = count + 1 %} {% endfor %}
+              {{ count }}
+              )
+            </p>
+          </div>
+          <div class="card-body table-responsive">
+            <table class="table table-hover">
+              <thead class="text-warning">
+                <tr>
+                  <th>ID</th>
+                  <th>Nom</th>
+                  <th>Langue mat.</th>
+                  <th>Apprend le</th>
+                  <th>Inscrit depuis</th>
+                  <th>Cartes créées</th>
+                  <th>Decks crées</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for user in users %}
+                <tr>
+                  <td>{{ user.id }}</td>
+                  <td>
+                    <a href="">{{ user.name }}</a>
+                  </td>
+                  <td>
+                    {{ user.languageNative.name }}
+                  </td>
+                  <td>
+                    {{ user.languageLearn.name }}
+                  </td>
+                  <td>{{user.createdAt | date("d/m/Y") }}</td>
+                  <td class="text-center">
+                    {% set count = 0 %} {% for card in user.cards %} {% set
+                    count = count + 1 %} {% endfor %}
+                    {{ count }}
+                  </td>
+                  <td class="text-center">
+                    {% set count = 0 %} {% for deck in user.decks %} {% set
+                    count = count + 1 %} {% endfor %}
+                    {{ count }}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
           </div>
         </div>
-        <div class="col-lg-4 col-md-12">
-          <div class="card">
-            <div class="card-header card-header-info">
-              <h4 class="card-title">Dernières cards</h4>
-              <p>
-                (total : {% set count = 0 %} {% for card in cards %} {% set
-                count = count + 1 %} {% endfor %} {{ count }})
-              </p>
-            </div>
-            <div class="card-body table-responsive">
-              <table class="table table-hover">
-                <thead class="text-warning">
-                  <tr>
-                    <th>ID</th>
-                    <th>Langue</th>
-                    <th>Catégorie</th>
-                    <th>Créé le</th>
-                    <th>Auteur</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for card in cards %}
-                  <tr>
-                    <td>{{ card.id }}</td>
-                    <td>{{ card.author.languageLearn.name }}</td>
-                    <td>{{ card.category.name }}</td>
-                    <td>{{card.createdAt | date("d/m/Y") }}</td>
-                    <td>{{ card.author.name }}</td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
+      </div>
+      <div class="col-lg-4 col-md-12">
+        <div class="card">
+          <div class="card-header card-header-info">
+            <h4 class="card-title">Dernières cards</h4>
+            <p>
+              (total : {% set count = 0 %} {% for card in allCards %} {% set
+              count = count + 1 %} {% endfor %} {{ count }})
+            </p>
+          </div>
+          <div class="card-body table-responsive">
+            <table class="table table-hover">
+              <thead class="text-warning">
+                <tr>
+                  <th>ID</th>
+                  <th>Langue</th>
+                  <th>Catégorie</th>
+                  <th>Créé le</th>
+                  <th>Auteur</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for card in cards %}
+                <tr>
+                  <td>
+                    <a href="">{{ card.id }}</a>
+                  </td>
+                  <td>{{ card.author.languageLearn.name }}</td>
+                  <td>{{ card.category.name }}</td>
+                  <td>{{card.createdAt | date("d/m/Y") }}</td>
+                  <td>{{ card.author.name }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
           </div>
         </div>
-        <div class="col-lg-4 col-md-12">
-          <div class="card">
-            <div class="card-header card-header-warning">
-              <h4 class="card-title">Derniers decks</h4>
-              <p>
-                (total : {% set count = 0 %} {% for deck in decks %} {% set
-                count = count + 1 %} {% endfor %} {{ count }})
-              </p>
-            </div>
-            <div class="card-body table-responsive">
-              <table class="table table-hover">
-                <thead class="text-warning">
-                  <tr>
-                    <th>ID</th>
-                    <th>Nom</th>
-                    <th>Langue</th>
-                    <th>Créé le</th>
-                    <th>Auteur</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for deck in decks %}
-                  <tr>
-                    <td>{{ deck.id }}</td>
-                    <td>{{ deck.name }}</td>
-                    <td>{{ deck.author.languageLearn.name }}</td>
-                    <td>{{ deck.createdAt | date("d/m/Y") }}</td>
-                    <td>{{ deck.author.name }}</td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
+      </div>
+      <div class="col-lg-4 col-md-12">
+        <div class="card">
+          <div class="card-header card-header-warning">
+            <h4 class="card-title">Derniers decks</h4>
+            <p>
+              (total : {% set count = 0 %} {% for deck in allDecks %} {% set
+              count = count + 1 %} {% endfor %} {{ count }})
+            </p>
+          </div>
+          <div class="card-body table-responsive">
+            <table class="table table-hover">
+              <thead class="text-warning">
+                <tr>
+                  <th>ID</th>
+                  <th>Nom</th>
+                  <th>Langue</th>
+                  <th>Créé le</th>
+                  <th>Auteur</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for deck in decks %}
+                <tr>
+                  <td>{{ deck.id }}</td>
+                  <td>
+                    <a href="">{{ deck.name }}</a>
+                  </td>
+                  <td>{{ deck.author.languageLearn.name }}</td>
+                  <td>{{ deck.createdAt | date("d/m/Y") }}</td>
+                  <td>{{ deck.author.name }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px">
-    <div
-      class="ps-scrollbar-x"
-      tabindex="0"
-      style="left: 0px; width: 0px"
-    ></div>
-  </div>
-  <div class="ps-scrollbar-y-rail" style="top: 0px; right: 0px">
-    <div
-      class="ps-scrollbar-y"
-      tabindex="0"
-      style="top: 0px; height: 0px"
-    ></div>
-  </div>
 </div>
+
+
 
 {% endblock body %}
