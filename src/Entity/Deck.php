@@ -63,7 +63,7 @@ class Deck
     private $cards;
 
     /**
-     * @ORM\ManyToOne(targetEntity=language::class)
+     * @ORM\ManyToOne(targetEntity=Language::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $langague_learn;

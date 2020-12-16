@@ -66,13 +66,13 @@ class Card
     private $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity=category::class, inversedBy="cards")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="cards")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
 
     /**
-     * @ORM\ManyToMany(targetEntity=deck::class, inversedBy="cards")
+     * @ORM\ManyToMany(targetEntity=Deck::class, inversedBy="cards")
      */
     private $decks;
 
