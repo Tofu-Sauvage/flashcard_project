@@ -1,10 +1,6 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
-
-home:
-  path: /
-  controller: App\Controller\HomeController::indexAction
+index:
+   path: /
+   controller: App\Controller\HomeController::homeAction
 
 app_login:
   path: /login
