@@ -97,7 +97,9 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
         }
 
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        return new RedirectResponse($this->urlGenerator->generate('admin-dashboard'));
+        
+        // Commenter la ligne-ci-dessous semble résoudre le conflits de routage
+        // return new RedirectResponse($this->urlGenerator->generate('deckboard'));
     }
 
     protected function getLoginUrl()
