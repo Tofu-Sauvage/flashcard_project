@@ -29,4 +29,32 @@ class CategoriesController extends AbstractController {
     }
     return $this->render('./pages/administration/categoryForm.html.twig', ['categoryForm' => $form->createView()]);
   }
+
+  public function categoryEditAction(Request $request, CategoryRepository $categoryRepository, $id)
+  {
+    $category = $categoryRepository->find($id);
+    $categoryForm = $this->createForm(CategoryType::class, $category);
+    $categoryForm->handleRequest($request);
+
+    if ($categoryForm->isSubmitted()) {
+      $category = $categoryForm->getData();
+      $manager = $this->getDoctrine()->getManager();
+      $manager->persist($category);
+      $manager->flush();
+      //$this->addFlash('success-category', 'La catégorie a bien été modifiée !');
+      return $this->redirectToRoute('admin-categories');
+        }
+    return $this->render('./pages/administration/categoryForm.html.twig', ['categoryForm' => $categoryForm->createView()]);
+  }
+
+
+  public function categoryDeleteAction(EntityManagerInterface $em, CategoryRepository $categoryRepository, $id)
+  {
+    $category = $categoryRepository->find($id);
+    $em->remove($category);
+    $em->flush();
+    //$this->addFlash('success-category', 'La catégorie a bien été supprimée !');
+    return $this->redirectToRoute('admin-categories');  }
+
+
 }

@@ -20,7 +20,7 @@
                     <th>ID</th>
                     <th>Nom</th>
                     <th>Cartes concernées</th>
-                    <th>Voir</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -32,16 +32,33 @@
                       {% set count = 0 %} {% for card in category.cards %} {%
                       set count = count + 1 %} {% endfor %} {{ count }}
                     </td>
-                    <td class="td-actions text-right">
+                    <td class="td-actions text-center">
                       <button
-                        type="button"
-                        rel="tooltip"
-                        title=""
-                        class="btn btn-white btn-link btn-sm"
-                        data-original-title="Edit Task"
+                      type="button"
+                      rel="tooltip"
+                      title="Supprimer"
+                      class="btn btn-white btn-link btn-sm"
+                    >
+                      <a
+                        href="{{
+                          path('category-edit', { id: category.id })
+                        }}"
+                        ><i class="material-icons">edit</i></a
                       >
-                        <i class="material-icons">remove_red_eye</i>
-                      </button>
+                    </button>
+                    <button
+                      type="button"
+                      rel="tooltip"
+                      title="Supprimer"
+                      class="btn btn-white btn-link btn-sm"
+                    >
+                      <a
+                        href="{{
+                          path('category-delete', { id: category.id })
+                        }}"
+                        ><i class="material-icons">close</i></a
+                      >
+                    </button>
                     </td>
                   </tr>
                   {% endfor %}
