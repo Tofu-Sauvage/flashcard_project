@@ -22,8 +22,9 @@
             <div class="container">
 
 			    {% block body %}{% endblock %}
-            </div>
-
+			</div>
+			
+            {% include "./components/footer.html.twig" %}
             {% include "./components/script_js.html.twig" %}
 			{% block javascripts %}{% endblock %}
 		</body>
