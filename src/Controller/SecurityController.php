@@ -21,7 +21,7 @@ class SecurityController extends AbstractController
                 $route = 'deckboard';
             } else {
                 $route = 'index';
-                $this->addFlash('success', "Erreur"); // En attendant de créer d'autres Flash Messages
+                // $this->addFlash('error', "Erreur"); // En attendant de créer d'autres Flash Messages
             }
             return $this->redirectToRoute($route);
         }
