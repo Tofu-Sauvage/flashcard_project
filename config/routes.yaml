@@ -30,6 +30,22 @@ admin-categories:
   path: /admin/categories
   controller: App\Controller\CategoriesController::indexAction
 
+category-create:
+  path: /admin/create/category
+  controller : App\Controller\CategoriesController::categoryCreateAction
+
 admin-languages:
   path: /admin/languages
   controller: App\Controller\LanguagesController::indexAction
+
+language-create:
+  path: /admin/create/language
+  controller : App\Controller\LanguagesController::languageCreateAction
+
+language-edit:
+  path: /admin/edit/language/{id}
+  controller : App\Controller\LanguagesController::languageEditAction
+
+language-delete:
+  path: /admin/delete/language/{id}
+  controller : App\Controller\LanguagesController::languageDeleteAction

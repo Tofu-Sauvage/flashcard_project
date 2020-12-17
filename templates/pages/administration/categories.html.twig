@@ -5,11 +5,11 @@
     <div>
       <div class="card">
         <div class="card-header card-header-tabs card-header-primary">
-          <div class="nav-tabs-navigation">
-            <p class="h3">
-              Catégories
+          <p class="h3">Catégories</p>
+            <p class="card-category">
+              <i class="material-icons">add</i>
+              <a href="{{path('category-create') }}">Ajouter</a>
             </p>
-          </div>
         </div>
         <div class="card-body">
           <div class="tab-content">
@@ -28,8 +28,10 @@
                   <tr>
                     <td>{{ category.id }}</td>
                     <td>{{ category.name }}</td>
-                    <td>{% set count = 0 %} {% for card in category.cards %} {% set
-                      count = count + 1 %} {% endfor %} {{ count }}</td>
+                    <td>
+                      {% set count = 0 %} {% for card in category.cards %} {%
+                      set count = count + 1 %} {% endfor %} {{ count }}
+                    </td>
                     <td class="td-actions text-right">
                       <button
                         type="button"
@@ -50,7 +52,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>
 

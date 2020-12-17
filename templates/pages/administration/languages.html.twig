@@ -5,12 +5,14 @@
     <div>
       <div class="card">
         <div class="card-header card-header-tabs card-header-warning">
-          <div class="nav-tabs-navigation">
-            <p class="h3">
-              {% set count = 0 %} {% for language in languages %} {% set count =
-              count + 1 %} {% endfor %} {{ count }} langages enregistrés
-            </p>
-          </div>
+          <p class="h3">
+            {% set count = 0 %} {% for language in languages %} {% set count =
+            count + 1 %} {% endfor %} {{ count }} langages enregistrés
+          </p>
+          <p class="card-category">
+            <i class="material-icons">add</i>
+            <a href="{{ path('language-create') }}">Ajouter</a>
+          </p>
         </div>
         <div class="card-body">
           <div class="tab-content">
@@ -20,8 +22,8 @@
                   <tr>
                     <th>ID</th>
                     <th>Nom</th>
-
-                    <th>Voir</th>
+                    <th>Drapeau</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -29,16 +31,44 @@
                   <tr>
                     <td>{{ language.id }}</td>
                     <td>{{ language.name }}</td>
+                    <td>
+                      {% if language.flag is not null%}
+                      <img
+                        src="/uploads/images/{{ language.flag }}"
+                        width="20px"
+                        height="auto"
+                        focusable="false"
+                        role="img"
+                        preserveAspectRatio="xMidYMid slice"
+                      />{% endif %}
+                    </td>
 
-                    <td class="td-actions text-right">
+                    <td class="td-actions text-center">
                       <button
                         type="button"
                         rel="tooltip"
-                        title=""
+                        title="Supprimer"
                         class="btn btn-white btn-link btn-sm"
-                        data-original-title="Edit Task"
                       >
-                        <i class="material-icons">remove_red_eye</i>
+                        <a
+                          href="{{
+                            path('language-edit', { id: language.id })
+                          }}"
+                          ><i class="material-icons">edit</i></a
+                        >
+                      </button>
+                      <button
+                        type="button"
+                        rel="tooltip"
+                        title="Supprimer"
+                        class="btn btn-white btn-link btn-sm"
+                      >
+                        <a
+                          href="{{
+                            path('language-delete', { id: language.id })
+                          }}"
+                          ><i class="material-icons">close</i></a
+                        >
                       </button>
                     </td>
                   </tr>
