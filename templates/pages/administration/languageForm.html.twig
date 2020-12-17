@@ -1,0 +1,53 @@
+{% extends './pages/administration/admin.base.html.twig'%} {%block body%}
+
+<div class="content">
+  <div class="container-fluid">
+    <div class="card card-stats">
+      <div class="card-header card-header-success card-header-icon">
+        <div class="row">
+          <div class="col-lg-1 col-md-1">
+            <div class="card-icon primary">
+              <i class="material-icons">flag</i>
+            </div>
+          </div>
+          <div class="col-lg-11 col-md-11">
+            <p class="h2" style="color: white ; text-align: left;">Langues</p>
+          </div>
+        </div>
+      </div>
+      {{ form_start(languageForm) }}
+      <form>
+        <div class="form-group container">
+          <fieldset>
+            <div class="form-group">
+              {{ form_label(languageForm.name) }}
+              {{form_widget(languageForm.name, {attr: {'class' :"form-control"
+
+
+              }})}}
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-1 col-md-1">
+            {{ form_label(languageForm.flag) }}
+                    </div>
+                <div class="col-lg-11 col-md-11">
+                    <p class="mb-5">
+                    {{ form_widget(languageForm.flag, {attr: {'class' :"form-control-file", 'style':"opacity:1 ; z-index:1 ; color:lightgrey"
+                    }}) }}</p>
+                </div>
+            </div>
+            <div class="form-group">
+              {{form_widget(languageForm.ajouter, {attr: {'class' :"btn btn-primary"
+
+              }})}}
+            </div>
+          </fieldset>
+        </div>
+      </form>
+      {{ form_end(languageForm) }}
+    </div>
+  </div>
+</div>
+
+{% endblock body %}
