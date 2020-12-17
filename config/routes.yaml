@@ -10,6 +10,8 @@ app_logout:
   path: /logout
   controller: App\Controller\SecurityController::logout
 
+# ------------- ADMIN ---------------------
+
 admin-dashboard:
   path: /admin/dashboard
   controller: App\Controller\AdminController::indexAction
@@ -33,3 +35,9 @@ admin-categories:
 admin-languages:
   path: /admin/languages
   controller: App\Controller\LanguagesController::indexAction
+
+# ------------- USER ---------------------
+
+deckboard:
+  path: /profile/deckboard
+  controller: App\Controller\DeckboardController::indexAction
