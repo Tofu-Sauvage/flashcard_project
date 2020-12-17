@@ -19,38 +19,38 @@
           data-ps-id="e42e0919-82d1-aa0b-b428-babea0e1e0bc"
         >
           <ul class="nav">
-            <li>
+            <li class="nav-item {{'dashboard' in  app.request.uri ? 'active':'' }}">
               <a class="nav-link" href="{{ path('admin-dashboard') }}">
                 <i class="material-icons">dashboard</i>
                 <p>Dashboard</p>
               </a>
             </li>
-            <li>
-                <a class="nav-link" href="{{ path('index') }}">
+            <li class="nav-item {{'users' in  app.request.uri ? 'active':'' }}">
+                <a class="nav-link" href="{{ path('admin-users') }}">
                   <i class="material-icons">account_box</i>
                   <p>Voir tout les inscrits</p>
                 </a>
               </li>
-              <li>
-                <a class="nav-link" href="{{ path('index') }}">
+              <li class="nav-item {{'cards' in  app.request.uri ? 'active':'' }}">
+                <a class="nav-link" href="{{ path('admin-cards') }}">
                   <i class="material-icons">bookmark</i>
                   <p>Voir toutes les cartes</p>
                 </a>
               </li>
-              <li>
-                <a class="nav-link" href="{{ path('index') }}">
+              <li class="nav-item {{'decks' in  app.request.uri ? 'active':'' }}">
+                <a class="nav-link" href="{{ path('admin-decks') }}">
                   <i class="material-icons">bookmarks</i>
                   <p>Voir tout les decks</p>
                 </a>
               </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('index') }}">
+            <li  class="nav-item {{'categories' in  app.request.uri ? 'active':'' }}">
+                <a class="nav-link" href="{{ path('admin-categories') }}">
                   <i class="material-icons">article</i>
                   <p>Voir les catégories</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_logout') }}">
+              <li  class="nav-item {{'languages' in  app.request.uri ? 'active':'' }}">
+                <a class="nav-link" href="{{ path('admin-languages') }}">
                   <i class="material-icons">flag</i>
                   <p>Voir les langues</p>
                 </a>

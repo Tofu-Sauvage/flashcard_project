@@ -13,3 +13,23 @@ app_logout:
 admin-dashboard:
   path: /admin/dashboard
   controller: App\Controller\AdminController::indexAction
+
+admin-users:
+  path: /admin/users
+  controller: App\Controller\UsersController::indexAction
+
+admin-cards:
+  path: /admin/cards
+  controller: App\Controller\CardsController::indexAction
+
+admin-decks:
+  path: /admin/decks
+  controller: App\Controller\DecksController::indexAction
+
+admin-categories:
+  path: /admin/categories
+  controller: App\Controller\CategoriesController::indexAction
+
+admin-languages:
+  path: /admin/languages
+  controller: App\Controller\LanguagesController::indexAction
