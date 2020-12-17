@@ -40,7 +40,7 @@ class LanguagesController extends AbstractController {
     return $this->render('./pages/administration/languageForm.html.twig', ['languageForm' => $form->createView()]);
   }
 
-  public function languageEditAction(Request $request, LanguageRepository $languageRepository, $id)
+  public function languageEditAction(Request $request, LanguageRepository $languageRepository, EntityManagerInterface $em, $id)
   {
 
     $language = $languageRepository->find($id);
@@ -59,9 +59,8 @@ class LanguagesController extends AbstractController {
         );
         $language->setFlag($uniqueName);
       }
-      $manager = $this->getDoctrine()->getManager();
-      $manager->persist($language);
-      $manager->flush();
+      $em->persist($language);
+      $em->flush();
       //$this->addFlash('success-category', 'La catégorie a bien été modifiée !');
       return $this->redirectToRoute('admin-languages');
         }

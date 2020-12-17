@@ -30,7 +30,7 @@ class CategoriesController extends AbstractController {
     return $this->render('./pages/administration/categoryForm.html.twig', ['categoryForm' => $form->createView()]);
   }
 
-  public function categoryEditAction(Request $request, CategoryRepository $categoryRepository, $id)
+  public function categoryEditAction(Request $request, CategoryRepository $categoryRepository, EntityManagerInterface $em, $id)
   {
     $category = $categoryRepository->find($id);
     $categoryForm = $this->createForm(CategoryType::class, $category);
@@ -38,9 +38,8 @@ class CategoriesController extends AbstractController {
 
     if ($categoryForm->isSubmitted()) {
       $category = $categoryForm->getData();
-      $manager = $this->getDoctrine()->getManager();
-      $manager->persist($category);
-      $manager->flush();
+      $em->persist($category);
+      $em->flush();
       //$this->addFlash('success-category', 'La catégorie a bien été modifiée !');
       return $this->redirectToRoute('admin-categories');
         }
