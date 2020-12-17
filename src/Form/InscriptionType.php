@@ -27,18 +27,18 @@ class InscriptionType extends AbstractType
             // ->add('created_at', DateTimeType::class)
             ->add('image', FileType::class, ['mapped' => false, 'required' => false])
             // ->add('favorites')
-            ->add('language_native', EntityType::class, 
-            ['class'=>Language::class, 
-            'choice_label' => 'name',
-            'multiple' => 'false',
-            'expanded' => 'false'
-            ])
-            ->add('language_learn', EntityType::class, 
-            ['class'=>Language::class, 
-            'choice_label' => 'name',
-            'multiple' => 'false',
-            'expanded' => 'false'
-            ])
+            // ->add('language_native', EntityType::class, 
+            // ['class'=>Language::class, 
+            // 'choice_label' => 'name',
+            // 'multiple' => 'false',
+            // 'expanded' => 'false'
+            // ])
+            // ->add('language_learn', EntityType::class, 
+            // ['class'=>Language::class, 
+            // 'choice_label' => 'name',
+            // 'multiple' => 'false',
+            // 'expanded' => 'false'
+            // ])
             ->add('submit', SubmitType::class)
         ;
     }
