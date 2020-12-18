@@ -28,6 +28,12 @@ class HomeController extends AbstractController {
         $user->setImage('user-blanck.png'); // Image "blanche" par défaut
       }
 
+      $password = $form->get('password')->getData();
+      if($password == null){
+
+        return $this->redirectToRoute('index');
+      }
+
       $user->setCreatedAt(new \DateTime()); // Date et heure au moment de la création
       $user->setRoles(['ROLE_USER']);
       $language = $languageRepository->findOneBy(['id' => 8]); // Français par défaut
