@@ -29,6 +29,8 @@ class InscriptionType extends AbstractType
                 'invalid_message' => 'Les deux champs "mots de passe" ne sont pas identique.',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
+                'mapped' => true,
+                'error_bubbling' => true,
                 'first_options'  => ['label' => 'Mot de passe'],
                 'second_options' => ['label' => 'Confirmer mot de passe'],
             ])
