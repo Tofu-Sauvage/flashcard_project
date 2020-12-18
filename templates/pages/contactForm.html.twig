@@ -1,0 +1,84 @@
+{% extends "base.html.twig" %} {% block body %} {% for flash in
+app.flashes('success-message') %}
+<div class="alert alert-dismissible alert-secondary">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  {{ flash }}
+</div>
+{% endfor %}
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">Contactez-nous</h4>
+        <p class="card-category">
+          Nous vous répondrons dans les meilleurs délais.
+        </p>
+      </div>
+      <div class="card-body">
+        {{ form_start(formulaire) }}
+        <form data-np-checked="1">
+          <fieldset>
+            <div class="form-group">
+              {{ form_label(formulaire.sender) }}
+              {{form_widget(formulaire.sender, {attr: {'class' :"form-control"
+
+
+
+              }})}}
+            </div>
+            <div class="form-group">
+              {{ form_label(formulaire.email) }}
+              {{form_widget(formulaire.email, {attr: {'class' :"form-control"
+
+              }})}}
+            </div>
+            <div class="form-group">
+              {{ form_label(formulaire.subject) }}
+              {{form_widget(formulaire.subject, {attr: {'class' :"form-control"
+
+
+
+              }})}}
+            </div>
+            <div class="form-group">
+              {{ form_label(formulaire.content) }}
+              {{form_widget(formulaire.content, {attr: {'class' :"form-control"
+
+
+
+              }})}}
+            </div>
+            <div class="form-group">
+              {{ form_label(formulaire.Envoyer) }}
+              {{form_widget(formulaire.Envoyer, {attr: {'class' :"btn btn-primary"
+
+
+
+              }})}}
+            </div>
+          </fieldset>
+        </form>
+        {{ form_end(formulaire) }}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 mt-5">
+    <div class="card card-profile">
+      <div class="card-avatar">
+        <a href="#pablo">
+          <img class="img" src="/assets/img/contact.jpg" />
+        </a>
+      </div>
+      <div class="card-body">
+        <h6 class="card-category">Ici un truc</h6>
+        <h4 class="card-title">Là un autre truc</h4>
+        <p class="card-description">
+          Ici un texte cool pour dire qu'on est vraiment trop forts... 
+        </p>
+      
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body%}
