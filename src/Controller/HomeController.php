@@ -16,10 +16,12 @@ class HomeController extends AbstractController {
     $form = $this->createForm(InscriptionType::class);
 
     $form->handleRequest($request);
-    if($form->isSubmitted()){
+
+    if($form->isSubmitted() && $form->isValid()){
+      
       $user = $form->getData();
       $image = $form->get('image')->getData();
-
+      
       if($image){
         $newFileName ="user-image" . uniqid(). "." . $image->guessExtension();
         $image->move($this->getParameter('uploads'), $newFileName);
@@ -41,6 +43,6 @@ class HomeController extends AbstractController {
       $this->addFlash('success', "L'utilisateur a bien été ajouté");
       return $this->redirectToRoute('index');
     }
-    return $this->render("pages/accueil.html.twig", ['form' => $form->createView()]);
+    return $this->render("pages/accueil.html.twig", ['form' => $form->createView(), 'errors' => $form->getErrors()]);
   }
 }
