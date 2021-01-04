@@ -26,19 +26,19 @@ class UserFixtures extends Fixture
     {
         // LANGUAGES
         $french = new Language();
-        $french->setName("Français")->setFlag("https://cdn.countryflags.com/thumbs/france/flag-400.png
+        $french->setName("Français")->setFlag("flags/france.png
         ");
         $manager->persist($french);
         $manager->flush();
 
         $english = new Language();
-        $english->setName("Anglais")->setFlag("https://cdn.countryflags.com/thumbs/united-kingdom/flag-400.png
+        $english->setName("Anglais")->setFlag("flags/uk.png
         ");
         $manager->persist($english);
         $manager->flush();
 
         $finnois = new Language();
-        $finnois->setName("Finnois")->setFlag("https://cdn.countryflags.com/thumbs/finland/flag-400.png
+        $finnois->setName("Finnois")->setFlag("flags/finland.png
         ");
         $manager->persist($finnois);
         $manager->flush();
