@@ -11,4 +11,10 @@ class CardsController extends AbstractController {
     $cards = $cardRepository->findAll();
     return $this->render('./pages/administration/cards.html.twig', ['cards'=>$cards]);
   }
+
+  public function detailAction(CardRepository $cardRepository, $id)
+  {
+    $card =  $cardRepository->findOneBy(['id' => $id]);
+    return $this->render('./pages/administration/card.html.twig', ['card' => $card]);
+  }
 }
