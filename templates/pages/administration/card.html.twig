@@ -3,33 +3,60 @@
 <div class="content">
   <div class="container-fluid">
     <div class="col-lg-6 col-md-12">
-      <div class="card">
-        <div class="card card-profile">
-          <div class="card-avatar">
-            <a href="#pablo">
-              <img class="img" src="/assets/img/faces/user-blanck.png" />
-            </a>
-          </div>
-          <div class="card-body">
-            <h6 class="card-category">id - {{ card.id }}</h6>
-            <h4 class="card-title">Autheur - {{ card.author.name }}</h4>
+      <div class="card card-profile">
+        <div class="card-avatar">
+          <a href="#pablo">
+            <img class="img" src="/assets/img/faces/user-blanck.png" />
+          </a>
+        </div>
+        <div class="card-body">
+          <h6 class="card-category">
+            id - {{ card.id }} <br />
+            catégorie - {{ card.category.name }}
+          </h6>
+          <h4 class="card-title">Auteur - {{ card.author.name }}</h4>
 
-            <div class="row">
-              <div class="col-4">Question</div>
-              <div class="col-8">{{ card.question }}</div>
-            </div>
-            <div class="row">
-              <div class="col-lg-4">Réponse</div>
-              <div class="col-lg-8 text-align-left">{{ card.answer }}</div>
-            </div>
-<p>
-    
-</p>
-            <a href="#pablo" class="btn btn-primary btn-round">Supprimer</a>
+          <div class="row">
+            <div class="col-6"><p class="h4">Question</p></div>
+            <div class="col-6"><p class="h4">Réponse</p></div>
           </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <p class="h3">"{{ card.question }}"</p>
+            </div>
+            <div class="col-lg-6">
+              <p class="h3">"{{ card.answer }}"</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6"><p class="h4">Phrase d'exemple</p></div>
+            <div class="col-6"><p class="h4">Traduction</p></div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <p class="h3">{{ card.sentence1 }}</p>
+            </div>
+            <div class="col-lg-6">
+              <p class="h3">{{ card.sentence2 }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6"><p class="h4">Temps</p></div>
+            <div class="col-6"><p class="h4">Mode</p></div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <p class="h3">{{ card.tense }}</p>
+            </div>
+            <div class="col-lg-6">
+              <p class="h3">{{ card.mood }}</p>
+            </div>
+          </div>
+          <a href="#pablo" class="btn btn-primary btn-round">Supprimer</a>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 {% endblock body%}

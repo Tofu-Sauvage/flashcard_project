@@ -12,7 +12,7 @@ class CardsController extends AbstractController {
 
   public function indexAction(CardRepository $cardRepository) {
     $cards = $cardRepository->findAll();
-    return $this->render('./pages/administration/card.html.twig', ['cards'=>$cards]);
+    return $this->render('./pages/administration/cards.html.twig', ['cards'=>$cards]);
   }
 
   public function cardCreateAction(Request $request, EntityManagerInterface $em)
@@ -34,7 +34,6 @@ class CardsController extends AbstractController {
       $em->persist($card);
       $em->flush();
     }
-
 
     return $this->render('./pages/user/cardForm.html.twig', ['cardForm' => $form->createView()]);
 
