@@ -6,8 +6,27 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-6">
-        <div class="card">
-
+        <div class="card"> {# Section "cartes"#}
+          <div class="card-header card-header-primary">
+            <h2 class="card-title">Cartes</h2>
+          </div>
+          <div class="card-body">
+            {% if not cards %} {# Si aucune carte présente en BDD cards == null #}
+              <h3><a href="#">Veuillez créer votre première carte :)</a></h3>
+            {% endif %}
+          
+          </div>
+        </div> {# Fin Section "cartes"#}
+          <div class="card"> {# Section "decks"#}
+            <div class="card-header card-header-info">
+              <h2 class="card-title">Decks</h2>
+            </div>
+            <div class="card-body">
+            {% if not cards %} {# Si aucune carte présente en BDD cards == null #}
+              <h3><a href="#">Veuillez créer votre première carte AVANT de créer votre premier deck</a></h3>
+            {% endif %}
+          
+          </div> {#  Fin Section "decks"#}
         </div>
       </div>
     </div>
