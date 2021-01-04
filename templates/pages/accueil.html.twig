@@ -15,6 +15,9 @@
       <p>Votre espace de travail idéal pour apprendre les langues que vous voulez par le biais du célèbre système de flashcards !</p>
       <p>Projet Flashcards fonctionne sur le principe de l'auto-discipline. Définissez vos propres flashcards et révisez dès maintenant !</p>
       <p>Toute une communauté de linguistes aussi passionnés que vous vous attends. Rejoignez-nous !</p>
+      <p>Votre espace de travail idéal pour apprendre les langues que vous voulez par le biais du célèbre système de flashcards !</p>
+      <p>Projet Flashcards fonctionne sur le principe de l'auto-discipline. Définissez vos propres flashcards et révisez dès maintenant !</p>
+      <p>Toute une communauté de linguistes aussi passionnés que vous vous attends. Rejoignez-nous !</p>
       </div>
     <div class="col-sm">
       <h2 class="mb-4">Inscription</h2>
@@ -52,9 +55,13 @@
           {{ form_widget(form.name, {attr: {'class': 'form-control'}}) }}
         </div>
 
+        
+        <p>Profile picture (optional). Keep in mind that offensive pictures are prohibited and may result in a ban of your account.</p>
+       
+
         <div class="form-group">
+          {{ form_label(form.name, "Picture") }} {# ??? #} 
           {{ form_widget(form.image, {attr: {'class': 'form-control-file', 'style': 'opacity:1; z-index:1'}}) }}
-          {{ form_label(form.image) }}
         </div>
 
          {# <div class="form-group">
@@ -78,9 +85,9 @@
             </div>
           {% endfor %}
         </div> #}
-
           {{ form_widget(form.submit, {label: 'Valider', attr: {'class': 'btn btn-primary mt-3'}}) }}
-      {{ form_end(form) }}
+          {{ form_end(form) }}
+      
     </div>
   </div>
 
