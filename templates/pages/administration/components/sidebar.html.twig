@@ -27,7 +27,7 @@
             </li>
             <li class="nav-item {{'users' in  app.request.uri ? 'active':'' }}">
                 <a class="nav-link" href="{{ path('admin-users') }}">
-                  <i class="material-icons">account_box</i>
+                  <i class="material-icons">supervised_user_circle</i>
                   <p>Voir tout les inscrits</p>
                 </a>
               </li>
@@ -53,6 +53,18 @@
                 <a class="nav-link" href="{{ path('admin-languages') }}">
                   <i class="material-icons">flag</i>
                   <p>Voir les langues</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <i class="material-icons">account_circle</i>
+                  <p>Notre deckboard</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path('index') }}">
+                  <i class="material-icons">home</i>
+                  <p>Retour accueil</p>
                 </a>
               </li>
             <li class="nav-item">
