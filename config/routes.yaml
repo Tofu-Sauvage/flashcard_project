@@ -73,3 +73,7 @@ language-delete:
 deckboard:
   path: /profile/deckboard
   controller: App\Controller\DeckboardController::indexAction
+
+card:
+  path: /profile/create/card
+  controller : App\Controller\CardsController::cardCreateAction
