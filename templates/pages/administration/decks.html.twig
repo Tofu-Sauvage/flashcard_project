@@ -39,15 +39,16 @@
                     </td>
 
                     <td class="td-actions text-right">
-                      <button
-                        type="button"
-                        rel="tooltip"
-                        title=""
-                        class="btn btn-white btn-link btn-sm"
-                        data-original-title="Edit Task"
+                      <a href="{{ path('admin-deck', { id: deck.id }) }}"
+                        ><button
+                          type="button"
+                          rel="tooltip"
+                          title=""
+                          class="btn btn-white btn-link btn-sm"
+                        >
+                          <i class="material-icons">remove_red_eye</i>
+                        </button></a
                       >
-                        <i class="material-icons">remove_red_eye</i>
-                      </button>
                     </td>
                   </tr>
                   {% endfor %}

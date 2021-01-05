@@ -22,8 +22,7 @@
                     <th>Auteur</th>
                     <th>Langue</th>
                     <th>Catégorie</th>
-                    <th>Qestion</th>
-                    <th>Réponse</th>
+                    <th>Question</th>
                     <th>Créée le</th>
                     <th>Decks concernés</th>
                     <th>Voir</th>
@@ -36,8 +35,7 @@
                     <td>{{ card.author.name }}</td>
                     <td>{{ card.author.languageLearn.name }}</td>
                     <td>{{ card.category.name }}</td>
-                    <td>{{ card.question }}</td>
-                    <td>{{ card.answer }}</td>
+                    <td>{{ card.question |length > 20 ? card.question|slice(0, 20) ~ '...' : card.question }}</td>
                     <td>{{card.createdAt | date("d/m/Y") }}</td>
                     <td>
                       {% set count = 0 %} {% for deck in card.decks %} {% set
@@ -45,15 +43,14 @@
                     </td>
 
                     <td class="td-actions text-right">
-                      <button
+                      <a href="{{ path('admin-card', { id: card.id }) }}"><button
                         type="button"
                         rel="tooltip"
                         title=""
                         class="btn btn-white btn-link btn-sm"
-                        data-original-title="Edit Task"
                       >
                         <i class="material-icons">remove_red_eye</i>
-                      </button>
+                      </button></a>
                     </td>
                   </tr>
                   {% endfor %}
