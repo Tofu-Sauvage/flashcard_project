@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Form\DeckType;
 use App\Repository\DeckRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DecksController extends AbstractController {
@@ -12,7 +15,21 @@ class DecksController extends AbstractController {
     return $this->render('./pages/administration/decks.html.twig', ['decks'=>$decks]);
   }
 
-  
+  public function deckCreateAction(Request $request, EntityManagerInterface $em)
+  {
+    $form = $this->createForm(DeckType::class);
+    $form->handleRequest($request);
+    if ($form->isSubmitted()) {
+      $deck = $form->getData();
+      
+      $em->persist($deck);
+      $em->flush();
+    }
+
+
+    return $this->render('./pages/administration/deckForm.html.twig', ['deckForm' => $form->createView()]);
+
+  }
   public function detailAction(DeckRepository $deckRepository, $id)
   {
     $deck =  $deckRepository->findOneBy(['id' => $id]);

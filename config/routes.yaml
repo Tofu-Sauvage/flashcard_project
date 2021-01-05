@@ -89,3 +89,7 @@ deckboard:
 card:
   path: /profile/create/card
   controller : App\Controller\CardsController::cardCreateAction
+
+deck:
+  path: /profile/create/deck
+  controller : App\Controller\DecksController::deckCreateAction
