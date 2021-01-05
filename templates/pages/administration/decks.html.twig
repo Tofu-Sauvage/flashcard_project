@@ -30,7 +30,7 @@
                   {% for deck in decks %}
                   <tr>
                     <td>{{ deck.id }}</td>
-                    <td>{{ deck.author.name }}</td>
+                    <td> <a href="{{ path('admin-user', { id: deck.author.id }) }}">{{ deck.author.name }}</a></td>
                     <td>{{ deck.author.languageLearn.name }}</td>
                     <td>{{deck.createdAt | date("d/m/Y") }}</td>
                     <td>

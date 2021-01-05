@@ -28,6 +28,10 @@ admin-users:
   path: /admin/users
   controller: App\Controller\UsersController::indexAction
 
+admin-user:
+  path: /admin/user/{id}
+  controller: App\Controller\UsersController::detailAction
+
 admin-cards:
   path: /admin/cards
   controller: App\Controller\CardsController::indexAction

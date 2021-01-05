@@ -32,7 +32,7 @@
                   {% for card in cards %}
                   <tr>
                     <td>{{ card.id }}</td>
-                    <td>{{ card.author.name }}</td>
+                    <td> <a href="{{ path('admin-user', { id: card.author.id }) }}">{{ card.author.name }}</a></td>
                     <td>{{ card.author.languageLearn.name }}</td>
                     <td>{{ card.category.name }}</td>
                     <td>{{ card.question |length > 20 ? card.question|slice(0, 20) ~ '...' : card.question }}</td>

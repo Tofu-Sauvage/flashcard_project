@@ -11,4 +11,10 @@ class UsersController extends AbstractController {
     $users = $userRepository->findAll();
     return $this->render('./pages/administration/users.html.twig', ['users'=>$users]);
   }
+
+  public function detailAction(UserRepository $userRepository, $id)
+  {
+    $user =  $userRepository->findOneBy(['id' => $id]);
+    return $this->render('./pages/administration/user.html.twig', ['user' => $user]);
+  }
 }

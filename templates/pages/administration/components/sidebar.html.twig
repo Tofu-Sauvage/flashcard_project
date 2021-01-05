@@ -25,7 +25,7 @@
                 <p>Dashboard</p>
               </a>
             </li>
-            <li class="nav-item {{'users' in  app.request.uri ? 'active':'' }}">
+            <li class="nav-item {{'users' in  app.request.uri ? 'active':'' }} {{'user' in  app.request.uri ? 'active':'' }}">
                 <a class="nav-link" href="{{ path('admin-users') }}">
                   <i class="material-icons">supervised_user_circle</i>
                   <p>Voir tout les inscrits</p>

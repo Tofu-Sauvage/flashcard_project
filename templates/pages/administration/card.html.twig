@@ -2,95 +2,148 @@
 
 <div class="content">
   <div class="container-fluid">
-    <div class="col-lg-6 col-md-12">
-      <div class="card card-profile">
-        {% if card.image is not null%}
-        <div class="card-avatar">
-          <img class="img" src="/uploads/images/{{ card.image }}" />
+    <div class="row">
+      <div class="col-lg-6 col-md-12">
+        <div class="card card-profile">
+          {% if card.image is not null%}
+          <div class="card-avatar">
+            <img class="img" src="/uploads/images/{{ card.image }}" />
+          </div>
+          {% else %}
+          <div class="card-avatar">
+            <img class="img" src="/assets/img/faces/user-blanck.png" />
+          </div>
+          {% endif %}
+
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane active">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Auteur</th>
+                      <th>Langue</th>
+                      <th>Catégorie</th>
+                      <th>Créée le</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>{{ card.id }}</td>
+                      <td>
+                        <a
+                          href="{{
+                            path('admin-user', { id: card.author.id })
+                          }}"
+                          >{{ card.author.name }}</a
+                        >
+                      </td>
+                      <td>{{ card.author.languageLearn.name }}</td>
+                      <td>{{ card.category.name }}</td>
+                      <td>{{card.createdAt | date("d/m/Y") }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="card col-xl-6" style="width: 20rem">
+                <div class="card-body">
+                  <h4 class="card-title">Question</h4>
+                  <p class="card-text">{{ card.question }}</p>
+                </div>
+              </div>
+              <div class="card col-xl-6" style="width: 20rem">
+                <div class="card-body">
+                  <h4 class="card-title">Réponse</h4>
+                  <p class="card-text">{{ card.answer }}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              {% if card.sentence1 and card.sentence2 is not null%}
+              <div class="card col-xl-6" style="width: 20rem">
+                <div class="card-body">
+                  <h4 class="card-title">Phrase d'exemple</h4>
+                  <p class="card-text">{{ card.sentence1 }}</p>
+                </div>
+              </div>
+              <div class="card col-xl-6" style="width: 20rem">
+                <div class="card-body">
+                  <h4 class="card-title">Traduction</h4>
+                  <p class="card-text">{{ card.sentence2 }}</p>
+                </div>
+              </div>
+              {%endif%}
+            </div>
+
+            <div class="row">
+              {% if card.tense is not null%}
+              <div class="card col-xl-6" style="width: 20rem">
+                <div class="card-body">
+                  <h4 class="card-title">Temps</h4>
+                  <p class="card-text">{{ card.tense }}</p>
+                </div>
+              </div>
+              {%endif%} {% if card.mood is not null%}
+              <div class="card col-xl-6" style="width: 20rem">
+                <div class="card-body">
+                  <h4 class="card-title">Mode</h4>
+                  <p class="card-text">{{ card.mood }}</p>
+                </div>
+              </div>
+              {%endif%}
+            </div>
+            <a href="#" class="btn btn-danger btn-round">Supprimer</a>
+          </div>
         </div>
-        {% else %}
-        <div class="card-avatar">
-          <img class="img" src="/assets/img/faces/user-blanck.png" />
-        </div>
-        {% endif %}
+      </div>
 
-        <div class="card-body">
-          <div class="tab-content">
-            <div class="tab-pane active">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Auteur</th>
-                    <th>Langue</th>
-                    <th>Catégorie</th>
-                    <th>Créée le</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>{{ card.id }}</td>
-                    <td>{{ card.author.name }}</td>
-                    <td>{{ card.author.languageLearn.name }}</td>
-                    <td>{{ card.category.name }}</td>
-                    <td>{{card.createdAt | date("d/m/Y") }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+      <div class="col-lg-4 col-md-8">
+        <div class="card card-stats">
+          {% set count = 0 %} {% for deck in card.decks %} {% set count = count
+          + 1 %} {% endfor %} {% if count == 0 %}
+          <p class="text-info text-center">Pas de deck associé.</p>
+          {% else %}
+          <div class="card-header card-header-info">
+            {{ count }} deck associés :
           </div>
 
-          <div class="row">
-            <div class="card col-xl-6" style="width: 20rem">
-              <div class="card-body">
-                <h4 class="card-title">Question</h4>
-                <p class="card-text">{{ card.question }}</p>
-              </div>
-            </div>
-            <div class="card col-xl-6" style="width: 20rem">
-              <div class="card-body">
-                <h4 class="card-title">Réponse</h4>
-                <p class="card-text">{{ card.answer }}</p>
-              </div>
-            </div>   
-          </div>
-
-          <div class="row">
-            {% if card.sentence1 and card.sentence2 is not null%}
-            <div class="card col-xl-6" style="width: 20rem">
-              <div class="card-body">
-                <h4 class="card-title">Phrase d'exemple</h4>
-                <p class="card-text">{{ card.sentence1 }}</p>
-              </div>
-            </div>
-            <div class="card col-xl-6" style="width: 20rem">
-              <div class="card-body">
-                <h4 class="card-title">Traduction</h4>
-                <p class="card-text">{{ card.sentence2 }}</p>
-              </div>
-            </div>     
-            {%endif%}
-          </div>
-
-          <div class="row">
-            {% if card.tense is not null%}
-            <div class="card col-xl-6" style="width: 20rem">
-              <div class="card-body">
-                <h4 class="card-title">Temps</h4>
-                <p class="card-text">{{ card.tense }}</p>
-              </div>
-            </div>
-            {%endif%} {% if card.mood is not null%}
-            <div class="card col-xl-6" style="width: 20rem">
-              <div class="card-body">
-                <h4 class="card-title">Mode</h4>
-                <p class="card-text">{{ card.mood }}</p>
-              </div>
-            </div>
-            {%endif%}
-          </div>
-
-          <a href="#" class="btn btn-danger btn-round">Supprimer</a>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Créée le</th>
+                <th>Voir</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for deck in card.decks %}
+              <tr>
+                <td>{{ deck.id }}</td>
+                <td>{{ deck.name }}</td>
+                <td>{{deck.createdAt | date("d/m/Y") }}</td>
+                <td class="td-actions text-right">
+                  <a href="{{ path('admin-deck', { id: deck.id }) }}"
+                    ><button
+                      type="button"
+                      rel="tooltip"
+                      title=""
+                      class="btn btn-white btn-link btn-sm"
+                    >
+                      <i class="material-icons">remove_red_eye</i>
+                    </button></a
+                  >
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {% endif %}
         </div>
       </div>
     </div>
