@@ -11,4 +11,11 @@ class DecksController extends AbstractController {
     $decks = $deckRepository->findAll();
     return $this->render('./pages/administration/decks.html.twig', ['decks'=>$decks]);
   }
+
+  
+  public function detailAction(DeckRepository $deckRepository, $id)
+  {
+    $deck =  $deckRepository->findOneBy(['id' => $id]);
+    return $this->render('./pages/administration/deck.html.twig', ['deck' => $deck]);
+  }
 }

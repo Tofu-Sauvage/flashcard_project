@@ -4,59 +4,96 @@
   <div class="container-fluid">
     <div class="col-lg-6 col-md-12">
       <div class="card card-profile">
+        {% if card.image is not null%}
         <div class="card-avatar">
-          <a href="#pablo">
-            <img class="img" src="/assets/img/faces/user-blanck.png" />
-          </a>
+          <img class="img" src="/uploads/images/{{ card.image }}" />
         </div>
+        {% else %}
+        <div class="card-avatar">
+          <img class="img" src="/assets/img/faces/user-blanck.png" />
+        </div>
+        {% endif %}
+
         <div class="card-body">
-          <h6 class="card-category">
-            id - {{ card.id }} <br />
-            catégorie - {{ card.category.name }}
-          </h6>
-          <h4 class="card-title">Auteur - {{ card.author.name }}</h4>
+          <div class="tab-content">
+            <div class="tab-pane active">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Auteur</th>
+                    <th>Langue</th>
+                    <th>Catégorie</th>
+                    <th>Créée le</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{ card.id }}</td>
+                    <td>{{ card.author.name }}</td>
+                    <td>{{ card.author.languageLearn.name }}</td>
+                    <td>{{ card.category.name }}</td>
+                    <td>{{card.createdAt | date("d/m/Y") }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
 
           <div class="row">
-            <div class="col-6"><p class="h4">Question</p></div>
-            <div class="col-6"><p class="h4">Réponse</p></div>
+            <div class="card col-xl-6" style="width: 20rem">
+              <div class="card-body">
+                <h4 class="card-title">Question</h4>
+                <p class="card-text">{{ card.question }}</p>
+              </div>
+            </div>
+            <div class="card col-xl-6" style="width: 20rem">
+              <div class="card-body">
+                <h4 class="card-title">Réponse</h4>
+                <p class="card-text">{{ card.answer }}</p>
+              </div>
+            </div>   
           </div>
+
           <div class="row">
-            <div class="col-lg-6">
-              <p class="h3">"{{ card.question }}"</p>
+            {% if card.sentence1 and card.sentence2 is not null%}
+            <div class="card col-xl-6" style="width: 20rem">
+              <div class="card-body">
+                <h4 class="card-title">Phrase d'exemple</h4>
+                <p class="card-text">{{ card.sentence1 }}</p>
+              </div>
             </div>
-            <div class="col-lg-6">
-              <p class="h3">"{{ card.answer }}"</p>
-            </div>
+            <div class="card col-xl-6" style="width: 20rem">
+              <div class="card-body">
+                <h4 class="card-title">Traduction</h4>
+                <p class="card-text">{{ card.sentence2 }}</p>
+              </div>
+            </div>     
+            {%endif%}
           </div>
+
           <div class="row">
-            <div class="col-6"><p class="h4">Phrase d'exemple</p></div>
-            <div class="col-6"><p class="h4">Traduction</p></div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6">
-              <p class="h3">{{ card.sentence1 }}</p>
+            {% if card.tense is not null%}
+            <div class="card col-xl-6" style="width: 20rem">
+              <div class="card-body">
+                <h4 class="card-title">Temps</h4>
+                <p class="card-text">{{ card.tense }}</p>
+              </div>
             </div>
-            <div class="col-lg-6">
-              <p class="h3">{{ card.sentence2 }}</p>
+            {%endif%} {% if card.mood is not null%}
+            <div class="card col-xl-6" style="width: 20rem">
+              <div class="card-body">
+                <h4 class="card-title">Mode</h4>
+                <p class="card-text">{{ card.mood }}</p>
+              </div>
             </div>
+            {%endif%}
           </div>
-          <div class="row">
-            <div class="col-6"><p class="h4">Temps</p></div>
-            <div class="col-6"><p class="h4">Mode</p></div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6">
-              <p class="h3">{{ card.tense }}</p>
-            </div>
-            <div class="col-lg-6">
-              <p class="h3">{{ card.mood }}</p>
-            </div>
-          </div>
-          <a href="#pablo" class="btn btn-primary btn-round">Supprimer</a>
+
+          <a href="#" class="btn btn-danger btn-round">Supprimer</a>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 {% endblock body%}

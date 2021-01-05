@@ -37,7 +37,7 @@
                   <p>Voir toutes les cartes</p>
                 </a>
               </li>
-              <li class="nav-item {{'decks' in  app.request.uri ? 'active':'' }}">
+              <li class="nav-item {{'decks' in  app.request.uri ? 'active':'' }} {{'deck' in  app.request.uri ? 'active':'' }}">
                 <a class="nav-link" href="{{ path('admin-decks') }}">
                   <i class="material-icons">bookmarks</i>
                   <p>Voir tout les decks</p>
