@@ -5,14 +5,14 @@
 	 <div class="content">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-6"> {# Colonne contenant section "cartes" et "decks" #}
 					<div class="card"> {# Section "cartes"#}
 						<div class="card-header card-header-primary">
 							<h2 class="card-title">Cartes</h2>
 						</div>
 
 						<div class="card-body">
-							{% if not last_card %} {# Si aucune carte présente en BDD cards == null #}
+							{% if not last_card %} {# Si aucune carte présente en BDD, cards == null #}
 								<h3>
 									<a href="#">Veuillez créer votre première carte :)</a>
 								</h3>
@@ -20,28 +20,33 @@
 
 							{% if last_card %}
 
-								<div class="card-header card-header-default">
+								<div class="card-header card-header-default"> {# Carte au détail #}
 									<div class="row">
 
 										<div class="col-sm">
 											<h3 class="card-title">Question :</h3>
 											<h4 class="card-category">{{ last_card.question }}</h4>
-											<hr>
 										</div>
 
 										<div class="col-sm">
 											<h3 class="card-title">Réponse :</h3>
 											<h4 class="card-category">{{ last_card.answer}}</h4>
-											<br>
 										</div>
 
-										<div>
+										<div class="col-sm">
 											<h3 class="card-title">Crée le :</h3>
 											<h4 class="card-category">{{ last_card.createdAt}}</h4>
-											<br>
 										</div>
 									</div>
-								{% endif %}
+								</div> {# Fin Carte au détail #}
+
+							{% endif %}
+						</div>
+
+						<div class="card-footer">
+							{% if last_card %}
+								<a href="#" type="button" class="btn btn-lg btn-primary">Gestion des cartes</a>
+							{% endif %}
 						</div>
 					</div> {# Fin Section "cartes"#}
 
@@ -49,14 +54,40 @@
 						<div class="card-header card-header-info">
 							<h2 class="card-title">Decks</h2>
 						</div>
+
 						<div class="card-body">
+
+							{% if last_deck %}
+
+								<div class="card-header card-header-default"> {# Carte au détail #}
+									<div class="row">
+
+										<div class="col-sm">
+											<h3 class="card-title">Nom :</h3>
+											<h4 class="card-category">{{ last_deck.name }}</h4>
+										</div>
+
+										<div class="col-sm">
+											<h3 class="card-title">description</h3>
+											<h4 class="card-category">{{ last_deck.description}}</h4>
+										</div>
+
+										<div class="col-sm">
+											<h3 class="card-title">Crée le :</h3>
+											<h4 class="card-category">{{ last_deck.createdAt}}</h4>
+										</div>
+									</div>
+								</div> {# Fin Carte au détail #}
+
+							{% endif %}
+
 							{% if not last_card %} {# Si aucune carte présente en BDD cards == null #}
 								<h3>
-									<a href="#">Veuillez créer votre première carte AVANT de créer votre premier deck</a>
+									<a href="#" type="button" class="btn btn-lg btn-info">Veuillez créer votre première carte <br>AVANT de créer votre premier deck</a>
 								</h3>
 							{% elseif last_card and not last_deck %}
                 <h3>
-									<a href="#">Créer votre premier deck</a>
+									<a href="#" type="button" class="btn btn-lg btn-info">Créer votre premier deck</a>
 								</h3>
               {% endif %}
 						</div>
