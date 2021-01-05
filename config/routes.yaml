@@ -32,9 +32,17 @@ admin-cards:
   path: /admin/cards
   controller: App\Controller\CardsController::indexAction
 
+admin-card:
+  path: /admin/card/{id}
+  controller: App\Controller\CardsController::detailAction
+
 admin-decks:
   path: /admin/decks
   controller: App\Controller\DecksController::indexAction
+
+admin-deck:
+  path: /admin/deck/{id}
+  controller: App\Controller\DecksController::detailAction
 
 admin-categories:
   path: /admin/categories
