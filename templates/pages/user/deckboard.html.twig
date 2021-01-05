@@ -14,7 +14,7 @@
 						<div class="card-body">
 							{% if not last_card %} {# Si aucune carte présente en BDD, cards == null #}
 								<h3>
-									<a href="#">Veuillez créer votre première carte :)</a>
+									<a href="#" type="button" class="btn btn-lg btn-primary">Veuillez créer votre première carte :)</a>
 								</h3>
 							{% endif %}
 
@@ -24,17 +24,17 @@
 									<div class="row">
 
 										<div class="col-sm">
-											<h3 class="card-title">Question :</h3>
+											<h3 class="card-title">Question</h3>
 											<h4 class="card-category">{{ last_card.question }}</h4>
 										</div>
 
 										<div class="col-sm">
-											<h3 class="card-title">Réponse :</h3>
+											<h3 class="card-title">Réponse</h3>
 											<h4 class="card-category">{{ last_card.answer}}</h4>
 										</div>
 
 										<div class="col-sm">
-											<h3 class="card-title">Crée le :</h3>
+											<h3 class="card-title">Crée le</h3>
 											<h4 class="card-category">{{ last_card.createdAt}}</h4>
 										</div>
 									</div>
@@ -63,17 +63,17 @@
 									<div class="row">
 
 										<div class="col-sm">
-											<h3 class="card-title">Nom :</h3>
+											<h3 class="card-title">Nom</h3>
 											<h4 class="card-category">{{ last_deck.name }}</h4>
 										</div>
 
 										<div class="col-sm">
-											<h3 class="card-title">description</h3>
+											<h3 class="card-title">Description</h3>
 											<h4 class="card-category">{{ last_deck.description}}</h4>
 										</div>
 
 										<div class="col-sm">
-											<h3 class="card-title">Crée le :</h3>
+											<h3 class="card-title">Crée le</h3>
 											<h4 class="card-category">{{ last_deck.createdAt}}</h4>
 										</div>
 									</div>
