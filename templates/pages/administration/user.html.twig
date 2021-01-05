@@ -4,7 +4,7 @@
   <div class="container-fluid">
     <div class="col-lg-6 col-md-12">
       <div class="card">
-        <p class="h4 card-header card-header-info">Nom : {{ deck.name }}</p>
+        <p class="h4 card-header card-header-info">Nom : {{ user.name }}</p>
 
         <div class="card-body">
           <div class="tab-content">
@@ -20,28 +20,27 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>{{ deck.id }}</td>
-                    <td><a href="{{ path('admin-user', { id:  deck.author.id }) }}">{{ deck.author.name }}</a></td>
-                    <td>{{ deck.author.languageLearn.name }}</td>
-                    <td>{{deck.createdAt | date("d/m/Y") }}</td>
+                    <td>{{ user.id }}</td>
+                    <td>
+                      <a href="{{ path('admin-user', { id: user.id }) }}">{{
+                        user.name
+                      }}</a>
+                    </td>
+                    <td>{{ user.email }}</td>
+                    <td>{{user.createdAt | date("d/m/Y") }}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
-          <p class="card-text">Description : {{ deck.description }}</p>
-          <p class="card-text">
-            Statut : {% if deck.public == 1 %} public {% else %} privé {%endif%}
-          </p>
-          <p class="card-text">Tags associés : {{ deck.tags|json_encode() }}</p>
 
           <p class="h3">
-            {% set count = 0 %} {% for card in deck.cards %} {% set count =
+            {% set count = 0 %} {% for deck in user.decks %} {% set count =
             count + 1 %} {% endfor %} 
             {% if count == 0 %}
-            <p class="text-info">Pas encore de carte.</p>
+            <p class="text-info">Pas encore de deck.</p>
             {% else %}
-            {{ count }} cartes associées :
+            {{ count }} decks créés :
           </p>
 
           <table class="table">
@@ -54,7 +53,48 @@
               </tr>
             </thead>
             <tbody>
-              {% for card in deck.cards%}
+              {% for deck in user.decks%}
+
+              <tr>
+                <td>{{ deck.id }}</td>
+                <td>{{ deck.name }}</td>
+                <td>{{deck.createdAt | date("d/m/Y") }}</td>
+                <td class="td-actions text-right">
+                  <a href="{{ path('admin-deck', { id: deck.id }) }}"
+                    ><button
+                      type="button"
+                      rel="tooltip"
+                      title=""
+                      class="btn btn-white btn-link btn-sm"
+                    >
+                      <i class="material-icons">remove_red_eye</i>
+                    </button></a
+                  >
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {% endif %}
+          <p class="h3">
+            {% set count = 0 %} {% for card in user.cards %} {% set count =
+            count + 1 %} {% endfor %} 
+            {% if count == 0 %}
+            <p class="text-info">Pas encore de carte.</p>
+            {% else %}
+            {{ count }} cartes créées :
+          </p>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Catégorie</th>
+                <th>Créée le</th>
+                <th>Voir</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for card in user.cards%}
 
               <tr>
                 <td>{{ card.id }}</td>
@@ -76,7 +116,7 @@
               {% endfor %}
             </tbody>
           </table>
-{% endif %}
+          {% endif %}
           <p class="text-center">
             <a href="#" class="btn btn-danger btn-round">Supprimer</a>
           </p>

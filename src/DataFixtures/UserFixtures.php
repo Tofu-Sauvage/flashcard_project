@@ -120,13 +120,27 @@ class UserFixtures extends Fixture
         $manager->flush();
 
         //CARDS
-        for($i=0; $i<=20; $i++){
+        for($i=0; $i<=5; $i++){
             $card = new Card();
             $card->setQuestion("rabbit")->setAnswer("lapin")->setAuthor($Kiki)->setCategory($vocabulaire);
             $manager->persist($card);
             $manager->flush();
             }
 
+        for($i=0; $i<=5; $i++){
+            $card = new Card();
+            $card->setQuestion("fox")->setAnswer("renard")->setAuthor($Lulu91)->setCategory($vocabulaire);
+            $manager->persist($card);
+            $manager->flush();
+        }
+
+        for($i=0; $i<=3; $i++){
+            $card = new Card();
+            $card->setQuestion("What the fuck !")->setAnswer("Ouate de phoque !")->setAuthor($Lulu91)->setCategory($dicton);
+            $manager->persist($card);
+            $manager->flush();
+        }
+        
         //DECKS
         $deck1 = new Deck();
         $deck1->setName("Deck1")->setDescription("Une description du deck 1")->setPublic("true")->setAuthor($Lulu91)->setLangagueLearn($english);

@@ -35,13 +35,15 @@
                   <tr>
                     <td>{{ user.id }}</td>
                     <td>
-                        {% if user.roles[0] == 'ROLE_ADMIN' %}
-                        Administrateur
-                        {% elseif user.roles[0] == 'ROLE_USER' %}
-                        Utilisateur
-                        {% endif %}
+                      {% if user.roles[0] == 'ROLE_ADMIN' %} Administrateur {%
+                      elseif user.roles[0] == 'ROLE_USER' %} Utilisateur {%
+                      endif %}
                     </td>
-                    <td>{{ user.name }}</td>
+                    <td>
+                      <a href="{{ path('admin-user', { id: user.id }) }}">{{
+                        user.name
+                      }}</a>
+                    </td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.languageNative.name }}</td>
                     <td>{{ user.languageLearn.name }}</td>
@@ -56,15 +58,17 @@
                     </td>
 
                     <td class="td-actions text-right">
-                      <button
-                        type="button"
-                        rel="tooltip"
-                        title=""
-                        class="btn btn-white btn-link btn-sm"
-                        data-original-title="Edit Task"
-                      >
-                        <i class="material-icons">remove_red_eye</i>
-                      </button>
+                      <a href="{{ path('admin-user', { id: user.id }) }}">
+                        <button
+                          type="button"
+                          rel="tooltip"
+                          title=""
+                          class="btn btn-white btn-link btn-sm"
+                          data-original-title="Edit Task"
+                        >
+                          <i class="material-icons">remove_red_eye</i>
+                        </button>
+                      </a>
                     </td>
                   </tr>
                   {% endfor %}
