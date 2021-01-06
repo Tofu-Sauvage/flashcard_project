@@ -12,7 +12,7 @@ class DeckboardController extends AbstractController {
   public function indexAction(CardRepository $cardRepository, DeckRepository $deckRepository) {
     $idActiveUser = $this->getUser()->getId();
     $lastCard = $cardRepository->findOneBy(['author' => $idActiveUser], ['id' => 'desc']);
-    //  if ($lastCard->getCreatedAt() ==  null) {
+    //  if ($lastCard->getCreatedAt() == null) {
     //    $lastCard->setCreatedAt(new DateTime("now"));
     //  }
     $lastDeck = $deckRepository->findOneBy(['author' => $idActiveUser], ['id' => 'desc']);

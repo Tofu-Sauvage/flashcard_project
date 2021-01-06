@@ -43,7 +43,7 @@ class CardsController extends AbstractController {
       $card->setCreatedAt(new DateTime("now"))
            ->setCategory($categorySelected)
            ->setAuthor($this->getUser());
-      // dd($card);
+
       $em->persist($card);
       $em->flush();
 
