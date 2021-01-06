@@ -32,7 +32,7 @@
                 <tr>
                   <td>{{ user.id }}</td>
                   <td>
-                    <a href="">{{ user.name }}</a>
+                    <a href="{{ path('admin-user', { id: user.id }) }}">{{ user.name }}</a>
                   </td>
                   <td>
                     {{ user.languageNative.name }}
@@ -82,7 +82,7 @@
                 {% for card in cards %}
                 <tr>
                   <td>
-                    <a href="">{{ card.id }}</a>
+                    <a href="{{ path('admin-card', { id: card.id }) }}">{{ card.id }}</a>
                   </td>
                   <td>{{ card.author.languageLearn.name }}</td>
                   <td>{{ card.category.name }}</td>
@@ -120,7 +120,7 @@
                 <tr>
                   <td>{{ deck.id }}</td>
                   <td>
-                    <a href="">{{ deck.name }}</a>
+                    <a href="{{ path('admin-deck', { id: deck.id }) }}">{{ deck.name }}</a>
                   </td>
                   <td>{{ deck.author.languageLearn.name }}</td>
                   <td>{{ deck.createdAt | date("d/m/Y") }}</td>

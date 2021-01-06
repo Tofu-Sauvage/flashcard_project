@@ -59,7 +59,7 @@
                 <td>{{ deck.id }}</td>
                 <td>{{ deck.name }}</td>
                 <td>{{deck.createdAt | date("d/m/Y") }}</td>
-                <td class="td-actions text-right">
+                <td class="td-actions">
                   <a href="{{ path('admin-deck', { id: deck.id }) }}"
                     ><button
                       type="button"
@@ -100,7 +100,7 @@
                 <td>{{ card.id }}</td>
                 <td>{{ card.category.name }}</td>
                 <td>{{card.createdAt | date("d/m/Y") }}</td>
-                <td class="td-actions text-right">
+                <td class="td-actions">
                   <a href="{{ path('admin-card', { id: card.id }) }}"
                     ><button
                       type="button"
