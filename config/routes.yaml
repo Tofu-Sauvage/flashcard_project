@@ -86,8 +86,12 @@ deckboard:
   path: /profile/deckboard
   controller: App\Controller\DeckboardController::indexAction
 
+card-category: #Route temporaire
+  path: /profile/card/category
+  controller: App\Controller\CardsController::indexChoixCategoryAction
+
 card:
-  path: /profile/create/card
+  path: /profile/create/card/{categoryId}
   controller : App\Controller\CardsController::cardCreateAction
 
 deck:
