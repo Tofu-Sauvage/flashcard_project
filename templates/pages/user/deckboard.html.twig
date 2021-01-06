@@ -100,48 +100,51 @@
 						<div class="card-header card-header-primary">
 							<h2 class="card-title">Révision</h2>
 						</div>
-					{% if not last_deck %}
-						<h3>
-							<a href="#" type="button" class="btn btn-lg btn-info">Veuillez créer un deck<br>AVANT de lancer une révision</a>
-						</h3>
-					{% else %} 
+						<div class="card-body">
+						{% if not last_deck %}
+							<h3>
+								<a href="#" type="button" class="btn btn-lg btn-info">Veuillez créer un deck<br>AVANT de lancer une révision</a>
+							</h3>
+						{% else %} 
 
-						<div class="dropdown">
-							<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Choisissez un deck.
-							</button>
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							{% for un_deck in list_deck %}
-								<a class="dropdown-item" href="#">Réviser {{un_deck.name}}</a>
-							{% endfor %}
+							<div class="dropdown">
+								<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Choisissez un deck.
+								</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								{% for un_deck in list_deck %}
+									<a class="dropdown-item" href="#">Réviser {{un_deck.name}}</a>
+								{% endfor %}
+								</div>
 							</div>
+						
+
+						{% endif %} 
 						</div>
-
-					{% endif %} 
-
-
 					</div>
 						<div class="card"> {# Section "quiz" #}
 							<div class="card-header card-header-info">
 								<h2 class="card-title">Quiz</h2>
 							</div>
-					{% if not last_deck %}
-						<h3>
-							<a href="#" type="button" class="btn btn-lg btn-info">Veuillez créer un deck<br>AVANT de lancer un quiz</a>
-						</h3>
-					{% else %}
-						<div class="dropdown">
-							<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Choisissez un deck.
-							</button>
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							{% for un_deck in list_deck %}
-								<a class="dropdown-item" href="#">Quiz sur {{un_deck.name}}</a>
-							{% endfor %}
+						<div class="card-body">
+						{% if not last_deck %}
+							<h3>
+								<a href="#" type="button" class="btn btn-lg btn-info">Veuillez créer un deck<br>AVANT de lancer un quiz</a>
+							</h3>
+						{% else %}
+							<div class="dropdown">
+								<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Choisissez un deck.
+								</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								{% for un_deck in list_deck %}
+									<a class="dropdown-item" href="#">Quiz sur {{un_deck.name}}</a>
+								{% endfor %}
+								</div>
 							</div>
-						</div>
 
-					{% endif %}
+						{% endif %}
+						</div>
 					</div>
 				</div>
 			</div>
