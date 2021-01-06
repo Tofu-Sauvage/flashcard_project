@@ -17,7 +17,8 @@ class DeckboardController extends AbstractController {
     //    $lastCard->setCreatedAt(new \DateTimeInterface('@'.strtotime('now')));
     //  }
     $lastDeck = $deckRepository->findOneBy(['author' => $idActiveUser], ['id' => 'desc']);
+    $listDeck = $deckRepository->findBy(['author' => $idActiveUser]);
 
-    return $this->render("pages/user/deckboard.html.twig", ["last_card" => $lastCard, "last_deck" => $lastDeck]);
+    return $this->render("pages/user/deckboard.html.twig", ["last_card" => $lastCard, "last_deck" => $lastDeck, "list_deck" => $listDeck]);
   }
 }

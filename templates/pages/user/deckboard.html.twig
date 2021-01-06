@@ -104,13 +104,20 @@
 						<h3>
 							<a href="#" type="button" class="btn btn-lg btn-info">Veuillez créer un deck<br>AVANT de lancer une révision</a>
 						</h3>
-					{% else %} {# CODE EN CHANTIER #}
+					{% else %} 
 
-						<h3>
-							<a href="#" type="button" class="btn btn-lg btn-info">(( Révisions à coder ici ))</a>
-						</h3>
+						<div class="dropdown">
+							<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Choisissez un deck.
+							</button>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							{% for un_deck in list_deck %}
+								<a class="dropdown-item" href="#">Réviser {{un_deck.name}}</a>
+							{% endfor %}
+							</div>
+						</div>
 
-					{% endif %} {# FIN DU CODE EN CHANTIER #}
+					{% endif %} 
 
 
 					</div>
@@ -122,13 +129,19 @@
 						<h3>
 							<a href="#" type="button" class="btn btn-lg btn-info">Veuillez créer un deck<br>AVANT de lancer un quiz</a>
 						</h3>
-					{% else %} {# CODE EN CHANTIER #}
+					{% else %}
+						<div class="dropdown">
+							<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Choisissez un deck.
+							</button>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							{% for un_deck in list_deck %}
+								<a class="dropdown-item" href="#">Quiz sur {{un_deck.name}}</a>
+							{% endfor %}
+							</div>
+						</div>
 
-						<h3>
-							<a href="#" type="button" class="btn btn-lg btn-info">(( Quiz à coder ici ))</a>
-						</h3>
-
-					{% endif %} {# FIN DU CODE EN CHANTIER #}
+					{% endif %}
 					</div>
 				</div>
 			</div>
