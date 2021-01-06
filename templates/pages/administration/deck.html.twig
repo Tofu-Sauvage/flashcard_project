@@ -77,9 +77,15 @@
             </tbody>
           </table>
 {% endif %}
-          <p class="text-center">
-            <a href="#" class="btn btn-danger btn-round">Supprimer</a>
-          </p>
+          <div class="text-center">
+            <form
+            method="POST"
+            action="{{ path('admin-deck-delete', { id: deck.id }) }}"
+            onsubmit="return confirm('Supprimer ce deck ?')"
+          >
+            <button class="btn btn-danger btn-round">supprimer</button>
+          </form>
+        </div>
         </div>
       </div>
     </div>

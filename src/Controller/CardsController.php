@@ -60,4 +60,13 @@ class CardsController extends AbstractController {
     $card =  $cardRepository->findOneBy(['id' => $id]);
     return $this->render('./pages/administration/card.html.twig', ['card' => $card]);
   }
+
+  public function deleteAction(EntityManagerInterface $em, CardRepository $cardRepository, $id)
+  {
+    $card = $cardRepository->find($id);
+    $em->remove($card);
+    $em->flush();
+    $this->addFlash('success-card', 'La carte a bien été supprimée !');
+    return $this->redirectToRoute('admin-cards');
+  }
 }

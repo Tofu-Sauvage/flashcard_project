@@ -35,4 +35,13 @@ class DecksController extends AbstractController {
     $deck =  $deckRepository->findOneBy(['id' => $id]);
     return $this->render('./pages/administration/deck.html.twig', ['deck' => $deck]);
   }
+
+  public function deleteAction(EntityManagerInterface $em, DeckRepository $deckRepository, $id)
+  {
+    $deck = $deckRepository->find($id);
+    $em->remove($deck);
+    $em->flush();
+    $this->addFlash('success-deck', 'Le deck a bien été supprimé !');
+    return $this->redirectToRoute('admin-decks');
+  }
 }

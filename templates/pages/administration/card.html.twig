@@ -97,7 +97,13 @@
               </div>
               {%endif%}
             </div>
-            <a href="#" class="btn btn-danger btn-round">Supprimer</a>
+            <form
+              method="POST"
+              action="{{ path('admin-card-delete', { id: card.id }) }}"
+              onsubmit="return confirm('Supprimer cette carte ?')"
+            >
+              <button class="btn btn-danger btn-round">supprimer</button>
+            </form>
           </div>
         </div>
       </div>
