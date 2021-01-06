@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Form\CardType;
 use App\Repository\CardRepository;
+use App\Repository\CategoryRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,8 +17,14 @@ class CardsController extends AbstractController {
     return $this->render('./pages/administration/cards.html.twig', ['cards'=>$cards]);
   }
 
-  public function cardCreateAction(Request $request, EntityManagerInterface $em)
+  public function indexChoixCategoryAction() {
+    return $this->render('./pages/user/cardSelectCategory.html.twig');
+  }
+
+  public function cardCreateAction(Request $request, EntityManagerInterface $em, $categoryId, CategoryRepository $categoryRepository)
   {
+    $categorySelected = $categoryRepository->findOneBy(['id' => $categoryId]);
+    
     $form = $this->createForm(CardType::class);
     $form->handleRequest($request);
     if ($form->isSubmitted()) {
@@ -31,11 +39,19 @@ class CardsController extends AbstractController {
         );
         $card->setImage($uniqueName);
       }
+
+      $card->setCreatedAt(new DateTime("now"))
+           ->setCategory($categorySelected)
+           ->setAuthor($this->getUser());
+
       $em->persist($card);
       $em->flush();
+
+      $this->addFlash('success', "La carte a bien été ajoutée");
+      return $this->redirectToRoute('card-category');
     }
 
-    return $this->render('./pages/user/cardForm.html.twig', ['cardForm' => $form->createView()]);
+    return $this->render('./pages/user/cardForm.html.twig', ['cardForm' => $form->createView(), 'category' => $categorySelected]);
 
   }
 

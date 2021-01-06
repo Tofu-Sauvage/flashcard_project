@@ -1,0 +1,56 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+  <div class="conatiner">
+    <div class="container-fluid">
+      <h1>Formulaire de cartes</h1>
+      <h2 class='mb-5'>Category : {{category.name}} </h2>
+
+      {{ form_start(cardForm) }}
+
+        <div class="form-group">
+          {{ form_label(cardForm.question, "Question") }}
+          {{ form_widget(cardForm.question, {attr: {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+          {{ form_label(cardForm.answer, "Réponse") }}
+          {{ form_widget(cardForm.answer, {attr: {'class': 'form-control'}}) }}
+        </div>
+        
+        <div class="form-group" {% if category.name is not same as("Conjugaison") %}style="display: none;"{% endif %}>
+          {{ form_label(cardForm.tense, "Temps") }}
+          {{ form_widget(cardForm.tense, { attr: {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group" {% if category.name is not same as("Conjugaison") %}style="display: none;"{% endif %}>
+          {{ form_label(cardForm.mood, "Mode") }}
+          {{ form_widget(cardForm.mood, { attr: {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+          {{ form_label(cardForm.sentence1, "Description question (facultatif)") }}
+          {{ form_widget(cardForm.sentence1, {attr: {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+          {{ form_label(cardForm.sentence2, "Description réponse (facultatif)") }}
+          {{ form_widget(cardForm.sentence2, {attr: {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+          {{ form_label(cardForm.image, "Une image d'illustration ? (facultatif)") }}
+          {{ form_widget(cardForm.image, {attr: {'class': 'form-control-file mt-4', 'style': 'opacity:1; z-index:1'}}) }}
+        </div>
+
+        <div class="form-group">
+			    {{ form_widget(cardForm.Ajouter, {'label': 'Ajouter une carte', attr: {'class': 'btn btn-success mt-4'}}) }}
+		    </div>
+
+      {{ form_end(cardForm) }}
+
+    </div>
+  </div>
+
+{% endblock %}
