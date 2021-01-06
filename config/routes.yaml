@@ -40,6 +40,10 @@ admin-card:
   path: /admin/card/{id}
   controller: App\Controller\CardsController::detailAction
 
+admin-card-delete:
+  path: admin/delete/card/{id}
+  controller : App\Controller\CardsController::deleteAction
+
 admin-decks:
   path: /admin/decks
   controller: App\Controller\DecksController::indexAction
@@ -47,6 +51,10 @@ admin-decks:
 admin-deck:
   path: /admin/deck/{id}
   controller: App\Controller\DecksController::detailAction
+
+admin-deck-delete:
+  path: admin/delete/deck/{id}
+  controller : App\Controller\DecksController::deleteAction
 
 admin-categories:
   path: /admin/categories

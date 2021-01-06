@@ -1,5 +1,7 @@
 {% extends './pages/administration/admin.base.html.twig'%} {%block body%}
 
+
+
 <div class="content">
   <div class="container-fluid">
     <div>
@@ -13,56 +15,68 @@
           </div>
         </div>
         <div class="card-body">
-          <div class="tab-content">
-            <div class="tab-pane active" id="profile">
-              <table class="table">
-                <thead class="text-warning">
-                  <tr>
-                    <th>ID</th>
-                    <th>Auteur</th>
-                    <th>Langue</th>
-                    <th>Catégorie</th>
-                    <th>Question</th>
-                    <th>Créée le</th>
-                    <th>Decks concernés</th>
-                    <th>Voir</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for card in cards %}
-                  <tr>
-                    <td>{{ card.id }}</td>
-                    <td> <a href="{{ path('admin-user', { id: card.author.id }) }}">{{ card.author.name }}</a></td>
-                    <td>{{ card.author.languageLearn.name }}</td>
-                    <td>{{ card.category.name }}</td>
-                    <td>{{ card.question |length > 20 ? card.question|slice(0, 20) ~ '...' : card.question }}</td>
-                    <td>{{card.createdAt | date("d/m/Y") }}</td>
-                    <td>
-                      {% set count = 0 %} {% for deck in card.decks %} {% set
-                      count = count + 1 %} {% endfor %} {{ count }}
-                    </td>
+            <div class="tab-content">
+              <div class="tab-pane active">
+                <table class="table" id="table">
+                  <thead>
+                    <tr>
+                      <th class="text-warning" style="cursor: pointer" onclick="sortTable(0)">ID<i class="material-icons">import_export</i></th>
+                      <th class="text-warning" style="cursor: pointer" onclick="sortTable(1)">Auteur<i class="material-icons">import_export</i></th>
+                      <th class="text-warning" style="cursor: pointer" onclick="sortTable(2)">Langue<i class="material-icons">import_export</i></th>
+                      <th class="text-warning" style="cursor: pointer" onclick="sortTable(3)">Catégorie<i class="material-icons">import_export</i></th>
+                      <th class="text-warning" style="cursor: pointer" onclick="sortTable(4)">Question<i class="material-icons">import_export</i></th>
+                      <th class="text-warning" style="cursor: pointer" onclick="sortTable(5)">Créée le<i class="material-icons">import_export</i></th>
+                      <th class="text-warning" style="cursor: pointer" onclick="sortTable(6)">Decks concernés<i class="material-icons">import_export</i></th>
+                      <th class="text-warning">Voir</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for card in cards %}
+                    <tr>
+                      <td>{{ card.id }}</td>
+                      <td>
+                        <a
+                          href="{{
+                            path('admin-user', { id: card.author.id })
+                          }}"
+                          >{{ card.author.name }}</a
+                        >
+                      </td>
+                      <td>{{ card.author.languageLearn.name }}</td>
+                      <td>{{ card.category.name }}</td>
+                      <td>
+                        {{ card.question |length > 20 ? card.question|slice(0, 20) ~ '...' : card.question }}
+                      </td>
+                      <td>{{card.createdAt | date("d/m/Y") }}</td>
+                      <td>
+                        {% set count = 0 %} {% for deck in card.decks %} {% set
+                        count = count + 1 %} {% endfor %} {{ count }}
+                      </td>
 
-                    <td class="td-actions text-right">
-                      <a href="{{ path('admin-card', { id: card.id }) }}"><button
-                        type="button"
-                        rel="tooltip"
-                        title=""
-                        class="btn btn-white btn-link btn-sm"
-                      >
-                        <i class="material-icons">remove_red_eye</i>
-                      </button></a>
-                    </td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
+                      <td class="td-actions text-right">
+                        <a href="{{ path('admin-card', { id: card.id }) }}"
+                          ><button
+                            type="button"
+                            rel="tooltip"
+                            title=""
+                            class="btn btn-white btn-link btn-sm"
+                          >
+                            <i class="material-icons">remove_red_eye</i>
+                          </button></a
+                        >
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 </div>
+
 
 {% endblock body %}
