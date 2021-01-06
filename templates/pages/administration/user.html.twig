@@ -2,126 +2,268 @@
 
 <div class="content">
   <div class="container-fluid">
-    <div class="col-lg-6 col-md-12">
-      <div class="card">
-        <p class="h4 card-header card-header-info">Nom : {{ user.name }}</p>
+    <div class="row">
 
-        <div class="card-body">
-          <div class="tab-content">
-            <div class="tab-pane active">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Auteur</th>
-                    <th>Langue</th>
-                    <th>Créée le</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>{{ user.id }}</td>
-                    <td>
-                      <a href="{{ path('admin-user', { id: user.id }) }}">{{
-                        user.name
-                      }}</a>
-                    </td>
-                    <td>{{ user.email }}</td>
-                    <td>{{user.createdAt | date("d/m/Y") }}</td>
-                  </tr>
-                </tbody>
-              </table>
+      <div class="col-lg-4 col-md-4">
+        <div class="card">
+          <div class="card-header card-header-info card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">account_circle</i>
+            </div>
+            <h3 class="card-title text-right">Nom : {{ user.name }}</h3>
+          </div>
+
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane active m-3">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Auteur</th>
+                      <th>Langue</th>
+                      <th>Inscrit le</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>{{ user.id }}</td>
+                      <td>
+                        <a href="{{ path('admin-user', { id: user.id }) }}">{{
+                          user.name
+                        }}</a>
+                      </td>
+                      <td>{{ user.email }}</td>
+                      <td>{{user.createdAt | date("d/m/Y") }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            
+            <div class="card-avatar text-center m-3">
+                {% if user.image is not null%}
+                <img
+                  src="{{ user.image }}"
+                  class="img avatar"
+                  width="80px"
+                  height="auto"
+                />
+                {% else %}
+                <img
+                  src="/uploads/images/lapin.jpg"
+                  class="img"
+                  width="80px"
+                  height="auto"
+                />
+                {%endif%}
+
+            </div>
+
+            <div class="text-center">
+                <form
+                method="POST"
+                action="{{ path('admin-user-delete', { id: user.id }) }}"
+                onsubmit="return confirm('Supprimer cet utilisateur ? Cette action est définitive !')"
+              >
+                <button class="btn btn-danger btn-round">supprimer</button>
+              </form>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+  
+
+      <div class="col-lg-8 col-md-8">
+
+        <div class="card">
+
+          <div class="card-header card-header-tabs card-header-info">
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+                <ul class="nav nav-tabs" data-tabs="tabs">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#cards" data-toggle="tab">
+                      <i class="material-icons">bookmark</i>
+                      {% set count = 0 %} {% for card in user.cards %} {% set count =
+                        count + 1 %} {% endfor %}
+                      {{count }} carte(s)
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#decks" data-toggle="tab">
+                      <i class="material-icons">bookmarks</i>
+                      {% set count = 0 %} {% for deck in user.decks %} {% set count =
+                        count + 1 %} {% endfor %}
+                      {{count }} deck(s)
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#favorites" data-toggle="tab">
+                      <i class="material-icons">favorite</i>
+                      {% set count = 0 %} {% for favorite in user.favorites %} {% set count =
+                        count + 1 %} {% endfor %}
+                      {{count }} favori(s)
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
 
-          <p class="h3">
-            {% set count = 0 %} {% for deck in user.decks %} {% set count =
-            count + 1 %} {% endfor %} 
-            {% if count == 0 %}
-            <p class="text-info">Pas encore de deck.</p>
-            {% else %}
-            {{ count }} decks créés :
-          </p>
+          <div class="card-body">
+            <div class="tab-content">
 
-          <table class="table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Catégorie</th>
-                <th>Créée le</th>
-                <th>Voir</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for deck in user.decks%}
 
-              <tr>
-                <td>{{ deck.id }}</td>
-                <td>{{ deck.name }}</td>
-                <td>{{deck.createdAt | date("d/m/Y") }}</td>
-                <td class="td-actions">
-                  <a href="{{ path('admin-deck', { id: deck.id }) }}"
-                    ><button
-                      type="button"
-                      rel="tooltip"
-                      title=""
-                      class="btn btn-white btn-link btn-sm"
+              <div class="tab-pane active" id="cards">
+                <p class="h3">
+              {% set count = 0 %} {% for card in user.cards %} {% set count =
+              count + 1 %} {% endfor %} 
+              {% if count == 0 %}
+              <p class="text-info">Pas encore de carte.</p>
+              {% else %}
+              {{ count }} carte(s) créée(s) :
+            </p>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Catégorie</th>
+                  <th>Créée le</th>
+                  <th>Voir</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for card in user.cards%}
+
+                <tr>
+                  <td>{{ card.id }}</td>
+                  <td>{{ card.category.name }}</td>
+                  <td>{{card.createdAt | date("d/m/Y") }}</td>
+                  <td class="td-actions">
+                    <a href="{{ path('admin-card', { id: card.id }) }}"
+                      ><button
+                        type="button"
+                        rel="tooltip"
+                        title=""
+                        class="btn btn-white btn-link btn-sm"
+                      >
+                        <i class="material-icons">remove_red_eye</i>
+                      </button></a
                     >
-                      <i class="material-icons">remove_red_eye</i>
-                    </button></a
-                  >
-                </td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-          {% endif %}
-          <p class="h3">
-            {% set count = 0 %} {% for card in user.cards %} {% set count =
-            count + 1 %} {% endfor %} 
-            {% if count == 0 %}
-            <p class="text-info">Pas encore de carte.</p>
-            {% else %}
-            {{ count }} cartes créées :
-          </p>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Catégorie</th>
-                <th>Créée le</th>
-                <th>Voir</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for card in user.cards%}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            {% endif %}
+              </div>
 
-              <tr>
-                <td>{{ card.id }}</td>
-                <td>{{ card.category.name }}</td>
-                <td>{{card.createdAt | date("d/m/Y") }}</td>
-                <td class="td-actions">
-                  <a href="{{ path('admin-card', { id: card.id }) }}"
-                    ><button
-                      type="button"
-                      rel="tooltip"
-                      title=""
-                      class="btn btn-white btn-link btn-sm"
-                    >
-                      <i class="material-icons">remove_red_eye</i>
-                    </button></a
-                  >
-                </td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-          {% endif %}
-          <p class="text-center">
-            <a href="#" class="btn btn-danger btn-round">Supprimer</a>
-          </p>
+
+              <div class="tab-pane" id="decks">
+                <p class="h3">
+                  {% set count = 0 %} {% for deck in user.decks %} {% set count =
+                  count + 1 %} {% endfor %} 
+                  {% if count == 0 %}
+                  <p class="text-info">Pas encore de deck.</p>
+                  {% else %}
+                  {{ count }} deck(s) créé(s) :
+                </p>
+    
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Catégorie</th>
+                      <th>Créée le</th>
+                      <th>Voir</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for deck in user.decks%}
+    
+                    <tr>
+                      <td>{{ deck.id }}</td>
+                      <td>{{ deck.name }}</td>
+                      <td>{{deck.createdAt | date("d/m/Y") }}</td>
+                      <td class="td-actions">
+                        <a href="{{ path('admin-deck', { id: deck.id }) }}"
+                          ><button
+                            type="button"
+                            rel="tooltip"
+                            title=""
+                            class="btn btn-white btn-link btn-sm"
+                          >
+                            <i class="material-icons">remove_red_eye</i>
+                          </button></a
+                        >
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                {% endif %}
+              </div>
+
+              <div class="tab-pane" id="favorites">
+                <p class="h3">
+                  {% set count = 0 %} {% for favorite in user.favorites %} {% set count =
+                  count + 1 %} {% endfor %} 
+                  {% if count == 0 %}
+                  <p class="text-info">Pas encore de favori.</p>
+                  {% else %}
+                  {{ count }} favori(s) :
+                </p>
+    
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Catégorie</th>
+                      <th>Créée le</th>
+                      <th>Voir</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for favorite in user.favorites%}
+    
+                    <tr>
+                      <td>{{ favorite.id }}</td>
+                      <td>{{ favorite.name }}</td>
+                      <td>{{favorite.createdAt | date("d/m/Y") }}</td>
+                      <td class="td-actions">
+                        <a href="{{ path('admin-deck', { id: favorite.id }) }}"
+                          ><button
+                            type="button"
+                            rel="tooltip"
+                            title=""
+                            class="btn btn-white btn-link btn-sm"
+                          >
+                            <i class="material-icons">remove_red_eye</i>
+                          </button></a
+                        >
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                {% endif %}
+              </div>
+
+            </div>
+          </div>
+
         </div>
       </div>
+
+      </div>
+
     </div>
   </div>
 </div>
