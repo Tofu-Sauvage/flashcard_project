@@ -86,13 +86,50 @@
 									<a href="#" type="button" class="btn btn-lg btn-info">Veuillez créer votre première carte <br>AVANT de créer votre premier deck</a>
 								</h3>
 							{% elseif last_card and not last_deck %}
-                <h3>
+                				<h3>
 									<a href="#" type="button" class="btn btn-lg btn-info">Créer votre premier deck</a>
 								</h3>
-              {% endif %}
+              				{% endif %}
 						</div>
-					</div> {#  Fin Section "decks"#}
+					</div>{#  Fin Section "decks"#}
+				</div>
+				<div class="col-md-6">
+				
 
+					<div class="card"> {# Section "révision" #}
+						<div class="card-header card-header-primary">
+							<h2 class="card-title">Révision</h2>
+						</div>
+					{% if not last_deck %}
+						<h3>
+							<a href="#" type="button" class="btn btn-lg btn-info">Veuillez créer un deck<br>AVANT de lancer une révision</a>
+						</h3>
+					{% else %} {# CODE EN CHANTIER #}
+
+						<h3>
+							<a href="#" type="button" class="btn btn-lg btn-info">(( Révisions à coder ici ))</a>
+						</h3>
+
+					{% endif %} {# FIN DU CODE EN CHANTIER #}
+
+
+					</div>
+						<div class="card"> {# Section "quiz" #}
+							<div class="card-header card-header-info">
+								<h2 class="card-title">Quiz</h2>
+							</div>
+					{% if not last_deck %}
+						<h3>
+							<a href="#" type="button" class="btn btn-lg btn-info">Veuillez créer un deck<br>AVANT de lancer un quiz</a>
+						</h3>
+					{% else %} {# CODE EN CHANTIER #}
+
+						<h3>
+							<a href="#" type="button" class="btn btn-lg btn-info">(( Quiz à coder ici ))</a>
+						</h3>
+
+					{% endif %} {# FIN DU CODE EN CHANTIER #}
+					</div>
 				</div>
 			</div>
 		</div>
