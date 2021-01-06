@@ -22,7 +22,7 @@
 					</div>
 					<div class="card-body">
 						{% for category in categories %}
-							<a class="btn btn-info" href="{{ path('card-create', {categoryId: category.id}) }}">Créer une carte "{{category.name}}"</a>
+							<a class="btn btn-primary" href="{{ path('card-create', {categoryId: category.id}) }}">Créer une carte "{{category.name}}"</a>
 						{% endfor %}
 					</div>
 				</div>
