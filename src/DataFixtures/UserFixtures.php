@@ -152,7 +152,5 @@ class UserFixtures extends Fixture
         $manager->persist($deck2);
         $manager->flush();
 
-        $Kiki->addFavorite($deck1);
-
     }
 }
