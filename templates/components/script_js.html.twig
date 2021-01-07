@@ -93,6 +93,14 @@
         {
           document.getElementsByClassName("bonnesReponses")[0].innerHTML = 0;
 
+          document.getElementsByClassName("listeMauvaisesReponses")[0].innerHTML = ""; 
+
+          for(i=0 ; i< document.getElementsByClassName("uneReponseUser").length ; i++)
+          {
+            document.getElementsByClassName("uneReponseUser")[i].value = ""; 
+            document.getElementsByClassName("alert-success")[i].style.display = "none";
+            document.getElementsByClassName("alert-danger")[i].style.display = "none";
+          }
           var elementIndex = 0;
           showElement(elementIndex);
         }
@@ -101,27 +109,32 @@
         {
           var nombreBonnesReponses = 0;
           document.getElementsByClassName("bonnesReponses")[0].innerHTML = 0;
+
+          document.getElementsByClassName("listeMauvaisesReponses")[0].innerHTML = ""; 
           for(i=0 ; i< document.getElementsByClassName("uneReponseUser").length ; i++)
           {
             document.getElementsByClassName("uneReponseUser")[i].value = ""; 
-            document.getElementsByClassName("verdict")[i].innerHTML = ""; 
+            document.getElementsByClassName("alert-success")[i].style.display = "none";
+            document.getElementsByClassName("alert-danger")[i].style.display = "none";
           }
           elementIndex = 0;
           showElement(elementIndex);
         }
 
-        function verifierReponse(n, bonneReponse)
+        function verifierReponse(n, motOriginal, bonneReponse)
         {
             if(document.getElementsByClassName("uneReponseUser")[n].value == bonneReponse)
             {
-              document.getElementsByClassName("verdict")[n].innerHTML = "Bonne réponse !";
+              document.getElementsByClassName("alert-success")[n].style.display = "block";
               document.getElementsByClassName("bonnesReponses")[0].innerHTML = String(parseInt(document.getElementsByClassName("bonnesReponses")[0].innerHTML) + 1);
             }
             else
             {
-              document.getElementsByClassName("verdict")[n].innerHTML = "Mauvaise réponse...";
+              document.getElementsByClassName("alert-danger")[n].style.display = "block";
+
+              document.getElementsByClassName("listeMauvaisesReponses")[0].innerHTML += "La bonne traduction de <em>" + motOriginal + "</em> était <em>" + bonneReponse + "</em>.<br/>"; 
             }
-            setTimeout(showElement(n+1),1000);
+            setTimeout(showElement,1000, n+1);
         }
 
 

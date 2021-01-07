@@ -18,15 +18,21 @@
                         <div class="form-group">
                         <label for="exampleInput1" class="bmd-label-floating">Question numéro {{ compteur + 1 }}. Tapez votre réponse ci-dessous.</label><br/>
                         <input type="text" class="uneReponseUser form-control" id="exampleInput1">
-                        <input type="submit" value="Envoyer la réponse" onclick="verifierReponse({{ compteur}},'{{ q.answer }}')">
-                        <p class="verdict"></p>
+                        <input type="submit" class="btn btn-primary" value="Envoyer la réponse" onclick="verifierReponse({{ compteur}},'{{ q.question }}','{{ q.answer }}')">
+                        <div class="alert alert-success" role="alert">
+                            Bonne réponse !
+                        </div>
+                        <div class="alert alert-danger" role="alert">
+                            Mauvaise réponse...
+                        </div>
                     </div>
                     {% set compteur = compteur + 1 %}
                 </div>
                 {% endfor %}
                 <div class="uneCarteResultats form-group">
                     <p class="votreScore">Vous avez donné <span class="bonnesReponses">0</span> bonnes réponses !</p>
-                    <input type="submit" value="Recommencer" onclick="recommencerQuiz()">
+                    <p><span class="listeMauvaisesReponses"></p>
+                    <input type="submit" class="btn btn-primary" value="Recommencer" onclick="recommencerQuiz()">
                 </div>
             </div>
 
