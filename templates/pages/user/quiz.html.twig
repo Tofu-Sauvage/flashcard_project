@@ -16,16 +16,16 @@
                 <div class="uneCarteQuestion form-group">
                     <h3>Traduisez {{ q.question }}.</h3>
                         <div class="form-group">
-                        <label for="exampleInput1" class="bmd-label-floating">Question numéro {{ compteur + 1 }}. Tapez votre réponse ci-dessous.</label><br/>
-                        <input type="text" class="uneReponseUser form-control" id="exampleInput1">
-                        <input type="submit" class="btn btn-primary" value="Envoyer la réponse" onclick="verifierReponse({{ compteur}},'{{ q.question }}','{{ q.answer }}')">
-                        <div class="alert alert-success" role="alert">
-                            Bonne réponse !
+                            <label for="exampleInput1" class="bmd-label-floating">Question numéro {{ compteur + 1 }}. Tapez votre réponse ci-dessous.</label><br/>
+                            <input type="text" class="uneReponseUser form-control" id="exampleInput1">
+                            <input type="submit" class="btn btn-primary" value="Envoyer la réponse" onclick="verifierReponse({{ compteur}},'{{ q.question }}','{{ q.answer }}')">
+                            <div class="alert alert-success" role="alert">
+                                Bonne réponse !
+                            </div>
+                            <div class="alert alert-danger" role="alert">
+                                Mauvaise réponse...
+                            </div>
                         </div>
-                        <div class="alert alert-danger" role="alert">
-                            Mauvaise réponse...
-                        </div>
-                    </div>
                     {% set compteur = compteur + 1 %}
                 </div>
                 {% endfor %}
@@ -33,6 +33,9 @@
                     <p class="votreScore">Vous avez donné <span class="bonnesReponses">0</span> bonnes réponses !</p>
                     <p><span class="listeMauvaisesReponses"></p>
                     <input type="submit" class="btn btn-primary" value="Recommencer" onclick="recommencerQuiz()">
+                </div>
+                <div class="form-group">
+                    <a href="/profile/deckboard" class="btn btn-info btn-sm" role="button">Retourner au deckboard</a>
                 </div>
             </div>
 
