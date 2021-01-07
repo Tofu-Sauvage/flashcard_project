@@ -110,7 +110,16 @@ class CardsController extends AbstractController {
     $card = $cardRepository->find($id);
     $em->remove($card);
     $em->flush();
-    $this->addFlash('success-card', 'La carte a bien été supprimée !');
+    $this->addFlash('success', 'La carte a bien été supprimée !');
     return $this->redirectToRoute('admin-cards');
+  }
+
+  public function deleteCardUserAction(EntityManagerInterface $em, CardRepository $cardRepository, $id)
+  {
+    $card = $cardRepository->find($id);
+    $em->remove($card);
+    $em->flush();
+    $this->addFlash('success', 'La carte a bien été supprimée !');
+    return $this->redirectToRoute('card-gestion');
   }
 }

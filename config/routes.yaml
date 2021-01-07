@@ -116,7 +116,7 @@ card-create:
 
 card-delete:
   path: /profile/delete/card/{id}
-  controller: App\Controller\CardsController::deleteAction
+  controller: App\Controller\CardsController::deleteCardUserAction
 
 deck:
   path: /profile/create/deck
