@@ -27,6 +27,7 @@
                       <th class="text-warning" style="cursor: pointer" onclick="sortTable(4)">Question<i class="material-icons">import_export</i></th>
                       <th class="text-warning" style="cursor: pointer" onclick="sortTable(5)">Créée le<i class="material-icons">import_export</i></th>
                       <th class="text-warning" style="cursor: pointer" onclick="sortTable(6)">Decks<br/>concernés<i class="material-icons">import_export</i></th>
+                      <th class="text-warning" style="cursor: pointer" onclick="sortTable(7)">Image ?<i class="material-icons">import_export</i></th>
                       <th class="text-warning">Voir</th>
                     </tr>
                   </thead>
@@ -52,7 +53,9 @@
                         {% set count = 0 %} {% for deck in card.decks %} {% set
                         count = count + 1 %} {% endfor %} {{ count }}
                       </td>
-
+                      <td>
+                      {% if card.image %} Oui {% else %} Non {%endif%}
+                      </td>
                       <td class="td-actions text-right">
                         <a href="{{ path('admin-card', { id: card.id }) }}"
                           ><button
