@@ -2,7 +2,7 @@
 
 {% block body %}
 
-	 <div class="content">
+
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-6"> {# Colonne contenant section "cartes" et "decks" #}
@@ -45,7 +45,7 @@
 
 						<div class="card-footer">
 							{% if last_card %}
-								<a href="#" type="button" class="btn btn-lg btn-primary">Gestion des cartes</a>
+								<a href="{{ path('card-gestion') }}" type="button" class="btn btn-lg btn-primary">Gestion des cartes</a>
 							{% endif %}
 						</div>
 					</div> {# Fin Section "cartes"#}
@@ -159,6 +159,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
+
 
 {% endblock %}

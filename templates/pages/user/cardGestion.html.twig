@@ -1,0 +1,94 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+	{% for message in app.flashes('success') %}
+
+		<div class="alert alert-success mt-4" role="alert">
+			{{ message }}
+		</div>
+
+	{% endfor %}
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-4">
+				{# Colonne de selction d'une nouvelle carte #}
+				<div class="card">
+                    <div class="card-header card-header-tabs card-header-info">
+                        <p class="h3">
+                            Créer une carte
+                        </p>
+					</div>
+					<div class="card-body">
+						{% for category in categories %}
+							<a class="btn btn-primary" href="{{ path('card-create', {categoryId: category.id}) }}">Créer une carte "{{category.name}}"</a>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-8">
+				{# Colonne d'affichage des cartes #}
+				<div class="card">
+					<div class="card-header card-header-tabs card-header-warning">
+						<div class="nav-tabs-navigation">
+							<p class="h3">
+								{% set count = 0 %} {% for card in cards %} {% set count = count + 1 %}
+								{% endfor %} {{ count }} cartes créées
+							</p>
+						</div>
+					</div>
+					<div class="card-body">
+						<div class="tab-content">
+							<div class="tab-pane active">
+								<table class="table" id="table">
+									<thead>
+										<tr>
+											<th class="text-warning" style="cursor: pointer" onclick="sortTable(0)">Langue<i class="material-icons">import_export</i>
+											</th>
+											<th class="text-warning" style="cursor: pointer" onclick="sortTable(1)">Catégorie<i class="material-icons">import_export</i>
+											</th>
+											<th class="text-warning" style="cursor: pointer" onclick="sortTable(2)">Question<i class="material-icons">import_export</i>
+											</th>
+											<th class="text-warning" style="cursor: pointer" onclick="sortTable(3)">Créée le<i class="material-icons">import_export</i>
+											</th>
+											<th class="text-warning" style="cursor: pointer" onclick="sortTable(4)">Decks<br>concernés<i class="material-icons">import_export</i>
+											</th>
+											<th class="text-warning">Voir</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for card in cards %}
+											<tr>
+												<td>{{ card.author.languageLearn.name }}</td>
+												<td>{{ card.category.name }}</td>
+												<td>
+													{{ card.question |length > 20 ? card.question|slice(0, 20) ~ '...' : card.question }}
+												</td>
+												<td>{{ card.createdAt | date("d/m/Y") }}</td>
+												<td>
+													{% set count = 0 %}{% for deck in card.decks %}{% set  count = count + 1 %}{% endfor %}
+													{{ count }}
+												</td>
+
+												<td class="td-actions text-right">
+													<a href="{{ path('card-detail', { id: card.id }) }}">
+														<button type="button" rel="tooltip" title="" class="btn btn-white btn-link btn-sm">
+															<i class="material-icons">remove_red_eye</i>
+														</button>
+													</a>
+												</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
