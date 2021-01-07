@@ -64,39 +64,53 @@
 
         <!-- FlashMessages -->
         <div class="container mt-5">
-        {% for flash in app.flashes('success-card') %}
-        <div class="alert alert-success">
-          <button
-            type="button"
-            class="close"
-            data-dismiss="alert"
-            aria-label="Close"
-            onclick="delete_flash(this)"
-          >
-            <i class="material-icons">close</i>
-          </button>
-          <span>
-            {{ flash }}
-          </span>
+          {% for flash in app.flashes('success-card') %}
+          <div class="alert alert-success">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+              onclick="delete_flash(this)"
+            >
+              <i class="material-icons">close</i>
+            </button>
+            <span>
+              {{ flash }}
+            </span>
+          </div>
+          {% endfor %} {% for flash in app.flashes('success-deck') %}
+          <div class="alert alert-success">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+              onclick="delete_flash(this)"
+            >
+              <i class="material-icons">close</i>
+            </button>
+            <span>
+              {{ flash }}
+            </span>
+          </div>
+          {% endfor %} {% for flash in app.flashes('success-user') %}
+          <div class="alert alert-success">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+              onclick="delete_flash(this)"
+            >
+              <i class="material-icons">close</i>
+            </button>
+            <span>
+              {{ flash }}
+            </span>
+          </div>
+          {% endfor %}
         </div>
-        {% endfor %}
-        {% for flash in app.flashes('success-deck') %}
-        <div class="alert alert-success">
-          <button
-            type="button"
-            class="close"
-            data-dismiss="alert"
-            aria-label="Close"
-            onclick="delete_flash(this)"
-          >
-            <i class="material-icons">close</i>
-          </button>
-          <span>
-            {{ flash }}
-          </span>
-        </div>
-        {% endfor %}
-      </div>
         <!-- End FlashMessages -->
 
         {% block body %} {% endblock body %}
@@ -192,6 +206,10 @@
       }
     </script>
 
+    <!-- Pour les dynamics tabs de la page admin/user.html.twig -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
     <!--   Core JS Files   -->
     <script src="{{ asset('/assets/js/core/jquery.min.js') }}"></script>
     <script src="{{ asset('/assets/js/core/popper.min.js') }}"></script>
@@ -218,8 +236,11 @@
     <script src="{{ asset('/assets/js/plugins/demo.js') }}"></script>
 
     <!-- Material Dashboard Core initialisations of plugins and Bootstrap Material Design Library -->
-    <script src="{{
-        asset('/assets/js/material-dashboard.js?v=2.1.0')
-      }}"></script>
+    <script src="{{ asset('/assets/js/material-dashboard.js') }}"></script>
+
+    <!-- Chartist JS -->
+    <script src="{{ asset('assets/js/plugins/chartist.min.js') }}"></script>
+    <!--  Notifications Plugin    -->
+    <script src="{{ asset('assets/js/plugins/bootstrap-notify.js') }}"></script>
   </body>
 </html>
