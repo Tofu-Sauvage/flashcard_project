@@ -21,7 +21,6 @@ class CardsController extends AbstractController {
     $idActiveUser = $this->getUser()->getID();
     $listeCategories = $categoryRepository->findBy([], ['id' => 'desc']);
     $listeCards = $cardRepository->findBy(['author' => $idActiveUser]);
-    // dd($listeCards);
 
     return $this->render('./pages/user/cardGestion.html.twig', ['categories' => $listeCategories, 'cards' => $listeCards]);
   }
@@ -29,6 +28,7 @@ class CardsController extends AbstractController {
   public function cardCreateAction(Request $request, EntityManagerInterface $em, $categoryId, CategoryRepository $categoryRepository)
   {
     $categorySelected = $categoryRepository->findOneBy(['id' => $categoryId]);
+    $modeEdition = false;
     
     $form = $this->createForm(CardType::class);
     $form->handleRequest($request);
@@ -56,8 +56,41 @@ class CardsController extends AbstractController {
       return $this->redirectToRoute('card-gestion');
     }
 
-    return $this->render('./pages/user/cardForm.html.twig', ['cardForm' => $form->createView(), 'category' => $categorySelected]);
+    return $this->render('./pages/user/cardForm.html.twig', ['cardForm' => $form->createView(), 'category' => $categorySelected, 'modeEdition' => $modeEdition]);
+  }
 
+  public function cardUpdateAction(Request $request, EntityManagerInterface $em, CardRepository $cardRepository, CategoryRepository $categoryRepository, $categoryId, $cardId) {
+    
+    $categorySelected = $categoryRepository->findOneBy(['id' => $categoryId]);
+    $modeEdition = true;
+    
+    $card = $cardRepository->findOneBy(['id' => $cardId]);
+    $form = $this->createForm(CardType::class, $card);
+
+    $form->handleRequest($request);
+
+    if($form->isSubmitted()){
+      $card = $form->getData();
+      $file = $form->get('image')->getData();
+
+      if ($file) {
+        $original = pathInfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $uniqueName = $original . "-" . uniqid() . "." . $file->guessExtension();
+        $file->move(
+          $this->getParameter('uploads'),
+          $uniqueName
+        );
+        $card->setImage($uniqueName);
+      }
+
+      $em->persist($card);
+      $em->flush();
+
+      $this->addFlash('success', "La carte a bien été modifié");
+      return $this->redirectToRoute('card-gestion');
+    }
+
+    return $this->render('./pages/user/cardForm.html.twig', ['cardForm' => $form->createView(), 'category' => $categorySelected, 'modeEdition' => $modeEdition]);
   }
 
   public function detailAction(CardRepository $cardRepository, $id)
@@ -66,12 +99,27 @@ class CardsController extends AbstractController {
     return $this->render('./pages/administration/card.html.twig', ['card' => $card]);
   }
 
+  public function detailCardUserAction(CardRepository $cardRepository, $id)
+  {
+    $card =  $cardRepository->findOneBy(['id' => $id]);
+    return $this->render('./pages/user/cardDetail.html.twig', ['card' => $card]);
+  }
+
   public function deleteAction(EntityManagerInterface $em, CardRepository $cardRepository, $id)
   {
     $card = $cardRepository->find($id);
     $em->remove($card);
     $em->flush();
-    $this->addFlash('success-card', 'La carte a bien été supprimée !');
+    $this->addFlash('success', 'La carte a bien été supprimée !');
     return $this->redirectToRoute('admin-cards');
+  }
+
+  public function deleteCardUserAction(EntityManagerInterface $em, CardRepository $cardRepository, $id)
+  {
+    $card = $cardRepository->find($id);
+    $em->remove($card);
+    $em->flush();
+    $this->addFlash('success', 'La carte a bien été supprimée !');
+    return $this->redirectToRoute('card-gestion');
   }
 }
