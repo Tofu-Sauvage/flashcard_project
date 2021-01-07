@@ -28,6 +28,7 @@ class CardsController extends AbstractController {
   public function cardCreateAction(Request $request, EntityManagerInterface $em, $categoryId, CategoryRepository $categoryRepository)
   {
     $categorySelected = $categoryRepository->findOneBy(['id' => $categoryId]);
+    $modeEdition = false;
     
     $form = $this->createForm(CardType::class);
     $form->handleRequest($request);
@@ -55,7 +56,7 @@ class CardsController extends AbstractController {
       return $this->redirectToRoute('card-gestion');
     }
 
-    return $this->render('./pages/user/cardForm.html.twig', ['cardForm' => $form->createView(), 'category' => $categorySelected]);
+    return $this->render('./pages/user/cardForm.html.twig', ['cardForm' => $form->createView(), 'category' => $categorySelected, 'modeEdition' => $modeEdition]);
   }
 
   public function cardUpdateAction(Request $request, EntityManagerInterface $em, CardRepository $cardRepository, CategoryRepository $categoryRepository, $categoryId, $cardId) {

@@ -93,11 +93,24 @@
                 action="{{ path('card-delete', { id: card.id }) }}"
                 onsubmit="return confirm('Supprimer cette carte ?')"
               >
-                <button class="btn btn-danger btn-round">supprimer</button>
-                <a href="{{ path('card-update', { cardId: card.id, categoryId: card.category.id }) }}" type="button" class="btn btn-info btn-round">Modifier</a>
+                <button class="btn btn-danger btn-round">
+                  <span class="material-icons">delete_forever</span>
+                   supprimer
+                </button>
+                <a href="{{ path('card-update', { cardId: card.id, categoryId: card.category.id }) }}" type="button" class="btn btn-info btn-round">
+                  <span class="material-icons">border_color</span>
+                   Modifier
+                  </a>
               </form>
 
             </div>
+          </div>
+          <div>
+            <a href="{{ path('card-gestion') }}" 
+            type="button" 
+            class="btn btn-primary btn-round">
+            <span class="material-icons">keyboard_return</span>
+            Retour à "Gestion des cartes"</a>
           </div>
         </div>
 
