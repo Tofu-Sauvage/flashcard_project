@@ -86,3 +86,66 @@
         }
       }
     </script>
+
+    <!-- Pour gérer les quizz -->
+    <script>
+        function initialiseQuiz()
+        {
+          document.getElementsByClassName("bonnesReponses")[0].innerHTML = 0;
+
+          var elementIndex = 0;
+          showElement(elementIndex);
+        }
+
+        function recommencerQuiz()
+        {
+          var nombreBonnesReponses = 0;
+          document.getElementsByClassName("bonnesReponses")[0].innerHTML = 0;
+          for(i=0 ; i< document.getElementsByClassName("uneReponseUser").length ; i++)
+          {
+            document.getElementsByClassName("uneReponseUser")[i].value = ""; 
+            document.getElementsByClassName("verdict")[i].innerHTML = ""; 
+          }
+          elementIndex = 0;
+          showElement(elementIndex);
+        }
+
+        function verifierReponse(n, bonneReponse)
+        {
+            if(document.getElementsByClassName("uneReponseUser")[n].value == bonneReponse)
+            {
+              document.getElementsByClassName("verdict")[n].innerHTML = "Bonne réponse !";
+              document.getElementsByClassName("bonnesReponses")[0].innerHTML = String(parseInt(document.getElementsByClassName("bonnesReponses")[0].innerHTML) + 1);
+            }
+            else
+            {
+              document.getElementsByClassName("verdict")[n].innerHTML = "Mauvaise réponse...";
+            }
+            setTimeout(showElement(n+1),1000);
+        }
+
+
+        /* Thumbnail image controls
+        function currentElement(n) {
+          showElement(elementIndex = n);
+        }*/
+
+        function showElement(n) {
+          var i;
+          var elements = document.getElementsByClassName("uneCarteQuestion");
+          var finalCard = document.getElementsByClassName("uneCarteResultats")[0];
+          
+          //if (n >= elements.length) { elementIndex = 0;}
+          for (i = 0; i < elements.length; i++) {
+              elements[i].style.display = "none";
+          }
+          finalCard.style.display = "none";
+
+          if (n < elements.length)
+            elements[n].style.display = "block";
+          else
+            {
+              finalCard.style.display = "block";
+            }
+        } 
+    </script>
