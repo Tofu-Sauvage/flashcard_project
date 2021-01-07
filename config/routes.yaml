@@ -92,6 +92,10 @@ language-delete:
   path: /admin/delete/language/{id}
   controller : App\Controller\LanguagesController::languageDeleteAction
 
+language-details:
+  path: /admin/language/{id}
+  controller : App\Controller\LanguagesController::detailAction
+
   # ------------- USER ---------------------
 
 deckboard:
