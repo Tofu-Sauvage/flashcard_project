@@ -16,6 +16,7 @@ class DeckboardController extends AbstractController {
     //    $lastCard->setCreatedAt(new DateTime("now"));
     //  }
     $lastDeck = $deckRepository->findOneBy(['author' => $idActiveUser], ['id' => 'desc']);
+    // dd($lastDeck);
     $listDeck = $deckRepository->findBy(['author' => $idActiveUser]);
 
     // LA LIGNE CI DESSOUS EST LA A DES FINS DE TESTS SI VOUS VOULEZ LA TESTER, en attendant que la feature "ajouter aux favoris" soit faite ! 
