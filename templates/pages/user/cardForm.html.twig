@@ -45,7 +45,11 @@
         </div>
 
         <div class="form-group">
-			    {{ form_widget(cardForm.Ajouter, {'label': 'Ajouter une carte', attr: {'class': 'btn btn-success mt-4'}}) }}
+          {% if not modeEdition %}
+            {{ form_widget(cardForm.Ajouter, {'label': 'Ajouter une carte', attr: {'class': 'btn btn-success mt-4'}}) }}
+          {% else %}
+            {{ form_widget(cardForm.Ajouter, {'label': 'Modifier cette carte', attr: {'class': 'btn btn-success mt-4'}}) }}
+          {% endif %}
 		    </div>
 
       {{ form_end(cardForm) }}

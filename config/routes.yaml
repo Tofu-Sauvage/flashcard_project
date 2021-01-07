@@ -100,12 +100,20 @@ card-gestion:
 
 card-detail:
   path: /profile/card/{id}
-  controller: App\Controller\CardsController::detailAction
+  controller: App\Controller\CardsController::detailCardUserAction
+
+card-update:
+  path: /profile/update/card/{cardId}/{categoryId}
+  controller: App\Controller\CardsController::cardUpdateAction
 
 card-create:
   path: /profile/create/card/{categoryId}
-  controller : App\Controller\CardsController::cardCreateAction
+  controller: App\Controller\CardsController::cardCreateAction
+
+card-delete:
+  path: /profile/delete/card/{id}
+  controller: App\Controller\CardsController::deleteAction
 
 deck:
   path: /profile/create/deck
-  controller : App\Controller\DecksController::deckCreateAction
+  controller: App\Controller\DecksController::deckCreateAction
