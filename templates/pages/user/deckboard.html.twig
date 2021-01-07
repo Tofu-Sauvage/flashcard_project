@@ -63,7 +63,7 @@
 
 							{% if last_deck %}
 
-								<div class="card-header card-header-default"> {# Carte au détail #}
+								<div class="card-header card-header-default"> {# deckau détail #}
 									<div class="row">
 										<h3>Dernière carte crée :</h3>
 										<table class="table">
@@ -85,28 +85,11 @@
 												</tr>
 											</tbody>
 										</table>
-										{% if last_deck%}
 											<a href="#" type="button" class="btn btn-lg btn-primary">
-											<i class="material-icons">view_agenda</i>
-											Gestion des cartes</a>
-										{% endif %}
-
-										<div class="col-sm">
-											<h3 class="card-title">Nom</h3>
-											<h4 class="card-category">{{ last_deck.name }}</h4>
-										</div>
-
-										<div class="col-sm">
-											<h3 class="card-title">Description</h3>
-											<h4 class="card-category">{{ last_deck.description}}</h4>
-										</div>
-
-										<div class="col-sm">
-											<h3 class="card-title">Crée le</h3>
-											<h4 class="card-category">{{ last_deck.createdAt | date('d-m-Y')}}</h4>
-										</div>
+											<i class="material-icons">all_inbox</i>
+											Gestion des decks</a>
 									</div>
-								</div> {# Fin Carte au détail #}
+								</div> {# Fin Deck au détail #}
 
 							{% endif %}
 
