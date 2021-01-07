@@ -32,6 +32,10 @@ admin-user:
   path: /admin/user/{id}
   controller: App\Controller\UsersController::detailAction
 
+admin-user-delete:
+  path: admin/delete/user/{id}
+  controller : App\Controller\UsersController::deleteAction 
+
 admin-cards:
   path: /admin/cards
   controller: App\Controller\CardsController::indexAction
