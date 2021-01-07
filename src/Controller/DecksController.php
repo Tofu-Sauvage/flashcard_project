@@ -32,7 +32,7 @@ class DecksController extends AbstractController {
   }
   public function detailAction(DeckRepository $deckRepository, $id)
   {
-    $deck =  $deckRepository->findOneBy(['id' => $id]);
+    $deck =  $deckRepository->findOneBy(['id' => $id]);     
     return $this->render('./pages/administration/deck.html.twig', ['deck' => $deck]);
   }
 

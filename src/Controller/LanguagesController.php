@@ -67,7 +67,6 @@ class LanguagesController extends AbstractController {
     return $this->render('./pages/administration/languageForm.html.twig', ['languageForm' => $languageForm->createView()]);
   }
 
-
   public function languageDeleteAction(EntityManagerInterface $em, LanguageRepository $languageRepository, $id)
   {
     $language = $languageRepository->find($id);
@@ -75,4 +74,10 @@ class LanguagesController extends AbstractController {
     $em->flush();
     //$this->addFlash('success-category', 'La catégorie a bien été supprimée !');
     return $this->redirectToRoute('admin-languages');  }
+
+    public function detailAction(LanguageRepository $languageRepository, $id)
+    {
+      $language =  $languageRepository->findOneBy(['id' => $id]);
+      return $this->render('./pages/administration/language.html.twig', ['language' => $language]);
+    }
 }
