@@ -44,4 +44,21 @@ class DecksController extends AbstractController {
     $this->addFlash('success-deck', 'Le deck a bien été supprimé !');
     return $this->redirectToRoute('admin-decks');
   }
+
+  public function launchQuizAction(DeckRepository $deckRepository, $deckId)
+  {
+    $deck = $deckRepository->findOneBy(['id' => $deckId]);
+
+    $cards = $deck->getCards();
+
+    $arrayCards = array();
+    for ($i = 0 ; $i < count($cards) ; $i++)
+    {
+      array_push($arrayCards, $cards[$i]);
+    }
+    shuffle($arrayCards);
+
+
+    return $this->render('./pages/user/quiz.html.twig', ['cartes' => $arrayCards]);
+  }
 }

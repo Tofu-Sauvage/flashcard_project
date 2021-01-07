@@ -17,7 +17,7 @@
         {% block stylesheets %}{% endblock %}
 
 		</head>
-		<body class="dark-edition">
+		<body class="dark-edition" {% block loaderQuiz %}{% endblock %}>
             {% include "./components/nav.html.twig" %}
             <div class="container">
 
