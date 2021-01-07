@@ -17,8 +17,13 @@ class CardsController extends AbstractController {
     return $this->render('./pages/administration/cards.html.twig', ['cards'=>$cards]);
   }
 
-  public function indexChoixCategoryAction() {
-    return $this->render('./pages/user/cardSelectCategory.html.twig');
+  public function indexCardGestionAction(CategoryRepository $categoryRepository, CardRepository $cardRepository) {
+    $idActiveUser = $this->getUser()->getID();
+    $listeCategories = $categoryRepository->findBy([], ['id' => 'desc']);
+    $listeCards = $cardRepository->findBy(['author' => $idActiveUser]);
+    // dd($listeCards);
+
+    return $this->render('./pages/user/cardGestion.html.twig', ['categories' => $listeCategories, 'cards' => $listeCards]);
   }
 
   public function cardCreateAction(Request $request, EntityManagerInterface $em, $categoryId, CategoryRepository $categoryRepository)
@@ -48,7 +53,7 @@ class CardsController extends AbstractController {
       $em->flush();
 
       $this->addFlash('success', "La carte a bien été ajoutée");
-      return $this->redirectToRoute('card-category');
+      return $this->redirectToRoute('card-gestion');
     }
 
     return $this->render('./pages/user/cardForm.html.twig', ['cardForm' => $form->createView(), 'category' => $categorySelected]);

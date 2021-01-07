@@ -2,7 +2,7 @@
 
 {% block body %}
 
-	 <div class="content">
+
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-6"> {# Colonne contenant section "cartes" et "decks" #}
@@ -45,7 +45,7 @@
 
 						<div class="card-footer">
 							{% if last_card %}
-								<a href="#" type="button" class="btn btn-lg btn-primary">Gestion des cartes</a>
+								<a href="{{ path('card-gestion') }}" type="button" class="btn btn-lg btn-primary">Gestion des cartes</a>
 							{% endif %}
 						</div>
 					</div> {# Fin Section "cartes"#}
@@ -101,7 +101,7 @@
 							<h2 class="card-title">Révision</h2>
 						</div>
 						<div class="card-body">
-						{% if not last_deck %}
+						{% if not last_deck and not has_favs %}
 							<h3>
 								<a href="#" type="button" class="btn btn-lg btn-info">Veuillez créer un deck<br>AVANT de lancer une révision</a>
 							</h3>
@@ -113,8 +113,13 @@
 								</button>
 								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 								{% for un_deck in list_deck %}
-									<a class="dropdown-item" href="#">Réviser {{un_deck.name}}</a>
+									<a class="dropdown-item" href="#">Réviser votre deck {{un_deck.name}}</a>
 								{% endfor %}
+								{% if list_deck_favoris %}
+									{% for un_deck in list_deck_favoris %}
+										<a class="dropdown-item" href="#">Réviser le deck favori {{un_deck.name}}</a>
+									{% endfor %}
+								{% endif %}
 								</div>
 							</div>
 						
@@ -127,7 +132,7 @@
 								<h2 class="card-title">Quiz</h2>
 							</div>
 						<div class="card-body">
-						{% if not last_deck %}
+						{% if not last_deck and not has_favs %}
 							<h3>
 								<a href="#" type="button" class="btn btn-lg btn-info">Veuillez créer un deck<br>AVANT de lancer un quiz</a>
 							</h3>
@@ -138,8 +143,13 @@
 								</button>
 								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 								{% for un_deck in list_deck %}
-									<a class="dropdown-item" href="#">Quiz sur {{un_deck.name}}</a>
+									<a class="dropdown-item" href="#">Quiz sur votre deck {{un_deck.name}}</a>
 								{% endfor %}
+								{% if list_deck_favoris %}
+									{% for un_deck in list_deck_favoris %}
+										<a class="dropdown-item" href="#">Quiz sur le deck favori {{un_deck.name}}</a>
+									{% endfor %}
+								{% endif %}
 								</div>
 							</div>
 
@@ -149,6 +159,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
+
 
 {% endblock %}
