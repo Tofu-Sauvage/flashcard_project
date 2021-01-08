@@ -69,7 +69,7 @@ class DecksController extends AbstractController {
     return $this->redirectToRoute('admin-decks');
   }
 
-  public function launchQuizAction(DeckRepository $deckRepository, $deckId)
+  public function shuffleLesCartes($deckRepository, $deckId)
   {
     $deck = $deckRepository->findOneBy(['id' => $deckId]);
 
@@ -82,7 +82,18 @@ class DecksController extends AbstractController {
     }
     shuffle($arrayCards);
 
+    return $arrayCards;
+  }
 
-    return $this->render('./pages/user/quiz.html.twig', ['cartes' => $arrayCards]);
+  public function launchRevisionAction(DeckRepository $deckRepository, $deckId)
+  {
+    $mesCartes = $this->shuffleLesCartes($deckRepository, $deckId);
+    return $this->render('./pages/user/revision.html.twig', ['cartes' => $mesCartes]);
+  }
+
+  public function launchQuizAction(DeckRepository $deckRepository, $deckId)
+  {
+    $mesCartes = $this->shuffleLesCartes($deckRepository, $deckId);
+    return $this->render('./pages/user/quiz.html.twig', ['cartes' => $mesCartes]);
   }
 }

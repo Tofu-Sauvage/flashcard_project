@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %} 
 
-{% block loaderQuiz %} onload="initialiseQuiz()" {% endblock %}
+{% block attributBody %} onload="initialiseQuiz()" {% endblock %}
 
 {% block body %}
 
@@ -30,9 +30,9 @@
                 </div>
                 {% endfor %}
                 <div class="uneCarteResultats form-group">
-                    <p class="votreScore">Vous avez donné <span class="bonnesReponses">0</span> bonnes réponses !</p>
+                    <p class="votreScore">Vous avez donné <span class="bonnesReponses">0</span> <span class="bonnesReponsesTexte"></span> !</p>
                     <p><span class="listeMauvaisesReponses"></p>
-                    <input type="submit" class="btn btn-primary" value="Recommencer" onclick="recommencerQuiz()">
+                    <input type="submit" class="btn btn-primary" value="Recommencer" onclick="initialiseQuiz()">
                 </div>
                 <div class="form-group">
                     <a href="/profile/deckboard" class="btn btn-info btn-sm" role="button">Retourner au deckboard</a>

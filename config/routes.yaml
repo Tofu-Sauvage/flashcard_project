@@ -150,6 +150,10 @@ deck-delete:
 
 # ____________ révision & quiz  ________________
 
+revision:
+  path: /profile/revision/{deckId}
+  controller: App\Controller\DecksController::launchRevisionAction
+
 quiz:
   path: /profile/quiz/{deckId}
   controller: App\Controller\DecksController::launchQuizAction
