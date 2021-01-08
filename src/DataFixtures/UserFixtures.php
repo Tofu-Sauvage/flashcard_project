@@ -146,6 +146,7 @@ class UserFixtures extends Fixture
         $deck1->setName("Deck1")->setDescription("Une description du deck 1")->setPublic("true")->setAuthor($Lulu91)->setLangagueLearn($english);
         $deck1->addCard($card2);
         $deck1->addCard($card3);
+        $deck1->addCard($card1);
         $manager->persist($deck1);
         $manager->flush();
 
