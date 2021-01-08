@@ -2,10 +2,257 @@
 
 <div class="content">
   <div class="container-fluid">
-    <div class="col-lg-6 col-md-12">
-      <div class="card">
-        <p class="h4 card-header card-header-info">Nom : {{ language.name }}</p>
-        <p class="card-category">Users, cards et decks associés.</p>
+    <div class="col-lg-12 col-md-12">
+      <div class="card card-stats">
+        <div class="card-header card-header-warning card-header-icon">
+          <div class="card-icon">
+            {% if language.flag is not null%}
+            <img
+              class="img"
+              src=" /uploads/images/{{ language.flag }}"
+              width="55px"
+              height="auto"
+            />
+            {% else %}
+            <i class="material-icons">flag</i>
+            {% endif %}
+          </div>
+          <p class="h3 card-title text-white text-left">{{ language.name }}</p>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            <i class="material-icons text-warning">flag</i>
+            <a href="{{ path('admin-languages') }}" class="warning-link"
+              >Retour à la liste</a
+            >
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-6 col-md-6">
+              {% set count = 0 %} {% for user in users %} {% if
+              user.languageLearn.id == language.id %} {% set count = count + 1
+              %}{%endif%}{%endfor%} {% if count == 0 %}
+
+              <p class="h6 card-category text-left">
+                Personne n'apprend cette langue.
+              </p>
+
+              {% else %}
+
+              <p class="h6 card-category text-left">{{ count }} Apprenant(s)</p>
+              <table class="table text-left" id="table">
+                <thead>
+                  <tr>
+                    <th
+                      class="text-warning"
+                      style="cursor: pointer"
+                      onclick="sortTable(0)"
+                    >
+                      ID user<i class="material-icons">import_export</i>
+                    </th>
+                    <th
+                      class="text-warning"
+                      style="cursor: pointer"
+                      onclick="sortTable(1)"
+                    >
+                      Nom<i class="material-icons">import_export</i>
+                    </th>
+                    <th
+                      class="text-warning"
+                      style="cursor: pointer"
+                      onclick="sortTable(2)"
+                    >
+                      Inscrit le<i class="material-icons">import_export</i>
+                    </th>
+                    <th class="text-warning">Voir</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for user in users %}{% set count = 0 %} {% if
+                  user.languageLearn.id == language.id %}
+                  <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{user.createdAt | date("d/m/Y") }}</td>
+                    <td class="td-actions text-right">
+                      <a href="{{ path('admin-user', { id: user.id }) }}"
+                        ><button
+                          type="button"
+                          rel="tooltip"
+                          title=""
+                          class="btn btn-white btn-link btn-sm"
+                        >
+                          <i class="material-icons">remove_red_eye</i>
+                        </button></a
+                      >
+                    </td>
+                  </tr>
+                  {% endif %} {% endfor %}
+                </tbody>
+              </table>
+              {%endif%}
+            </div>
+
+            <div class="col-lg-6 col-md-6">
+              {% set count = 0 %} {% for user in users %} {% if
+              user.languageNative.id == language.id %} {% set count = count + 1
+              %}{%endif%}{%endfor%} {% if count == 0 %}
+
+              <p class="h6 card-category text-left">
+                Personne ne parle nativement cette langue.
+              </p>
+
+              {% else %}
+
+              <p class="h6 card-category text-left">{{ count }} Natif(s)</p>
+
+              <table class="table text-left">
+                <thead>
+                  <tr>
+                    <th class="text-warning">ID user</th>
+                    <th class="text-warning">Nom</th>
+                    <th class="text-warning">Inscrit le</th>
+                    <th class="text-warning">Voir</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for user in users %} {% if user.languageNative.id ==
+                  language.id %}
+                  <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{user.createdAt | date("d/m/Y") }}</td>
+                    <td class="td-actions text-right">
+                      <a href="{{ path('admin-user', { id: user.id }) }}"
+                        ><button
+                          type="button"
+                          rel="tooltip"
+                          title=""
+                          class="btn btn-white btn-link btn-sm"
+                        >
+                          <i class="material-icons">remove_red_eye</i>
+                        </button></a
+                      >
+                    </td>
+                  </tr>
+                  {% endif %} {% endfor %}
+                </tbody>
+              </table>
+              {%endif%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-12 col-md-12">
+      <div class="card card-stats">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-6 col-md-6">
+              {% set count = 0 %} {% for card in cards%} {% for user in users%}
+              {% if card.author.id == user.id and user.languageLearn.id ==
+              language.id %} {% set count = count + 1
+              %}{%endif%}{%endfor%}{%endfor%} {% if count == 0 %}
+
+              <p class="h6 card-category text-left">Pas de carte concernée.</p>
+
+              {% else %}
+
+              <p class="h6 card-category text-left">
+                {{ count }} Carte(s) concernée(s)
+              </p>
+              <table class="table text-left">
+                <thead>
+                  <tr>
+                    <th class="text-warning">ID carte</th>
+                    <th class="text-warning">Auteur</th>
+                    <th class="text-warning">Catégorie</th>
+                    <th class="text-warning">Créée le</th>
+                    <th class="text-warning">Voir</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for card in cards%} {% for user in users%} {% if
+                  card.author.id == user.id and user.languageLearn.id ==
+                  language.id %}
+                  <tr>
+                    <td>{{ card.id }}</td>
+                    <td>{{ card.author.name }}</td>
+                    <td>{{ card.category.name }}</td>
+                    <td>{{card.createdAt | date("d/m/Y") }}</td>
+                    <td class="td-actions text-right">
+                      <a href="{{ path('admin-card', { id: card.id }) }}"
+                        ><button
+                          type="button"
+                          rel="tooltip"
+                          title=""
+                          class="btn btn-white btn-link btn-sm"
+                        >
+                          <i class="material-icons">remove_red_eye</i>
+                        </button></a
+                      >
+                    </td>
+                  </tr>
+                  {% endif %} {% endfor %} {% endfor %}
+                </tbody>
+              </table>
+              {%endif%}
+            </div>
+
+            <div class="col-lg-6 col-md-6">
+              {% set count = 0 %} {% for deck in decks%} {% for user in users%}
+              {% if deck.author.id == user.id and user.languageLearn.id ==
+              language.id %} {% set count = count + 1
+              %}{%endif%}{%endfor%}{%endfor%} {% if count == 0 %}
+
+              <p class="h6 card-category text-left">Pas de deck concerné.</p>
+
+              {% else %}
+
+              <p class="h6 card-category text-left">
+                {{ count }} Deck(s) concerné(s)
+              </p>
+              <table class="table text-left" id="table3">
+                <thead>
+                  <tr>
+                    <th class="text-warning">ID deck</th>
+                    <th class="text-warning">Auteur</th>
+                    <th class="text-warning">Nom</th>
+                    <th class="text-warning">Créée le</th>
+                    <th class="text-warning">Voir</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for deck in decks%} {% for user in users%} {% if
+                  deck.author.id == user.id and user.languageLearn.id ==
+                  language.id %}
+                  <tr>
+                    <td>{{ deck.id }}</td>
+                    <td>{{ deck.author.name }}</td>
+                    <td>{{ deck.name }}</td>
+                    <td>{{ deck.createdAt | date("d/m/Y") }}</td>
+                    <td class="td-actions text-right">
+                      <a href="{{ path('admin-deck', { id: deck.id }) }}"
+                        ><button
+                          type="button"
+                          rel="tooltip"
+                          title=""
+                          class="btn btn-white btn-link btn-sm"
+                        >
+                          <i class="material-icons">remove_red_eye</i>
+                        </button></a
+                      >
+                    </td>
+                  </tr>
+                  {% endif %} {% endfor %} {% endfor %}
+                </tbody>
+              </table>
+              {%endif%}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
