@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\DeckType;
+use App\Repository\CardRepository;
 use App\Repository\DeckRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -62,10 +63,14 @@ class DecksController extends AbstractController {
     return $this->render('./pages/administration/deck.html.twig', ['deck' => $deck]);
   }
 
-  public function detailUserAction(DeckRepository $deckRepository, $id)
+  public function detailUserAction(DeckRepository $deckRepository, CardRepository $cardRepository, $id)
   {
-    $deck =  $deckRepository->findOneBy(['id' => $id]);     
-    return $this->render('./pages/user/deckDetail.html.twig', ['deck' => $deck]);
+    $deck =  $deckRepository->findOneBy(['id' => $id]);
+
+    $idActiveUser = $this->getUser()->getID();
+    $listeCards = $cardRepository->findBy(['author' => $idActiveUser]);
+
+    return $this->render('./pages/user/deckDetail.html.twig', ['deck' => $deck, "cards" => $listeCards]);
   }
 
   public function deleteAction(EntityManagerInterface $em, DeckRepository $deckRepository, $id)
@@ -75,6 +80,18 @@ class DecksController extends AbstractController {
     $em->flush();
     $this->addFlash('success-deck', 'Le deck a bien été supprimé !');
     return $this->redirectToRoute('admin-decks');
+  }
+
+  public function addCardToDeckFromDeckDetailAction(DeckRepository $deckRepository, CardRepository $cardRepository, EntityManagerInterface $em, $idCard, $idDeck) {
+    $deck = $deckRepository->findOneBy(["id" => $idDeck]);
+    $card = $cardRepository->findOneBy(["id" => $idCard]);
+    $deck->addCard($card);
+
+    $em->persist($deck);
+    $em->flush();
+
+    $this->addFlash('success', 'La carte a bien été ajouté !');
+    return $this->redirectToRoute('deck-detail', ["id" => $idDeck]);
   }
 
   public function shuffleLesCartes($deckRepository, $deckId)

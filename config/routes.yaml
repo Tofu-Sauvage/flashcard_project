@@ -148,6 +148,10 @@ deck-delete:
   path: /profile/delete/deck/{id}
   controller: App\Controller\DecksController::deleteUserAction
 
+add-card-to-deck:
+  path: /profile/add-card/deck/{idCard}/{idDeck}
+  controller: App\Controller\DecksController::addCardToDeckFromDeckDetailAction
+
 # ____________ révision & quiz ________________
 
 revision:
