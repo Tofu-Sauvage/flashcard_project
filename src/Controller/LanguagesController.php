@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Form\LanguageType;
+use App\Repository\CardRepository;
+use App\Repository\DeckRepository;
 use App\Repository\LanguageRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -75,9 +78,12 @@ class LanguagesController extends AbstractController {
     //$this->addFlash('success-category', 'La catégorie a bien été supprimée !');
     return $this->redirectToRoute('admin-languages');  }
 
-    public function detailAction(LanguageRepository $languageRepository, $id)
+    public function detailAction(LanguageRepository $languageRepository, $id, UserRepository $userRepository, CardRepository $cardRepository, DeckRepository $deckRepository)
     {
       $language =  $languageRepository->findOneBy(['id' => $id]);
-      return $this->render('./pages/administration/language.html.twig', ['language' => $language]);
+      $users = $userRepository->findAll();
+      $cards = $cardRepository->findAll();
+      $decks = $deckRepository->findAll();
+      return $this->render('./pages/administration/language.html.twig', ['language' => $language, 'users'=>$users, 'cards'=>$cards, 'decks'=>$decks]);
     }
 }
