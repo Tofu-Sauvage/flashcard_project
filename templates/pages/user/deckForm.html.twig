@@ -2,7 +2,7 @@
 
 {% block body %}
   <div class="container-fluid">
-    <h1>Formulaire de decks</h1>
+    <h1 class="mb-5">Formulaire de decks</h1>
   <div>
 
   {{ form_start(deckForm) }}
@@ -19,7 +19,7 @@
 
     <div class="form-check">
         {{ form_label(deckForm.public, "Rendre le deck accessible aux autres utilisateurs ?") }}
-        {{ form_widget(deckForm.public, { attr: {'class': 'check'}}) }}
+        {{ form_widget(deckForm.public) }}
     </div>
 
     <div class="form-group">

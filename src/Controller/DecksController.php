@@ -30,6 +30,10 @@ class DecksController extends AbstractController {
     return $this->render('./pages/administration/deckForm.html.twig', ['deckForm' => $form->createView()]);
   }
 
+  public function indexGestionAction() {
+    return $this->render('./pages/user/deckGestion.html.twig');
+  }
+
   public function deckUserCreateAction(Request $request, EntityManagerInterface $em)
   {
     $form = $this->createForm(DeckType::class);
@@ -38,13 +42,13 @@ class DecksController extends AbstractController {
       $deck = $form->getData();
       
       $deck->setAuthor($this->getUser())
-           ->setCreatedAt(new DateTime("now"))
-           ;
-      
-      dd($deck);
+           ->setCreatedAt(new DateTime("now"));
 
       $em->persist($deck);
       $em->flush();
+
+      $this->addFlash('success', "Le deck a bien été crée");
+      return $this->redirectToRoute('deck-gestion');
     }
 
     return $this->render('./pages/user/deckForm.html.twig', ['deckForm' => $form->createView()]);
