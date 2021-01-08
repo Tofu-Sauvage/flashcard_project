@@ -158,18 +158,6 @@
 
         function initialiseRevision()
         {
-
-          var elementsMesCartes = document.getElementsByClassName("uneCarteRevision");
-          var mesNumeros = document.getElementsByClassName("numeroRevision");
-          var boutonRecom = document.getElementsByClassName("recom-button");
-          
-          for(i=0 ; i<elementsMesCartes.length ; i++)
-          {
-            elementsMesCartes[i].innerHTML = elementsMesCartes[i].innerHTML;
-            if(i = elementsMesCartes.length-1)
-              boutonRecom[i].disabled = false;
-          }
-
           var elementIndex = 0;
           showElementRevision(elementIndex);
 
@@ -179,10 +167,6 @@
           elementsPrecedent[0].disabled = true;
           elementsSuivant[(elementsSuivant.length)-1].disabled = true;
 
-          
-
-          //elementsPrecedent[melange[0]].disabled = true;
-          //elementsSuivant[melange[melange.length-1]].disabled = true;
         }
 
         function RevisionNavigation(actuel, chaine)
@@ -195,12 +179,19 @@
         }
 
 
-        function showElementRevision(n, dernierChiffreDeLaSuite = -1)
+        function showElementRevision(n)
         {
           var elements = document.getElementsByClassName("uneCarteRevision");
           for (i = 0; i < elements.length; i++)
               elements[i].style.display = "none";
 
           elements[n].style.display = "block";
+          
+          var monBoutonRecom = document.getElementsByClassName("recom-button")[0];
+
+          if(n == elements.length-1)
+            monBoutonRecom.disabled = false;
+          else
+            monBoutonRecom.disabled = true;
         }
     </script>

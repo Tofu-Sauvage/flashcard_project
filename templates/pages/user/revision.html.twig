@@ -9,7 +9,7 @@
             <div class="card-header card-header-primary">
 				<h2 class="card-title">Révision</h2>
 			</div>
-{           {% set compteur = 0 %}
+            {% set compteur = 0 %}
             {% for q in cartes %}
             <div class="uneCarteRevision card-body">
                 
@@ -22,17 +22,17 @@
                         <button class="btn btn-primary btn-sm rev-suivant" role="button" onclick="RevisionNavigation({{compteur}},'suivant')">Suivant</button>
                     </div>
                 </div>
-                {% set compteur = compteur + 1 %}
-                
+            </div>
+            {% set compteur = compteur + 1 %}
+            {% endfor %} 
+            <div class='card-footer'> 
                 <div class="form-group">
                     <button class="btn btn-primary btn-sm recom-button" role="button" onclick="location.reload()" disabled>Recommencer</button>
-                </div>
-                <div class="form-group">
+                
                     <a href="/profile/deckboard" class="btn btn-info btn-sm" role="button">Retourner au deckboard</a>
                 </div>
             </div>
-            {% endfor %}
-
+            
         </div>
     </div>
 {% endblock %}
