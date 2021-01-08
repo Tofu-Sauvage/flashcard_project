@@ -2,8 +2,12 @@
 
 {% block body %}
 
-
 		<div class="container-fluid">
+
+			<div class="alert alert-success">
+				<h2>Deckboard de {{ app.user.name }}</h2>
+			</div>
+
 			<div class="row">
 				<div class="col-md-6"> {# Colonne contenant section "cartes" et "decks" #}
 					<div class="card"> {# Section "cartes"#}
@@ -13,39 +17,39 @@
 
 						<div class="card-body">
 							{% if not last_card %} {# Si aucune carte présente en BDD, cards == null #}
-								<h3>
-									<a href="#" type="button" class="btn btn-lg btn-primary">Veuillez créer votre première carte :)</a>
-								</h3>
+									<a href="{{ path('card-gestion') }}" type="button" class="btn btn-lg btn-primary">Veuillez créer votre première carte :)</a>
 							{% endif %}
 
 							{% if last_card %}
 
 								<div class="card-header card-header-default"> {# Carte au détail #}
 									<div class="row">
-
-										<div class="col-sm">
-											<h3 class="card-title">Question</h3>
-											<h4 class="card-category">{{ last_card.question }}</h4>
-										</div>
-
-										<div class="col-sm">
-											<h3 class="card-title">Réponse</h3>
-											<h4 class="card-category">{{ last_card.answer}}</h4>
-										</div>
-
-										<div class="col-sm">
-											<h3 class="card-title">Crée le</h3>
-											<h4 class="card-category">{{ last_card.createdAt | date('d-m-Y \à H:m:s')}}</h4>
-										</div>
+										<h3>Dernière carte crée :</h3>
+										<table class="table">
+											<thead>
+												<tr>
+													<th>Catégorie</th>
+													<th>Question</th>
+													<th>Réponse</th>
+													<th>Crée le</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>{{ last_card.category.name }}</td>
+													<td>{{ last_card.question }}</td>
+													<td>{{ last_card.answer }}</td>
+													<td>{{ last_card.createdAt | date("d/m/Y") }}</td>
+												</tr>
+											</tbody>
+										</table>
+										{% if last_card %}
+											<a href="{{ path('card-gestion') }}" type="button" class="btn btn-lg btn-primary">
+											<i class="material-icons">view_agenda</i>
+											Gestion des cartes</a>
+										{% endif %}
 									</div>
 								</div> {# Fin Carte au détail #}
-
-							{% endif %}
-						</div>
-
-						<div class="card-footer">
-							{% if last_card %}
-								<a href="{{ path('card-gestion') }}" type="button" class="btn btn-lg btn-primary">Gestion des cartes</a>
 							{% endif %}
 						</div>
 					</div> {# Fin Section "cartes"#}
@@ -59,37 +63,43 @@
 
 							{% if last_deck %}
 
-								<div class="card-header card-header-default"> {# Carte au détail #}
+								<div class="card-header card-header-default"> {# deckau détail #}
 									<div class="row">
-
-										<div class="col-sm">
-											<h3 class="card-title">Nom</h3>
-											<h4 class="card-category">{{ last_deck.name }}</h4>
-										</div>
-
-										<div class="col-sm">
-											<h3 class="card-title">Description</h3>
-											<h4 class="card-category">{{ last_deck.description}}</h4>
-										</div>
-
-										<div class="col-sm">
-											<h3 class="card-title">Crée le</h3>
-											<h4 class="card-category">{{ last_deck.createdAt | date('d-m-Y')}}</h4>
-										</div>
+										<h3>Dernier deck crée :</h3>
+										<h5>Nombres de cartes dans le dernier deck : 
+											{% set count = 0 %} {% for card in last_deck.cards %} {% set count = count + 1 %}{% endfor %} 
+											{{ count }} cartes.
+										</h5>
+										<table class="table">
+											<thead>
+												<tr>
+													<th>Nom</th>
+													<th>Description</th>
+													<th>Crée le</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>{{ last_deck.name }}</td>
+													<td>{{ last_deck.description }}</td>
+													<td>{{ last_deck.createdAt | date("d/m/Y") }}</td>
+												</tr>
+											</tbody>
+										</table>
+												
+											<a href="#" type="button" class="btn btn-lg btn-primary">
+											<i class="material-icons">all_inbox</i>
+											Gestion des decks</a>
 									</div>
-								</div> {# Fin Carte au détail #}
+								</div> {# Fin Deck au détail #}
 
 							{% endif %}
 
 							{% if not last_card %} {# Si aucune carte présente en BDD cards == null #}
-								<h3>
 									<a href="#" type="button" class="btn btn-lg btn-info">Veuillez créer votre première carte <br>AVANT de créer votre premier deck</a>
-								</h3>
 							{% elseif last_card and not last_deck %}
-                				<h3>
-									<a href="#" type="button" class="btn btn-lg btn-info">Créer votre premier deck</a>
-								</h3>
-              				{% endif %}
+									<a href="#" type="button" class="btn btn-lg btn-info"><i class="material-icons">all_inbox</i>Créer votre premier deck</a>
+              {% endif %}
 						</div>
 					</div>{#  Fin Section "decks"#}
 				</div>
