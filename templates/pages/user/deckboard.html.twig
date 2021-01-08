@@ -66,12 +66,15 @@
 								<div class="card-header card-header-default"> {# deckau détail #}
 									<div class="row">
 										<h3>Dernier deck crée :</h3>
+										<h5>Nombres de cartes dans le dernier deck : 
+											{% set count = 0 %} {% for card in last_deck.cards %} {% set count = count + 1 %}{% endfor %} 
+											{{ count }} cartes.
+										</h5>
 										<table class="table">
 											<thead>
 												<tr>
 													<th>Nom</th>
 													<th>Description</th>
-													<th>Nombres de cartes</th>
 													<th>Crée le</th>
 												</tr>
 											</thead>
@@ -79,12 +82,11 @@
 												<tr>
 													<td>{{ last_deck.name }}</td>
 													<td>{{ last_deck.description }}</td>
-													<td>{% set count = 0 %} {% for card in last_deck.cards %} {% set count = count + 1 %}{% endfor %} 
-													{{ count }} cartes</td>
 													<td>{{ last_deck.createdAt | date("d/m/Y") }}</td>
 												</tr>
 											</tbody>
 										</table>
+												
 											<a href="#" type="button" class="btn btn-lg btn-primary">
 											<i class="material-icons">all_inbox</i>
 											Gestion des decks</a>
