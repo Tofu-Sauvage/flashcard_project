@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\CategoryType;
+use App\Repository\CardRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -53,7 +54,14 @@ class CategoriesController extends AbstractController {
     $em->remove($category);
     $em->flush();
     //$this->addFlash('success-category', 'La catégorie a bien été supprimée !');
-    return $this->redirectToRoute('admin-categories');  }
+    return $this->redirectToRoute('admin-categories');  
+  }
 
+  public function detailAction(CategoryRepository $categoryRepository, $id, CardRepository $cardRepository)
+  {
+    $category =  $categoryRepository->findOneBy(['id' => $id]);
+    $cards = $cardRepository->findAll();
+    return $this->render('./pages/administration/category.html.twig', ['category' => $category, 'cards'=>$cards]);
+  }
 
 }
