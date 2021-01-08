@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\DeckType;
 use App\Repository\DeckRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,10 +27,29 @@ class DecksController extends AbstractController {
       $em->flush();
     }
 
-
     return $this->render('./pages/administration/deckForm.html.twig', ['deckForm' => $form->createView()]);
-
   }
+
+  public function deckUserCreateAction(Request $request, EntityManagerInterface $em)
+  {
+    $form = $this->createForm(DeckType::class);
+    $form->handleRequest($request);
+    if ($form->isSubmitted()) {
+      $deck = $form->getData();
+      
+      $deck->setAuthor($this->getUser())
+           ->setCreatedAt(new DateTime("now"))
+           ;
+      
+      dd($deck);
+
+      $em->persist($deck);
+      $em->flush();
+    }
+
+    return $this->render('./pages/user/deckForm.html.twig', ['deckForm' => $form->createView()]);
+  }
+
   public function detailAction(DeckRepository $deckRepository, $id)
   {
     $deck =  $deckRepository->findOneBy(['id' => $id]);     

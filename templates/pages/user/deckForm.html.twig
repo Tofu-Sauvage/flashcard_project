@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+  <div class="container-fluid">
+    <h1>Formulaire de decks</h1>
+  <div>
+
+  {{ form_start(deckForm) }}
+
+    <div class="form-group">
+      {{ form_label(deckForm.name, "Nom") }}
+      {{ form_widget(deckForm.name, {attr: {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+      {{ form_label(deckForm.description, "Description du deck") }}
+      {{ form_widget(deckForm.description, {attr: {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-check">
+        {{ form_label(deckForm.public, "Rendre le deck accessible aux autres utilisateurs ?") }}
+        {{ form_widget(deckForm.public, { attr: {'class': 'check'}}) }}
+    </div>
+
+    <div class="form-group">
+      {{ form_label(deckForm.langague_learn, "Language à apprendre") }}
+
+      {% for vars in deckForm.langague_learn %}
+        <div class="form-check">
+          {{ form_widget(vars) }}
+          {{ form_label(vars) }}
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="form-group">
+			{{ form_widget(deckForm.Ajouter, {attr: {'class': 'btn btn-success'}}) }}
+		</div>
+
+  {{ form_end(deckForm) }}
+
+{% endblock %}
