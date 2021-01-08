@@ -126,6 +126,10 @@ deck:
   path: /profile/create/deck
   controller: App\Controller\DecksController::deckCreateAction
 
+revision:
+  path: /profile/revision/{deckId}
+  controller: App\Controller\DecksController::launchRevisionAction
+
 quiz:
   path: /profile/quiz/{deckId}
   controller: App\Controller\DecksController::launchQuizAction

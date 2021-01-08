@@ -113,11 +113,15 @@
 								</button>
 								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 								{% for un_deck in list_deck %}
-									<a class="dropdown-item" href="#">Réviser votre deck {{un_deck.name}}</a>
+									<a class="dropdown-item" href="{{
+											path('revision', { deckId: un_deck.id })
+											}}">Réviser votre deck {{un_deck.name}}</a>
 								{% endfor %}
 								{% if list_deck_favoris %}
 									{% for un_deck in list_deck_favoris %}
-										<a class="dropdown-item" href="#">Réviser le deck favori {{un_deck.name}}</a>
+										<a class="dropdown-item" href="{{
+											path('revision', { deckId: un_deck.id })
+											}}">Réviser le deck favori {{un_deck.name}}</a>
 									{% endfor %}
 								{% endif %}
 								</div>
