@@ -64,7 +64,7 @@ class DecksController extends AbstractController {
   public function launchRevisionAction(DeckRepository $deckRepository, $deckId)
   {
     $mesCartes = $this->shuffleLesCartes($deckRepository, $deckId);
-    return $this->render('./pages/user/revision.html.twig', ['cartes' => $mesCartes, 'deck' => $deckId]);
+    return $this->render('./pages/user/revision.html.twig', ['cartes' => $mesCartes]);
   }
 
   public function launchQuizAction(DeckRepository $deckRepository, $deckId)
