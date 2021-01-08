@@ -134,21 +134,21 @@ deck-gestion:
 
 deck-detail:
   path: /profile/deck/{id}
-  controller: App\Controller\DecksController::detailAction
-
-deck-update:
-  path: /profile/update/deck/{id}
-  controller: App\Controller\DecksController::UpdateAction
+  controller: App\Controller\DecksController::detailUserAction
 
 deck-create:
   path: /profile/create/deck
   controller: App\Controller\DecksController::deckUserCreateAction
 
+deck-update:
+  path: /profile/update/deck/{id}
+  controller: App\Controller\DecksController::UpdateAction
+
 deck-delete:
   path: /profile/delete/deck/{id}
   controller: App\Controller\DecksController::deleteUserAction
 
-# ____________ révision & quiz  ________________
+# ____________ révision & quiz ________________
 
 revision:
   path: /profile/revision/{deckId}

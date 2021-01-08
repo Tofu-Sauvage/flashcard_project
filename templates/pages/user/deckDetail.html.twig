@@ -1,0 +1,103 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+  <div class="content">
+  <div class="container-fluid">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header card-header-info">
+          <h3 class="pb-2">Nom : {{ deck.name }}</h3>
+        </div>
+        <div class="card-body">
+          <div class="tab-content">
+            <div class="tab-pane active">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Status</th>
+                    <th>Langue</th>
+                    <th>Créée le</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{% if deck.public %} Public {% else %} Privé {%endif%}</td>
+                    <td>{{ deck.author.languageLearn.name }}</td>
+                    <td>{{ deck.createdAt | date("d/m/Y") }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <p class="card-text">Description : {{ deck.description }}</p>
+          <p class="card-text">Tags associés : {{ deck.tags|json_encode() }}</p>
+
+          <p class="h3">
+            {% set count = 0 %} {% for card in deck.cards %} {% set count =
+            count + 1 %} {% endfor %} 
+            {% if count == 0 %}
+            <p class="text-info">Pas encore de carte.</p>
+            {% else %}
+            {{ count }} cartes associées :
+          </p>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Catégorie</th>
+                <th>Créée le</th>
+                <th>Voir</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for card in deck.cards%}
+
+              <tr>
+                <td>{{ card.id }}</td>
+                <td>{{ card.category.name }}</td>
+                <td>{{ card.createdAt | date("d/m/Y") }}</td>
+                <td class="td-actions text-right">
+                  <a href="{{ path('card-detail', { id: card.id }) }}"
+                    ><button
+                      type="button"
+                      rel="tooltip"
+                      title=""
+                      class="btn btn-white btn-link btn-sm"
+                    >
+                      <i class="material-icons">remove_red_eye</i>
+                    </button></a
+                  >
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        {% endif %}
+          <div class="text-center">
+            <form
+            method="POST"
+            action="{{ path('deck-delete', { id: deck.id }) }}"
+            onsubmit="return confirm('Supprimer ce deck ?')"
+            >
+              <button class="btn btn-danger btn-round">supprimer</button>
+              <a href="{{ path('deck-update', { id: deck.id }) }}" type="button" class="btn btn-info btn-round">
+                <span class="material-icons">border_color</span>
+                Modifier
+              </a>
+            </form>
+          </div>
+        </div>
+      </div>
+      <a href="{{ path('deck-gestion') }}" 
+         type="button" 
+         class="btn btn-primary btn-round">
+        <span class="material-icons">keyboard_return</span>
+        Retour à la gestion des decks
+      </a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

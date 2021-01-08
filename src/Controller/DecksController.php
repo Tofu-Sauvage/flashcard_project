@@ -30,8 +30,10 @@ class DecksController extends AbstractController {
     return $this->render('./pages/administration/deckForm.html.twig', ['deckForm' => $form->createView()]);
   }
 
-  public function indexGestionAction() {
-    return $this->render('./pages/user/deckGestion.html.twig');
+  public function indexGestionAction(DeckRepository $deckRepository) {
+    $idActiveUser = $this->getUser()->getID();
+    $listeDecks = $deckRepository->findBy(['author' => $idActiveUser]);
+    return $this->render('./pages/user/deckGestion.html.twig', ['decks' => $listeDecks]);
   }
 
   public function deckUserCreateAction(Request $request, EntityManagerInterface $em)
@@ -58,6 +60,12 @@ class DecksController extends AbstractController {
   {
     $deck =  $deckRepository->findOneBy(['id' => $id]);     
     return $this->render('./pages/administration/deck.html.twig', ['deck' => $deck]);
+  }
+
+  public function detailUserAction(DeckRepository $deckRepository, $id)
+  {
+    $deck =  $deckRepository->findOneBy(['id' => $id]);     
+    return $this->render('./pages/user/deckDetail.html.twig', ['deck' => $deck]);
   }
 
   public function deleteAction(EntityManagerInterface $em, DeckRepository $deckRepository, $id)
