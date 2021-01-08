@@ -9,25 +9,30 @@
             <div class="card-header card-header-primary">
 				<h2 class="card-title">Révision</h2>
 			</div>
-
-            <div class="card-body">
-                {% set compteur = 0 %}
-                {% for q in cartes %}
-                <div class="uneCarteRevision form-group">
-                    <h3>{{ compteur +1 }}. {{ q.question }}</h3>
+            {% set compteur = 0 %}
+            {% for q in cartes %}
+            <div class="uneCarteRevision card-body">
+                
+                <div class="form-group">
+                    <h3><span class="numeroRevision">{{ compteur +1 }}</span>. {{ q.question }}</h3>
                     <h4>se dit...</h4>
                     <h3>{{ q.answer }} !</h3>
-               
-                    <button class="btn btn-primary btn-sm rev-precedent" role="button" onclick="RevisionNavigation({{compteur}},'precedent')">Précédent</a>
-                    <button class="btn btn-primary btn-sm rev-suivant" role="button" onclick="RevisionNavigation({{compteur}},'suivant')">Suivant</a>
+                    <div class="navRevision form-group">
+                        <button class="btn btn-primary btn-sm rev-precedent" role="button" onclick="RevisionNavigation({{compteur}},'precedent')">Précédent</button>
+                        <button class="btn btn-primary btn-sm rev-suivant" role="button" onclick="RevisionNavigation({{compteur}},'suivant')">Suivant</button>
+                    </div>
                 </div>
-                {% set compteur = compteur + 1 %}
-                {% endfor %}
+            </div>
+            {% set compteur = compteur + 1 %}
+            {% endfor %} 
+            <div class='card-footer'> 
                 <div class="form-group">
+                    <button class="btn btn-primary btn-sm recom-button" role="button" onclick="location.reload()" disabled>Recommencer</button>
+                
                     <a href="/profile/deckboard" class="btn btn-info btn-sm" role="button">Retourner au deckboard</a>
                 </div>
             </div>
-
+            
         </div>
     </div>
 {% endblock %}

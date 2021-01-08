@@ -78,6 +78,10 @@ category-delete:
   path: /admin/delete/category/{id}
   controller : App\Controller\CategoriesController::categoryDeleteAction
 
+category-details:
+  path: /admin/category/{id}
+  controller : App\Controller\CategoriesController::detailAction
+
 admin-languages:
   path: /admin/languages
   controller: App\Controller\LanguagesController::indexAction

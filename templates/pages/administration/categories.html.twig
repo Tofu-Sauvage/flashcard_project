@@ -27,7 +27,11 @@
                   {% for category in categories %}
                   <tr>
                     <td>{{ category.id }}</td>
-                    <td>{{ category.name }}</td>
+                    <td> <a
+                      href="{{
+                        path('category-details', { id: category.id })
+                      }}"
+                      >{{ category.name }}</a></td>
                     <td>
                       {% set count = 0 %} {% for card in category.cards %} {%
                       set count = count + 1 %} {% endfor %} {{ count }}
