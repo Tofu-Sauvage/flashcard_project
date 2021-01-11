@@ -15,14 +15,56 @@
         <div class="card-body">
           <div class="tab-content">
             <div class="tab-pane active">
-              <table class="table"  id="table">
+              <table class="table text-left" id="table">
                 <thead>
                   <tr>
-                    <th class="text-primary" style="cursor: pointer" onclick="sortTable(0)">ID<i class="material-icons">import_export</i></th>
-                    <th class="text-primary" style="cursor: pointer" onclick="sortTable(1)">Auteur<i class="material-icons">import_export</i></th>
-                    <th class="text-primary" style="cursor: pointer" onclick="sortTable(2)">Langue<i class="material-icons">import_export</i></th>
-                    <th class="text-primary" style="cursor: pointer" onclick="sortTable(3)">Créée le<i class="material-icons">import_export</i></th>
-                    <th class="text-primary" style="cursor: pointer" onclick="sortTable(4)">Nbre de cartes concernées<i class="material-icons">import_export</i></th>
+                    <th
+                      class="text-primary"
+                      style="cursor: pointer"
+                      onclick="sortTable(0)"
+                    >
+                      ID<i class="material-icons">import_export</i>
+                    </th>
+                    <th
+                      class="text-primary"
+                      style="cursor: pointer"
+                      onclick="sortTable(1)"
+                    >
+                      Auteur<i class="material-icons">import_export</i>
+                    </th>
+                    <th
+                      class="text-primary"
+                      style="cursor: pointer"
+                      onclick="sortTable(2)"
+                    >
+                      Langue<i class="material-icons">import_export</i>
+                    </th>
+                    <th
+                      class="text-primary"
+                      style="cursor: pointer"
+                      onclick="sortTable(3)"
+                    >
+                      Créée le<i class="material-icons">import_export</i>
+                    </th>
+                    <th
+                      class="text-primary"
+                      style="cursor: pointer"
+                      onclick="sortTable(4)"
+                    >
+                      Nbre de cartes concernées<i class="material-icons"
+                        >import_export</i
+                      >
+                    </th>
+                    <th
+                      class="text-primary"
+                      style="cursor: pointer"
+                      onclick="sortTable(5)"
+                    >
+                      Combien de fan(s)<i class="material-icons"
+                        >import_export</i
+                      >
+                    </th>
+
                     <th class="text-primary">Voir</th>
                   </tr>
                 </thead>
@@ -30,14 +72,22 @@
                   {% for deck in decks %}
                   <tr>
                     <td>{{ deck.id }}</td>
-                    <td> <a href="{{ path('admin-user', { id: deck.author.id }) }}">{{ deck.author.name }}</a></td>
+                    <td>
+                      <a
+                        href="{{ path('admin-user', { id: deck.author.id }) }}"
+                        >{{ deck.author.name }}</a
+                      >
+                    </td>
                     <td>{{ deck.author.languageLearn.name }}</td>
                     <td>{{deck.createdAt | date("d/m/Y") }}</td>
                     <td>
                       {% set count = 0 %} {% for card in deck.cards %} {% set
                       count = count + 1 %} {% endfor %} {{ count }}
                     </td>
-
+                    <td>
+                      {% set countFan = 0 %} {% for fan in deck.fans %} {% set
+                      countFan = countFan + 1 %} {% endfor %}{{ countFan }}
+                    </td>
                     <td class="td-actions text-right">
                       <a href="{{ path('admin-deck', { id: deck.id }) }}"
                         ><button
