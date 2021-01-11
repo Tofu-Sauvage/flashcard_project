@@ -43,8 +43,8 @@
                           >{{ card.author.name }}</a
                         >
                       </td>
-                      <td>{{ card.author.languageLearn.name }}</td>
-                      <td>{{ card.category.name }}</td>
+                      <td><a href="{{ path('language-details', { id: card.author.languageLearn.id }) }}">{{ card.author.languageLearn.name }}</a></td>
+                      <td><a href="{{ path('category-details', { id: card.category.id }) }}">{{ card.category.name }}</a></td>
                       <td>
                         {{ card.question |length > 20 ? card.question|slice(0, 20) ~ '...' : card.question }}
                       </td>
