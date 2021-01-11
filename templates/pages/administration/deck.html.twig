@@ -66,7 +66,7 @@
               <tr>
                 <td>{{ card.id }}</td>
                 <td>{{ card.category.name }}</td>
-                <td>{{card.createdAt | date("d/m/Y") }}</td>
+                <td>{{ card.createdAt | date("d/m/Y") }}</td>
                 <td class="td-actions text-right">
                   <a href="{{ path('admin-card', { id: card.id }) }}"
                     ><button

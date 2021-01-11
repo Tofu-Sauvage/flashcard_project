@@ -1,0 +1,110 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+  {% for message in app.flashes('success') %}
+
+		<div class="alert alert-success mt-4" role="alert">
+			{{ message }}
+		</div>
+
+	{% endfor %}
+
+  <div class="container-fluid">
+    <div class="alert alert-success">
+      <h2>Gestion des decks de {{ app.user.name }}</h2>
+  </div>
+
+
+
+		<div class="row">
+
+      <div class="col-md-3">
+        <div class="card">
+          <div class="card-body">
+            <a class="btn btn-primary" 
+              href="{{ path('deck-create') }}">
+              Créer un nouveau deck</a>
+          </div>
+        </div>
+        <a href="{{ path('deckboard') }}" 
+              type="button" 
+              class="btn btn-primary btn-round">
+              <span class="material-icons">keyboard_return</span>
+              Retour au deckboard</a>
+      </div>
+
+			<div class="col-md-9"> {# Colonne d'affichage des decks #}
+				<div class="card">
+					<div class="card-header card-header-tabs card-header-warning">
+						<div class="nav-tabs-navigation">
+							<p class="h3">
+								{% set count = 0 %} {% for deck in decks %} {% set count = count + 1 %}
+								{% endfor %} {{ count }} decks créées
+							</p>
+						</div>
+					</div>
+					<div class="card-body">
+						<div class="tab-content">
+							<div class="tab-panel active">
+								<table class="table" id="table">
+									<thead>
+										<tr>
+											<th class="text-warning" style="cursor: pointer" onclick="sortTable(0)">Nom<i class="material-icons">import_export</i>
+											</th>
+											{# <th class="text-warning" style="cursor: pointer" onclick="sortTable(1)">Description<i class="material-icons">import_export</i>
+											</th> #}
+											<th class="text-warning" style="cursor: pointer" onclick="sortTable(1)">Status<i class="material-icons">import_export</i>
+											</th>
+											<th class="text-warning" style="cursor: pointer" onclick="sortTable(2)">Créée le<i class="material-icons">import_export</i>
+											</th>
+											<th class="text-warning" style="cursor: pointer" onclick="sortTable(3)">Nombre de<br>cartes<i class="material-icons">import_export</i>
+											</th>
+                      <th class="text-warning" style="cursor: pointer" onclick="sortTable(4)">Langue<i class="material-icons">import_export</i>
+											</th>
+											<th class="text-warning">Voir</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for deck in decks %}
+											<tr>
+												
+												<td>{{ deck.name }}</td>
+												{# <td>
+													{{ deck.description |length > 20 ? deck.description|slice(0, 20) ~ '...' : deck.description }}
+												</td> #}
+                        <td>
+                          {% if deck.public %}
+                            Public
+                          {% else %}
+                            Privé
+                          {% endif %}
+                        </td>
+												<td>{{ deck.createdAt | date("d/m/Y") }}</td>
+												<td>
+													{% set count = 0 %}{% for card in deck.cards %}{% set  count = count + 1 %}{% endfor %}
+													{{ count }}
+												</td>
+                        <td>{{ deck.author.languageLearn.name }}</td>
+
+												<td class="td-actions text-right">
+													<a href="{{ path('deck-detail', { id: deck.id }) }}">
+														<button type="button" rel="tooltip" title="" class="btn btn-white btn-link btn-sm">
+															<i class="material-icons">remove_red_eye</i>
+														</button>
+													</a>
+												</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	{# </div> #}
+
+
+{% endblock %}
