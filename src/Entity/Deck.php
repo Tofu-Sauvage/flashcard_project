@@ -219,6 +219,7 @@ class Deck
     }
 
     public function __toString() {
-        return $this->name;
+        return $this->created_at->format('j-m-Y');
+        
     }
 }

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Card;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Validator\Constraints\Type;
 
 
 /**
@@ -36,7 +37,8 @@ class CardRepository extends ServiceEntityRepository
 
     public function custom($author, $deck)
     {
-        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb = $this->_em->createQueryBuilder();
+
         $side = $qb ->select('d')
                      ->from('App\Entity\Deck', 'd')
                      ->andWhere('d = :deck')
@@ -44,18 +46,16 @@ class CardRepository extends ServiceEntityRepository
                      ->getQuery()
                      ->getResult()
                      ;
-$side = $side[0];
-// dd($side);
+// $side = $side[0];
+
         $main = $qb->select('c')
                     ->from('App\Entity\Card', 'c')
                     ->andWhere('c.author = :author')
                     ->andWhere($qb->expr()->notIn('c', $side))
-                    
-                    ->setParameter('author', $author);
-                    dd($main);
-                    // ->getQuery()
-                    // ->getResult()
-                    // ;
+                    ->setParameter('author', $author)
+                    ->getQuery()
+                    ->getResult()
+                    ;
 
     //     $em = $this->getEntityManager()->getConnection();
    
@@ -72,8 +72,9 @@ $side = $side[0];
 
     //    $query->execute();
     //    $cards = $query->fetchAll();
+    
         dd($main);
-    //    return $main;
+       return $main;
     }
     
 
