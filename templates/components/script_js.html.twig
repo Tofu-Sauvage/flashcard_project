@@ -194,4 +194,21 @@
           else
             monBoutonRecom.disabled = true;
         }
+
+        
+        // pour la section Recherche.
+
+        function lancerRecherche()
+        {
+            var monTermeARechercher = document.getElementsByClassName("uneRecherche")[0].value;
+            
+            window.location = "rechercher/" + monTermeARechercher;
+        }
+
+        function relancerRecherche()
+        {
+            var monTermeARechercher = document.getElementsByClassName("uneRecherche")[0].value;
+            
+            window.location = monTermeARechercher;
+        }
     </script>
