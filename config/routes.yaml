@@ -108,6 +108,14 @@ deckboard:
   path: /profile/deckboard
   controller: App\Controller\DeckboardController::indexAction
 
+rechercher:
+  path: /profile/rechercher
+  controller: App\Controller\DeckboardController::rechercherVide
+
+rechercherChaine:
+  path: /profile/rechercher/{jeCherche}
+  controller: App\Controller\DeckboardController::rechercher
+
 # ____________ cards ________________
 
 card-gestion:
