@@ -5,7 +5,14 @@
     <div class="col-lg-6 col-md-12">
       <div class="card">
         <p class="h4 card-header card-header-info">Nom : {{ deck.name }}</p>
-
+        <div class="card-footer">
+          <div class="stats">
+            <i class="material-icons text-info">bookmarks</i>
+            <a href="{{ path('admin-decks') }}" class="info-link"
+              >Retour à la liste</a
+            >
+          </div>
+        </div>
         <div class="card-body">
           <div class="tab-content">
             <div class="tab-pane active">

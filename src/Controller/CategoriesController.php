@@ -41,7 +41,7 @@ class CategoriesController extends AbstractController {
       $category = $categoryForm->getData();
       $em->persist($category);
       $em->flush();
-      //$this->addFlash('success-category', 'La catégorie a bien été modifiée !');
+      $this->addFlash('success-edit-category', 'La catégorie a bien été modifiée !');
       return $this->redirectToRoute('admin-categories');
         }
     return $this->render('./pages/administration/categoryForm.html.twig', ['categoryForm' => $categoryForm->createView()]);
@@ -53,7 +53,7 @@ class CategoriesController extends AbstractController {
     $category = $categoryRepository->find($id);
     $em->remove($category);
     $em->flush();
-    //$this->addFlash('success-category', 'La catégorie a bien été supprimée !');
+    $this->addFlash('success-category', 'La catégorie a bien été supprimée !');
     return $this->redirectToRoute('admin-categories');  
   }
 

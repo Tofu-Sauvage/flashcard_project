@@ -64,7 +64,7 @@ class LanguagesController extends AbstractController {
       }
       $em->persist($language);
       $em->flush();
-      //$this->addFlash('success-category', 'La catégorie a bien été modifiée !');
+      $this->addFlash('success-edit-language', 'Le langage a bien été modifié !');
       return $this->redirectToRoute('admin-languages');
         }
     return $this->render('./pages/administration/languageForm.html.twig', ['languageForm' => $languageForm->createView()]);
@@ -75,7 +75,7 @@ class LanguagesController extends AbstractController {
     $language = $languageRepository->find($id);
     $em->remove($language);
     $em->flush();
-    //$this->addFlash('success-category', 'La catégorie a bien été supprimée !');
+    $this->addFlash('success-language', 'Le langage a bien été supprimé !');
     return $this->redirectToRoute('admin-languages');  }
 
     public function detailAction(LanguageRepository $languageRepository, $id, UserRepository $userRepository, CardRepository $cardRepository, DeckRepository $deckRepository)
