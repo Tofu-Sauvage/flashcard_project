@@ -6,6 +6,7 @@ use App\Form\DeckType;
 use App\Repository\CardRepository;
 use App\Repository\DeckRepository;
 use DateTime;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -67,8 +68,15 @@ class DecksController extends AbstractController {
   {
     $deck =  $deckRepository->findOneBy(['id' => $id]);
 
+    dd($deck);
+
     $idActiveUser = $this->getUser()->getID();
-    $listeCards = $cardRepository->findBy(['author' => $idActiveUser]);
+    $listeCards = $cardRepository->findBy(['author' => $idActiveUser, !'deck_id' => $id]);
+    // $criteria = Criteria::create();
+    // $criteria->where(Criteria::expr()->neq('id', $id));
+    
+    // $listeCards->srcFiles->matching($criteria);
+    // dd($listeCards);
 
     return $this->render('./pages/user/deckDetail.html.twig', ['deck' => $deck, "cards" => $listeCards]);
   }
@@ -91,6 +99,18 @@ class DecksController extends AbstractController {
     $em->flush();
 
     $this->addFlash('success', 'La carte a bien été ajouté !');
+    return $this->redirectToRoute('deck-detail', ["id" => $idDeck]);
+  }
+
+  public function removeCardToDeckFromDeckDetailAction(DeckRepository $deckRepository, CardRepository $cardRepository, EntityManagerInterface $em, $idCard, $idDeck) {
+    $deck = $deckRepository->findOneBy(["id" => $idDeck]);
+    $card = $cardRepository->findOneBy(["id" => $idCard]);
+    $deck->removeCard($card);
+
+    $em->persist($deck);
+    $em->flush();
+
+    $this->addFlash('success', 'La carte a bien été supprimé du deck !');
     return $this->redirectToRoute('deck-detail', ["id" => $idDeck]);
   }
 

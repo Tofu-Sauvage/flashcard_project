@@ -156,6 +156,10 @@ add-card-to-deck:
   path: /profile/add-card/deck/{idCard}/{idDeck}
   controller: App\Controller\DecksController::addCardToDeckFromDeckDetailAction
 
+remove-card-to-deck:
+  path: /profile/add-card/deck/{idCard}/{idDeck}
+  controller: App\Controller\DecksController::removeCardToDeckFromDeckDetailAction
+
 # ____________ révision & quiz ________________
 
 revision:
