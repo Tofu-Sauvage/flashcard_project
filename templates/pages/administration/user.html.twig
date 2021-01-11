@@ -26,7 +26,10 @@
               /></p>
               {%endif%}
             </div>
-            <h3 class="card-title text-right">Nom : {{ user.name }}</h3>
+            <p class="h3 card-title text-right">Nom : {{ user.name }}</p>
+            <p class="card-category text-right"> {% if user.roles[0] == 'ROLE_ADMIN' %} Administrateur {%
+              elseif user.roles[0] == 'ROLE_USER' %} Utilisateur {%
+              endif %}</p>
           </div>
           <div class="card-footer">
             <div class="stats">
@@ -61,7 +64,7 @@
             </div>
 
             <div class="m-3">
-              <table class="table text-center">
+              <table class="table text-left">
                 <thead>
                   <tr>
                     <th>Parle</th>
@@ -70,8 +73,8 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>{{ user.languageNative.name}}</td>
-                    <td>{{ user.languageLearn.name}}</td>
+                    <td><a href="{{ path('language-details', { id: user.languageNative.id }) }}">{{ user.languageNative.name}}</a></td>
+                    <td><a href="{{ path('language-details', { id: user.languageLearn.id }) }}">{{ user.languageLearn.name}}</a></td>
                   </tr>
                 </tbody>
               </table>
@@ -253,7 +256,8 @@
                     <tr>
                       <td>{{ favorite.id }}</td>
                       <td><a href="{{ path('admin-user', { id: favorite.author.id }) }}">{{ favorite.author.name }}</a></td>
-                      <td>{{ favorite.name }}</td>
+                      <td><a href="{{ path('admin-deck', { id: favorite.id }) }}"
+                        >{{ favorite.name }}</a></td>
                       <td>{{favorite.createdAt | date("d/m/Y") }}</td>
                       <td class="td-actions">
                         <a href="{{ path('admin-deck', { id: favorite.id }) }}"

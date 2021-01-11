@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Form\DeckType;
 use App\Repository\CardRepository;
 use App\Repository\DeckRepository;
+use App\Repository\UserRepository;
 use DateTime;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManager;
@@ -84,10 +85,11 @@ class DecksController extends AbstractController {
     return $this->render('./pages/user/deckForm.html.twig', ['deckForm' => $form->createView(), 'modeEdition' => $modeEdition]);
   }
 
-  public function detailAction(DeckRepository $deckRepository, $id)
+  public function detailAction(DeckRepository $deckRepository, $id, UserRepository $userRepository)
   {
     $deck =  $deckRepository->findOneBy(['id' => $id]);     
-    return $this->render('./pages/administration/deck.html.twig', ['deck' => $deck]);
+    $users = $userRepository->findAll();
+    return $this->render('./pages/administration/deck.html.twig', ['deck' => $deck, 'users'=>$users]);
   }
 
   public function detailUserAction(DeckRepository $deckRepository, CardRepository $cardRepository, $id)

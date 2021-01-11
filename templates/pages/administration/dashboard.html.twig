@@ -35,10 +35,10 @@
                     <a href="{{ path('admin-user', { id: user.id }) }}">{{ user.name }}</a>
                   </td>
                   <td>
-                    {{ user.languageNative.name }}
+                    <a href="{{ path('language-details', { id: user.languageNative.id }) }}">{{ user.languageNative.name }}</a>
                   </td>
                   <td>
-                    {{ user.languageLearn.name }}
+                    <a href="{{ path('language-details', { id: user.languageLearn.id }) }}">{{ user.languageLearn.name }}</a>
                   </td>
                   <td>{{user.createdAt | date("d/m/Y") }}</td>
                   <td class="text-center">
@@ -84,10 +84,10 @@
                   <td>
                     <a href="{{ path('admin-card', { id: card.id }) }}">{{ card.id }}</a>
                   </td>
-                  <td>{{ card.author.languageLearn.name }}</td>
-                  <td>{{ card.category.name }}</td>
+                  <td><a href="{{ path('language-details', { id: card.author.languageLearn.id }) }}">{{ card.author.languageLearn.name }}</td></a>
+                  <td><a href="{{ path('category-details', { id: card.category.id }) }}">{{ card.category.name }}</a></td>
                   <td>{{card.createdAt | date("d/m/Y") }}</td>
-                  <td>{{ card.author.name }}</td>
+                  <td><a href="{{ path('admin-user', { id: card.author.id }) }}">{{ card.author.name }}</a></td>
                 </tr>
                 {% endfor %}
               </tbody>
@@ -122,9 +122,9 @@
                   <td>
                     <a href="{{ path('admin-deck', { id: deck.id }) }}">{{ deck.name }}</a>
                   </td>
-                  <td>{{ deck.author.languageLearn.name }}</td>
+                  <td><a href="{{ path('language-details', { id: deck.author.languageLearn.id }) }}">{{ deck.author.languageLearn.name }}</a></td>
                   <td>{{ deck.createdAt | date("d/m/Y") }}</td>
-                  <td>{{ deck.author.name }}</td>
+                  <td><a href="{{ path('admin-user', { id: deck.author.id }) }}">{{ deck.author.name }}</a></td>
                 </tr>
                 {% endfor %}
               </tbody>
