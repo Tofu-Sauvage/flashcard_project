@@ -7,6 +7,7 @@ use App\Repository\CardRepository;
 use App\Repository\DeckRepository;
 use DateTime;
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -93,8 +94,9 @@ class DecksController extends AbstractController {
   {
     $deck =  $deckRepository->findOneBy(['id' => $id]);
 
-    $idActiveUser = $this->getUser()->getID();
-    $listeCards = $cardRepository->findBy(['author' => $idActiveUser]);
+    $activeUser = $this->getUser();
+    $listeCards = $cardRepository->custom($activeUser, $deck);
+    // dd($listeCards);
 
     return $this->render('./pages/user/deckDetail.html.twig', ['deck' => $deck, "cards" => $listeCards]);
   }

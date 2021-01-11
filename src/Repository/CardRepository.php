@@ -6,6 +6,7 @@ use App\Entity\Card;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+
 /**
  * @method Card|null find($id, $lockMode = null, $lockVersion = null)
  * @method Card|null findOneBy(array $criteria, array $orderBy = null)
@@ -33,12 +34,47 @@ class CardRepository extends ServiceEntityRepository
         ;
     }
 
-    // public function custom()
-    // {
-    //     return $this->createQueryBuilder('card')
-    //                 ->where('card.deck_id')
-    //                 ->andWhere()
-    // }
+    public function custom($author, $deck)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $side = $qb ->select('d')
+                     ->from('App\Entity\Deck', 'd')
+                     ->andWhere('d = :deck')
+                     ->setParameter('deck', $deck)
+                     ->getQuery()
+                     ->getResult()
+                     ;
+$side = $side[0];
+// dd($side);
+        $main = $qb->select('c')
+                    ->from('App\Entity\Card', 'c')
+                    ->andWhere('c.author = :author')
+                    ->andWhere($qb->expr()->notIn('c', $side))
+                    
+                    ->setParameter('author', $author);
+                    dd($main);
+                    // ->getQuery()
+                    // ->getResult()
+                    // ;
+
+    //     $em = $this->getEntityManager()->getConnection();
+   
+    //     $sql = 'SELECT *
+    //             FROM card
+    //             WHERE card.author_id = 23
+    //             AND NOT card.id IN 
+    //             (SELECT card_id FROM card_deck cd WHERE cd.deck_id = 11)
+    //     ';
+    //     $query = $em->prepare($sql);
+    //     // $query->setParameter(1, $authorId)
+    //     //       ->setParameter(2, $deckId)
+    //     //       ;
+
+    //    $query->execute();
+    //    $cards = $query->fetchAll();
+        dd($main);
+    //    return $main;
+    }
     
 
     /*
