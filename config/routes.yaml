@@ -146,7 +146,7 @@ deck-create:
 
 deck-update:
   path: /profile/update/deck/{id}
-  controller: App\Controller\DecksController::UpdateAction
+  controller: App\Controller\DecksController::deckUserUpdateAction
 
 deck-delete:
   path: /profile/delete/deck/{id}
@@ -157,7 +157,7 @@ add-card-to-deck:
   controller: App\Controller\DecksController::addCardToDeckFromDeckDetailAction
 
 remove-card-to-deck:
-  path: /profile/add-card/deck/{idCard}/{idDeck}
+  path: /profile/remove-card/deck/{idCard}/{idDeck}
   controller: App\Controller\DecksController::removeCardToDeckFromDeckDetailAction
 
 # ____________ révision & quiz ________________

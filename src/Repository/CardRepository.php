@@ -32,6 +32,13 @@ class CardRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    // public function custom()
+    // {
+    //     return $this->createQueryBuilder('card')
+    //                 ->where('card.deck_id')
+    //                 ->andWhere()
+    // }
     
 
     /*

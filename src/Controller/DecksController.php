@@ -40,6 +40,8 @@ class DecksController extends AbstractController {
 
   public function deckUserCreateAction(Request $request, EntityManagerInterface $em)
   {
+    $modeEdition = false;
+
     $form = $this->createForm(DeckType::class);
     $form->handleRequest($request);
     if ($form->isSubmitted()) {
@@ -55,7 +57,30 @@ class DecksController extends AbstractController {
       return $this->redirectToRoute('deck-gestion');
     }
 
-    return $this->render('./pages/user/deckForm.html.twig', ['deckForm' => $form->createView()]);
+    return $this->render('./pages/user/deckForm.html.twig', ['deckForm' => $form->createView(), 'modeEdition' => $modeEdition]);
+  }
+
+  public function deckUserUpdateAction(Request $request, DeckRepository $deckRepository, EntityManagerInterface $em, $id)
+  {
+    $modeEdition = true;
+
+    $deck = $deckRepository->findOneBy(['id' => $id]);
+    $form = $this->createForm(DeckType::class, $deck);
+    $form->handleRequest($request);
+    if ($form->isSubmitted()) {
+      $deck = $form->getData();
+      
+      $deck->setAuthor($this->getUser())
+           ->setCreatedAt(new DateTime("now"));
+
+      $em->persist($deck);
+      $em->flush();
+
+      $this->addFlash('success', "Le deck a bien été modifié");
+      return $this->redirectToRoute('deck-detail', ['id' => $id]);
+    }
+
+    return $this->render('./pages/user/deckForm.html.twig', ['deckForm' => $form->createView(), 'modeEdition' => $modeEdition]);
   }
 
   public function detailAction(DeckRepository $deckRepository, $id)
@@ -68,15 +93,8 @@ class DecksController extends AbstractController {
   {
     $deck =  $deckRepository->findOneBy(['id' => $id]);
 
-    dd($deck);
-
     $idActiveUser = $this->getUser()->getID();
-    $listeCards = $cardRepository->findBy(['author' => $idActiveUser, !'deck_id' => $id]);
-    // $criteria = Criteria::create();
-    // $criteria->where(Criteria::expr()->neq('id', $id));
-    
-    // $listeCards->srcFiles->matching($criteria);
-    // dd($listeCards);
+    $listeCards = $cardRepository->findBy(['author' => $idActiveUser]);
 
     return $this->render('./pages/user/deckDetail.html.twig', ['deck' => $deck, "cards" => $listeCards]);
   }
@@ -88,6 +106,15 @@ class DecksController extends AbstractController {
     $em->flush();
     $this->addFlash('success-deck', 'Le deck a bien été supprimé !');
     return $this->redirectToRoute('admin-decks');
+  }
+
+  public function deleteUserAction(EntityManagerInterface $em, DeckRepository $deckRepository, $id)
+  {
+    $deck = $deckRepository->find($id);
+    $em->remove($deck);
+    $em->flush();
+    $this->addFlash('success', 'Le deck a bien été supprimé !');
+    return $this->redirectToRoute('deck-gestion');
   }
 
   public function addCardToDeckFromDeckDetailAction(DeckRepository $deckRepository, CardRepository $cardRepository, EntityManagerInterface $em, $idCard, $idDeck) {

@@ -34,7 +34,11 @@
     </div>
 
     <div class="form-group">
-			{{ form_widget(deckForm.Ajouter, {attr: {'class': 'btn btn-success'}}) }}
+      {% if not modeEdition %}
+        {{ form_widget(deckForm.Ajouter, {'label': 'Ajouter un deck', attr: {'class': 'btn btn-success'}}) }}
+      {% else %}
+        {{ form_widget(deckForm.Ajouter, {'label': 'Modifier ce deck', attr: {'class': 'btn btn-success'}}) }}
+      {% endif %}
 		</div>
 
   {{ form_end(deckForm) }}

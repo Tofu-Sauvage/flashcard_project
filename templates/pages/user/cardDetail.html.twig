@@ -114,8 +114,8 @@
           </div>
         </div>
 
-        <div class="col-lg-4 col-md-8">
-          <div class="card card-stats">
+        <div class="col-lg-6 col-md-12">
+          <div class="card card-profile">
             {% set count = 0 %} {% for deck in card.decks %} {% set count = count
             + 1 %} {% endfor %} {% if count == 0 %}
             <p class="text-info text-center pt-3">Pas de deck associé.</p>
@@ -127,7 +127,6 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>ID</th>
                   <th>Name</th>
                   <th>Créée le</th>
                   <th>Voir</th>
@@ -136,10 +135,9 @@
               <tbody>
                 {% for deck in card.decks %}
                 <tr>
-                  <td>{{ deck.id }}</td>
                   <td>{{ deck.name }}</td>
                   <td>{{deck.createdAt | date("d/m/Y") }}</td>
-                  <td class="td-actions text-right">
+                  <td class="td-actions text-center">
                     <a href="{{ path('admin-deck', { id: deck.id }) }}"
                       ><button
                         type="button"

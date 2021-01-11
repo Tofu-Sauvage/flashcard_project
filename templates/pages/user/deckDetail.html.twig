@@ -54,8 +54,8 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>Question</th>
                   <th>Catégorie</th>
+                  <th>Question</th>
                   <th>Voir</th>
                   <th>Retirer<br>la carte</th>
                 </tr>
@@ -64,8 +64,8 @@
                 {% for card in deck.cards%}
 
                 <tr>
-                  <td>{{ card.question }}</td>
                   <td>{{ card.category.name }}</td>
+                  <td>{{ card.question }}</td>
                   <td class="td-actions text-left">
                     <a href="{{ path('card-detail', { id: card.id }) }}"
                       ><button
