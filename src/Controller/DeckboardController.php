@@ -52,26 +52,15 @@ class DeckboardController extends AbstractController {
 
     $jeCherche = (String)$jeCherche;
     $allDecks = array();
-    if($jeCherche != '')
+
+    for($i = 0; $i < count($allMesDecks) ; $i++)
     {
-      for($i = 0; $i < count($allMesDecks) ; $i++)
+      if(str_contains((String)($allMesDecks[$i]->GetName()), $jeCherche) || str_contains($allMesDecks[$i]->GetDescription(), $jeCherche) || str_contains($allMesDecks[$i]->GetAuthor()->GetName(), $jeCherche))
       {
-        if(str_contains((String)($allMesDecks[$i]->GetName()), $jeCherche) || str_contains($allMesDecks[$i]->GetDescription(), $jeCherche) || str_contains($allMesDecks[$i]->GetAuthor()->GetName(), $jeCherche))
-        {
-          array_push($allDecks, $allMesDecks[$i]);
-        }
+        array_push($allDecks, $allMesDecks[$i]);
       }
     }
-    else
-    {
-      for($i = 0; $i < count($allMesDecks) ; $i++)
-      {
-        if($allDecks[$i]->GetAuthor()->GetName() != $this->GetUser()->GetName())
-        {
-          array_push($allDecks, $allMesDecks[$i]);
-        }
-      }
-    }
+    
     // LA LIGNE CI DESSOUS EST LA A DES FINS DE TESTS SI VOUS VOULEZ LA TESTER, en attendant que la feature "ajouter aux favoris" soit faite ! 
     $this->getUser()->addFavorite($deckRepository->findAll()[0]);
 
