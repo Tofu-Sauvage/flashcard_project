@@ -38,9 +38,10 @@
                 </div>
             </div>
             <div class="form-group">
-              {{form_widget(languageForm.ajouter, {attr: {'class' :"btn btn-primary"
-
-              }})}}
+              {{form_widget(languageForm.add,{ 'label': 
+               'edit' in  app.request.uri ? 'Mofifier':'Ajouter' 
+            })
+            }}
             </div>
           </fieldset>
         </div>
