@@ -1,3 +1,5 @@
+# ------------- GENERAL ---------------------
+
 index:
    path: /
    controller: App\Controller\HomeController::homeAction
@@ -100,11 +102,13 @@ language-details:
   path: /admin/language/{id}
   controller : App\Controller\LanguagesController::detailAction
 
-  # ------------- USER ---------------------
+# ------------- USER ---------------------
 
 deckboard:
   path: /profile/deckboard
   controller: App\Controller\DeckboardController::indexAction
+
+# ____________ cards ________________
 
 card-gestion:
   path: /profile/cards
@@ -126,9 +130,37 @@ card-delete:
   path: /profile/delete/card/{id}
   controller: App\Controller\CardsController::deleteCardUserAction
 
-deck:
+# ____________ decks ________________
+
+deck-gestion:
+  path: /profile/decks
+  controller: App\Controller\DecksController::indexGestionAction
+
+deck-detail:
+  path: /profile/deck/{id}
+  controller: App\Controller\DecksController::detailUserAction
+
+deck-create:
   path: /profile/create/deck
-  controller: App\Controller\DecksController::deckCreateAction
+  controller: App\Controller\DecksController::deckUserCreateAction
+
+deck-update:
+  path: /profile/update/deck/{id}
+  controller: App\Controller\DecksController::deckUserUpdateAction
+
+deck-delete:
+  path: /profile/delete/deck/{id}
+  controller: App\Controller\DecksController::deleteUserAction
+
+add-card-to-deck:
+  path: /profile/add-card/deck/{idCard}/{idDeck}
+  controller: App\Controller\DecksController::addCardToDeckFromDeckDetailAction
+
+remove-card-to-deck:
+  path: /profile/remove-card/deck/{idCard}/{idDeck}
+  controller: App\Controller\DecksController::removeCardToDeckFromDeckDetailAction
+
+# ____________ révision & quiz ________________
 
 revision:
   path: /profile/revision/{deckId}
