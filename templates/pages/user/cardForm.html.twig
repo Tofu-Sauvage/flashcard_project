@@ -10,12 +10,12 @@
       {{ form_start(cardForm) }}
 
         <div class="form-group">
-          {{ form_label(cardForm.question, "Question") }}
+          {{ form_label(cardForm.question, "Question, dans la langue que vous apprenez") }}
           {{ form_widget(cardForm.question, {attr: {'class': 'form-control'}}) }}
         </div>
 
         <div class="form-group">
-          {{ form_label(cardForm.answer, "Réponse") }}
+          {{ form_label(cardForm.answer, "Réponse, dans votre langue natale") }}
           {{ form_widget(cardForm.answer, {attr: {'class': 'form-control'}}) }}
         </div>
         

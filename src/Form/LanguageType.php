@@ -19,7 +19,9 @@ class LanguageType extends AbstractType
         $builder
         ->add('name', TextType::class)
         ->add('flag', FileType::class, ['required' => false, 'mapped' => false])
-        ->add('ajouter', SubmitType::class);
+        ->add('add', SubmitType::class,[
+            'attr' => ['class' => 'btn btn-primary'],
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
