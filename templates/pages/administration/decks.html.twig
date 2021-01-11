@@ -78,7 +78,7 @@
                         >{{ deck.author.name }}</a
                       >
                     </td>
-                    <td>{{ deck.author.languageLearn.name }}</td>
+                    <td><a href="{{ path('language-details', { id: deck.author.languageLearn.id }) }}">{{ deck.author.languageLearn.name }}</a></td>
                     <td>{{deck.createdAt | date("d/m/Y") }}</td>
                     <td>
                       {% set count = 0 %} {% for card in deck.cards %} {% set

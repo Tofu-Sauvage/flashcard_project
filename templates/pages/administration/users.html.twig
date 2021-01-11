@@ -45,8 +45,8 @@
                       }}</a>
                     </td>
                     <td>{{ user.email }}</td>
-                    <td>{{ user.languageNative.name }}</td>
-                    <td>{{ user.languageLearn.name }}</td>
+                    <td><a href="{{ path('language-details', { id: user.languageNative.id }) }}">{{ user.languageNative.name }}</a></td>
+                    <td><a href="{{ path('language-details', { id: user.languageLearn.id }) }}">{{ user.languageLearn.name }}</a></td>
                     <td>{{user.createdAt | date("d/m/Y") }}</td>
                     <td>
                       {% set count = 0 %} {% for card in user.cards %} {% set
