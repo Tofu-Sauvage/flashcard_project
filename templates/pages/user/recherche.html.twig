@@ -6,7 +6,7 @@
             <div class="col-md-6"> {# Liste des decks, avec boutons mise en favori et consulter en détail #}
                 <div class="card">
                     <div class="card-header card-header-primary">
-						<h2 class="card-title">{% if not jeCherche %}Tous les decks publics.{% else %}{{ deck_all|length }} résultats.{% endif %}</h2>
+						<h2 class="card-title">{% if not jeCherche %}Tous les decks externes.{% else %}{{ deck_all|length }} résultats.{% endif %}</h2>
 					</div>
                     <div class="card-body">
                             {% if deck_all|length == 0 %} {# Si il n'y a pas de decks #}
@@ -37,6 +37,14 @@
 													{% else %}
 													<td><button type="button" class="btn btm-sm btn-danger">Non</button></td></td>
 													{% endif %}
+													<td><a href='#'><button {# Remplacer le dièse par la page du deck quand elle sera opérationnelle ! #}
+														type="button"
+														rel="tooltip"
+														title=""
+														class="btn btn-white btn-link btn-sm"
+													>
+														<i class="material-icons">remove_red_eye</i>
+													</button></a></td>
 												</tr>
                                             {% endfor %}
 											</tbody>

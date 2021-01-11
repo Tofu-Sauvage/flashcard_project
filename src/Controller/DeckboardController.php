@@ -30,22 +30,30 @@ class DeckboardController extends AbstractController {
   public function rechercherVide(DeckRepository $deckRepository)  {
     $allMesDecks = $deckRepository->findBy(['public' => true]);
 
+    $allDecks = array();
+    for($i = 0; $i < count($allMesDecks) ; $i++)
+    {
+      if($allMesDecks[$i]->GetAuthor()->GetName() != $this->GetUser()->GetName())
+      {
+        array_push($allDecks, $allMesDecks[$i]);
+      }
+    }
+
     // LA LIGNE CI DESSOUS EST LA A DES FINS DE TESTS SI VOUS VOULEZ LA TESTER, en attendant que la feature "ajouter aux favoris" soit faite ! 
     $this->getUser()->addFavorite($deckRepository->findAll()[0]);
 
     $allFavsDecks = $this->getUser()->getFavorites();
 
-    return $this->render("pages/user/recherche.html.twig", ["deck_all" => $allMesDecks, "favs_deck_all" => $allFavsDecks, "jeCherche" => '']);
+    return $this->render("pages/user/recherche.html.twig", ["deck_all" => $allDecks, "favs_deck_all" => $allFavsDecks, "jeCherche" => '']);
   }
 
   public function rechercher(DeckRepository $deckRepository, $jeCherche)  {
     $allMesDecks = $deckRepository->findBy(['public' => true]);
 
     $jeCherche = (String)$jeCherche;
-    
+    $allDecks = array();
     if($jeCherche != '')
     {
-      $allDecks = array();
       for($i = 0; $i < count($allMesDecks) ; $i++)
       {
         if(str_contains((String)($allMesDecks[$i]->GetName()), $jeCherche) || str_contains($allMesDecks[$i]->GetDescription(), $jeCherche) || str_contains($allMesDecks[$i]->GetAuthor()->GetName(), $jeCherche))
@@ -56,7 +64,13 @@ class DeckboardController extends AbstractController {
     }
     else
     {
-      $allDecks = $allMesDecks;
+      for($i = 0; $i < count($allMesDecks) ; $i++)
+      {
+        if($allDecks[$i]->GetAuthor()->GetName() != $this->GetUser()->GetName())
+        {
+          array_push($allDecks, $allMesDecks[$i]);
+        }
+      }
     }
     // LA LIGNE CI DESSOUS EST LA A DES FINS DE TESTS SI VOUS VOULEZ LA TESTER, en attendant que la feature "ajouter aux favoris" soit faite ! 
     $this->getUser()->addFavorite($deckRepository->findAll()[0]);
