@@ -43,7 +43,7 @@ class DeckboardController extends AbstractController {
 
     $jeCherche = (String)$jeCherche;
     
-    if($jeCherche != 'aChercherIci')
+    if($jeCherche != '')
     {
       $allDecks = array();
       for($i = 0; $i < count($allMesDecks) ; $i++)
