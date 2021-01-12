@@ -226,7 +226,6 @@ class DecksController extends AbstractController {
         array_push($allDecks, $allMesDecks[$i]);
       }
     }
-    $this->getUser()->addFavorite($deckRepository->findAll()[0]);
 
     $allFavsDecks = $this->getUser()->getFavorites();
 
