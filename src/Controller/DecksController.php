@@ -84,7 +84,7 @@ class DecksController extends AbstractController {
     return $this->render('./pages/user/deckForm.html.twig', ['deckForm' => $form->createView(), 'modeEdition' => $modeEdition]);
   }
 
-  public function deckFavAction(DeckRepository $deckRepository, $id)
+  public function deckFavAction(DeckRepository $deckRepository, EntityManagerInterface $em, $id)
   {
     $deck = $deckRepository->findOneBy(['id' => $id]);
     $esTuDejaDansLesFavs = false;
@@ -92,13 +92,15 @@ class DecksController extends AbstractController {
     $decksFavoris = $this->getUser()->getFavorites();
     for ($i = 0 ; $i < count($decksFavoris) ; $i++)
     {
-      if($decksFavoris[$i]->GetId() == $id)
-      $esTuDejaDansLesFavs = true;
+      if($decksFavoris[$i]->getId() == $id)
+        $esTuDejaDansLesFavs = true;
     }
 
     if(!$esTuDejaDansLesFavs)
     {
-      $this->getUser()->AddFavorite($deck);
+      $this->getUser()->addFavorite($deck);
+      $em->persist($deck);
+      $em->flush();
       $this->addFlash('success', "Le deck a été ajouté dans vos favoris !");
     }
     else
@@ -203,13 +205,11 @@ class DecksController extends AbstractController {
     $allDecks = array();
     for($i = 0; $i < count($allMesDecks) ; $i++)
     {
-      if($allMesDecks[$i]->GetAuthor()->GetName() != $this->GetUser()->GetName())
+      if($allMesDecks[$i]->getAuthor()->getName() != $this->getUser()->getName())
       {
         array_push($allDecks, $allMesDecks[$i]);
       }
     }
-
-    // LA LIGNE CI DESSOUS EST LA A DES FINS DE TESTS SI VOUS VOULEZ LA TESTER, en attendant que la feature "ajouter aux favoris" soit faite ! 
     $this->getUser()->addFavorite($deckRepository->findAll()[0]);
 
     $allFavsDecks = $this->getUser()->getFavorites();
@@ -225,14 +225,11 @@ class DecksController extends AbstractController {
 
     for($i = 0; $i < count($allMesDecks) ; $i++)
     {
-      if(str_contains((String)($allMesDecks[$i]->GetName()), $jeCherche) || str_contains($allMesDecks[$i]->GetDescription(), $jeCherche) || str_contains($allMesDecks[$i]->GetAuthor()->GetName(), $jeCherche))
+      if(str_contains((String)($allMesDecks[$i]->getName()), $jeCherche) || str_contains($allMesDecks[$i]->getDescription(), $jeCherche) || str_contains($allMesDecks[$i]->getAuthor()->getName(), $jeCherche))
       {
         array_push($allDecks, $allMesDecks[$i]);
       }
     }
-    
-    // LA LIGNE CI DESSOUS EST LA A DES FINS DE TESTS SI VOUS VOULEZ LA TESTER, en attendant que la feature "ajouter aux favoris" soit faite ! 
-    $this->getUser()->addFavorite($deckRepository->findAll()[0]);
 
     $allFavsDecks = $this->getUser()->getFavorites();
 
@@ -241,7 +238,7 @@ class DecksController extends AbstractController {
 
   public function rechercherDeck(DeckRepository $deckRepository, $deckId){
     $monDeck = $deckRepository->findOneBy(['id' => $deckId]);
-    $mesCartes = $monDeck->GetCards();
+    $mesCartes = $monDeck->getCards();
 
     return $this->render("pages/user/rechercheDeck.html.twig", ["deck" => $monDeck, "cards" => $mesCartes]);
   }

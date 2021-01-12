@@ -18,9 +18,6 @@ class DeckboardController extends AbstractController {
     $lastDeck = $deckRepository->findOneBy(['author' => $idActiveUser], ['id' => 'desc']);
     $listDeck = $deckRepository->findBy(['author' => $idActiveUser]);
 
-    // LA LIGNE CI DESSOUS EST LA A DES FINS DE TESTS SI VOUS VOULEZ LA TESTER, en attendant que la feature "ajouter aux favoris" soit faite ! 
-    $this->getUser()->addFavorite($deckRepository->findAll()[0]);
-
     $listeFavouritedDecks = $this->getUser()->getFavorites();
     
     $nombreDeDecksFavoris = Count($listeFavouritedDecks);
