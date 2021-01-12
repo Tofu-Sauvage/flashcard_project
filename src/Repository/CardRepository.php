@@ -35,32 +35,36 @@ class CardRepository extends ServiceEntityRepository
         ;
     }
 
-    public function custom($author, $deck)
-    {
-        $qb = $this->_em->createQueryBuilder();
+    // -------------- Version avec Doctrine (non-fonctionnel) ----------------------
 
-        $side = $qb ->select('d')
-                     ->from('App\Entity\Deck', 'd')
-                     ->andWhere('d = :deck')
-                     ->setParameter('deck', $deck)
-                     ->getQuery()
-                     ->getResult()
-                     ;
+    // public function custom($author, $deck)
+    // {
+    //     $qb = $this->_em->createQueryBuilder();
+
+    //     $side = $qb ->select('d')
+    //                  ->from('App\Entity\Deck', 'd')
+    //                  ->andWhere('d = :deck')
+    //                  ->setParameter('deck', $deck)
+    //                  ->getQuery()
+    //                  ->getResult()
+    //                  ;
                      
-        $side = $side[0];
-        // dd($side);
+    //     $side = $side[0];
+    //     // dd($side);
 
-        $main = $qb->select('c')
-                    ->from('App\Entity\Card', 'c')
-                    ->andWhere('c.author = :author')
-                    ->andWhere($qb->expr()->notIn('c.id', $this->_em->createQuery('SELECT card_id FROM card_deck cd WHERE cd.deck_id = $deck->getId()')))
-                    ->setParameter('author', $author)
-                    // dd($main);
+    //     $main = $qb->select('c')
+    //                 ->from('App\Entity\Card', 'c')
+    //                 ->andWhere('c.author = :author')
+    //                 ->andWhere($qb->expr()->notIn('c.id', $this->_em->createQuery('SELECT card_id FROM card_deck cd WHERE cd.deck_id = $deck->getId()')))
+    //                 ->setParameter('author', $author)
+    //                 // dd($main);
 
-                    ->getQuery()
-                    ->getResult()
-                    ;
+    //                 ->getQuery()
+    //                 ->getResult()
+    //                 ;
 
+    // -------------------- Version avec SQl brut (fonctionnel MAIS ne renvoie pas d'objets) ---------------------
+    
     //     $em = $this->getEntityManager()->getConnection();
    
     //     $sql = 'SELECT *
@@ -77,9 +81,8 @@ class CardRepository extends ServiceEntityRepository
     //    $query->execute();
     //    $cards = $query->fetchAll();
     
-        dd($main);
     //    return $main;
-    }
+    // }
     
 
     /*

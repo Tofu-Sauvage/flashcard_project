@@ -101,16 +101,17 @@ class DecksController extends AbstractController {
     $listeAllCards = $cardRepository->findBy(['author' => $activeUser]);
     $listeCards = [];
     
+    //  Tri entre les cartes de l'utilisateurs et celles déja associé au deck. Envoir les cartes non-associés.
     foreach($listeAllCards as $card) {
       $ajouterCard = true;
       foreach ($deck->getCards() as $cardDeck) {
-        if ($card->getId() == $cardDeck->getId()) {
+
+        if ($card->getId() == $cardDeck->getId()) 
           $ajouterCard = false;
-        }
       }
-      if($ajouterCard) {
+
+      if($ajouterCard) 
         array_push($listeCards, $card); 
-      }
     }
 
     return $this->render('./pages/user/deckDetail.html.twig', ['deck' => $deck, "cards" => $listeCards]);
