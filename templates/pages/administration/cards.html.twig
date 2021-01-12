@@ -9,7 +9,7 @@
         <div class="card-header card-header-tabs card-header-warning">
           <div class="nav-tabs-navigation">
             <p class="h3">
-              {% set count = 0 %} {% for card in cards %} {% set count = count +
+              {% set count = 0 %} {% for card in cardsTable %} {% set count = count +
               1 %} {% endfor %} {{ count }} cartes créées
             </p>
           </div>
@@ -70,6 +70,8 @@
                       </td>
                     </tr>
                     {% endfor %}
+                    {{ knp_pagination_render(cards) }}
+
                   </tbody>
                 </table>
               </div>

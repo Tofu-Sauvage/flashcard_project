@@ -2,19 +2,26 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Form\CardType;
 use App\Repository\CardRepository;
 use App\Repository\CategoryRepository;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CardsController extends AbstractController {
 
-  public function indexAction(CardRepository $cardRepository) {
-    $cards = $cardRepository->findAll();
-    return $this->render('./pages/administration/cards.html.twig', ['cards'=>$cards]);
+  public function indexAction(CardRepository $cardRepository, Request $request, PaginatorInterface $paginator) {
+    $cardsTable = $cardRepository->findAll();
+
+    $cards = $paginator->paginate(
+        $cardsTable, // Requête contenant les données à paginer (ici nos articles)
+        $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+        6 // Nombre de résultats par page
+    );
+    return $this->render('./pages/administration/cards.html.twig', ['cards'=>$cards, 'cardsTable'=>$cardsTable]);
   }
 
   public function indexCardGestionAction(CategoryRepository $categoryRepository, CardRepository $cardRepository) {
