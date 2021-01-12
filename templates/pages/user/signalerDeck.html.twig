@@ -2,21 +2,13 @@
 
 {% block body %}
 
-{% for message in app.flashes('success') %}
+{% for message in app.flashes('info') %}
 
 		<div class="alert alert-success mt-4" role="alert">
 			{{ message }}
 		</div>
 
 {% endfor %}
-{% for message in app.flashes('info') %}
-
-		<div class="alert alert-info mt-4" role="alert">
-			{{ message }}
-		</div>
-
-{% endfor %}
-
 <div class="content">
   <div class="container-fluid">
     <div class="row">
@@ -85,28 +77,25 @@
 
       <div class="col-md-6">
         <div class="card">
-          <div class="card-header card-header-info">
-            <h3 class="pb-2">Actions</h3>
-          </div>
-          <div class="card-body">
-						<div class="tab-content">
-							<div class="tab-panel active">
-                                <a href="{{ path('deck-fav', { deckId: deck.id }) }}" type="button" class="btn btn-success">Ajouter aux favoris</a>
-							</div>
-						</div>
+            <div class="card-header card-header-info">
+                <h3 class="pb-2">Signaler ce deck.</h3>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label class="bmd-label-floating">Pourquoi signalez-vous ce deck ?</label>
+                    <input type="text" class="form-control" id="text-signalement" name="text-signalement" for="text-signalement" required>
+                </div>
+                
+                {# idée s'il y a un futur : rajouter un captcha ici. #}
 
-                        <div class="tab-content">
-							<div class="tab-panel active">
-                                <a href="{{ path('signalerDeck', { deckId: deck.id }) }}" type="button" class="btn btn-danger">Signaler ce deck</a>
-							</div>
-						</div>
-
-                        <div class="tab-content">
-							<div class="tab-panel active">
-                                <a href="{{ path('rechercher') }}" type="button" class="btn btn-info">Retour aux recherches</a>
-							</div>
-						</div>
+                    <a href="{{ path('deck-signale', { deckId: deck.id }) }}" type="button" class="btn btn-primary">Signaler</a>
+                <div class="tab-content">
+					<div class="tab-panel active">
+                        <a href="{{ path('rechercher') }}" type="button" class="btn btn-info">Retour aux recherches</a>
 					</div>
+				</div>
+
+            </div>
         </div>
       </div>
     </div>
