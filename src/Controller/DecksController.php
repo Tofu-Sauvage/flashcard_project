@@ -131,8 +131,8 @@ class DecksController extends AbstractController {
     //  Tri entre les cartes de l'utilisateurs et celles déja associé au deck. Renvoie les cartes non-associés.
     foreach($listeAllCards as $card) {
       $ajouterCard = true;
-      foreach ($deck->getCards() as $cardDeck) {
 
+      foreach ($deck->getCards() as $cardDeck) {
         if ($card->getId() == $cardDeck->getId()) 
           $ajouterCard = false;
       }
