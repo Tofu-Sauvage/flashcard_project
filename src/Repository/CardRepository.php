@@ -46,13 +46,17 @@ class CardRepository extends ServiceEntityRepository
                      ->getQuery()
                      ->getResult()
                      ;
-// $side = $side[0];
+                     
+        $side = $side[0];
+        // dd($side);
 
         $main = $qb->select('c')
                     ->from('App\Entity\Card', 'c')
                     ->andWhere('c.author = :author')
-                    ->andWhere($qb->expr()->notIn('c', $side))
+                    ->andWhere($qb->expr()->notIn('c.id', $this->_em->createQuery('SELECT card_id FROM card_deck cd WHERE cd.deck_id = $deck->getId()')))
                     ->setParameter('author', $author)
+                    // dd($main);
+
                     ->getQuery()
                     ->getResult()
                     ;
@@ -74,7 +78,7 @@ class CardRepository extends ServiceEntityRepository
     //    $cards = $query->fetchAll();
     
         dd($main);
-       return $main;
+    //    return $main;
     }
     
 

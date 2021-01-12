@@ -231,6 +231,6 @@ class Card
     }
 
     public function __toString() {
-        return $this->created_at->format('j-m-Y');
+        return $this->question;
     }
 }

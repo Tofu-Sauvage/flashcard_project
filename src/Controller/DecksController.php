@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Card;
 use App\Form\DeckType;
 use App\Repository\CardRepository;
 use App\Repository\DeckRepository;
@@ -96,9 +97,21 @@ class DecksController extends AbstractController {
   {
     $deck =  $deckRepository->findOneBy(['id' => $id]);
 
-    $activeUser = $this->getUser();
-    $listeCards = $cardRepository->custom($activeUser, $deck);
-    // dd($listeCards);
+    $activeUser = $this->getUser()->getId();
+    $listeAllCards = $cardRepository->findBy(['author' => $activeUser]);
+    $listeCards = [];
+    
+    foreach($listeAllCards as $card) {
+      $ajouterCard = true;
+      foreach ($deck->getCards() as $cardDeck) {
+        if ($card->getId() == $cardDeck->getId()) {
+          $ajouterCard = false;
+        }
+      }
+      if($ajouterCard) {
+        array_push($listeCards, $card); 
+      }
+    }
 
     return $this->render('./pages/user/deckDetail.html.twig', ['deck' => $deck, "cards" => $listeCards]);
   }
