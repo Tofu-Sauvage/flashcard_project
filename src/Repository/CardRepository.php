@@ -35,11 +35,53 @@ class CardRepository extends ServiceEntityRepository
         ;
     }
 
-    // public function custom()
+    // -------------- Version avec Doctrine (non-fonctionnel) ----------------------
+
+    // public function custom($author, $deck)
     // {
-    //     return $this->createQueryBuilder('card')
-    //                 ->where('card.deck_id')
-    //                 ->andWhere()
+    //     $qb = $this->_em->createQueryBuilder();
+
+    //     $side = $qb ->select('d')
+    //                  ->from('App\Entity\Deck', 'd')
+    //                  ->andWhere('d = :deck')
+    //                  ->setParameter('deck', $deck)
+    //                  ->getQuery()
+    //                  ->getResult()
+    //                  ;
+                     
+    //     $side = $side[0];
+    //     // dd($side);
+
+    //     $main = $qb->select('c')
+    //                 ->from('App\Entity\Card', 'c')
+    //                 ->andWhere('c.author = :author')
+    //                 ->andWhere($qb->expr()->notIn('c.id', $this->_em->createQuery('SELECT card_id FROM card_deck cd WHERE cd.deck_id = $deck->getId()')))
+    //                 ->setParameter('author', $author)
+    //                 // dd($main);
+
+    //                 ->getQuery()
+    //                 ->getResult()
+    //                 ;
+
+    // -------------------- Version avec SQl brut (fonctionnel MAIS ne renvoie pas d'objets) ---------------------
+    
+    //     $em = $this->getEntityManager()->getConnection();
+   
+    //     $sql = 'SELECT *
+    //             FROM card
+    //             WHERE card.author_id = 23
+    //             AND NOT card.id IN 
+    //             (SELECT card_id FROM card_deck cd WHERE cd.deck_id = 11)
+    //     ';
+    //     $query = $em->prepare($sql);
+    //     // $query->setParameter(1, $authorId)
+    //     //       ->setParameter(2, $deckId)
+    //     //       ;
+
+    //    $query->execute();
+    //    $cards = $query->fetchAll();
+    
+    //    return $main;
     // }
     
 

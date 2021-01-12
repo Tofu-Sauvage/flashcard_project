@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Card;
 use App\Form\DeckType;
 use App\Repository\CardRepository;
 use App\Repository\DeckRepository;
 use App\Repository\UserRepository;
 use DateTime;
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -95,8 +97,22 @@ class DecksController extends AbstractController {
   {
     $deck =  $deckRepository->findOneBy(['id' => $id]);
 
-    $idActiveUser = $this->getUser()->getID();
-    $listeCards = $cardRepository->findBy(['author' => $idActiveUser]);
+    $activeUser = $this->getUser()->getId();
+    $listeAllCards = $cardRepository->findBy(['author' => $activeUser]);
+    $listeCards = [];
+    
+    //  Tri entre les cartes de l'utilisateurs et celles déja associé au deck. Renvoie les cartes non-associés.
+    foreach($listeAllCards as $card) {
+      $ajouterCard = true;
+      foreach ($deck->getCards() as $cardDeck) {
+
+        if ($card->getId() == $cardDeck->getId()) 
+          $ajouterCard = false;
+      }
+
+      if($ajouterCard) 
+        array_push($listeCards, $card); 
+    }
 
     return $this->render('./pages/user/deckDetail.html.twig', ['deck' => $deck, "cards" => $listeCards]);
   }
