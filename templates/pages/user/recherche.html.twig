@@ -34,7 +34,9 @@
 													{% else %}
 													<td><button type="button" class="btn btm-sm btn-danger">Non</button></td></td>
 													{% endif %}
-													<td><a href='#'><button {# Remplacer le dièse par la page du deck quand elle sera opérationnelle ! #}
+													<td><a href="{{
+														path('rechercherDeck', { deckId: deck.id })
+														}}"><button {# Remplacer le dièse par la page du deck quand elle sera opérationnelle ! #}
 														type="button"
 														rel="tooltip"
 														title=""
