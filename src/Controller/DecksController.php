@@ -84,6 +84,31 @@ class DecksController extends AbstractController {
     return $this->render('./pages/user/deckForm.html.twig', ['deckForm' => $form->createView(), 'modeEdition' => $modeEdition]);
   }
 
+  public function deckFavAction(DeckRepository $deckRepository, $id)
+  {
+    $deck = $deckRepository->findOneBy(['id' => $id]);
+    $esTuDejaDansLesFavs = false;
+
+    $decksFavoris = $this->getUser()->getFavorites();
+    for ($i = 0 ; $i < count($decksFavoris) ; $i++)
+    {
+      if($decksFavoris[$i]->GetId() == $id)
+      $esTuDejaDansLesFavs = true;
+    }
+
+    if(!$esTuDejaDansLesFavs)
+    {
+      $this->getUser()->AddFavorite($deck);
+      $this->addFlash('success', "Le deck a été ajouté dans vos favoris !");
+    }
+    else
+    {
+      $this->addFlash('info', "Ce deck est déjà dans vos favoris.");
+    }
+    return($this->rechercherDeck($deckRepository, $deck));
+}
+
+
   public function detailAction(DeckRepository $deckRepository, $id, UserRepository $userRepository)
   {
     $deck =  $deckRepository->findOneBy(['id' => $id]);     
@@ -169,5 +194,55 @@ class DecksController extends AbstractController {
   {
     $mesCartes = $this->shuffleLesCartes($deckRepository, $deckId);
     return $this->render('./pages/user/quiz.html.twig', ['cartes' => $mesCartes]);
+  }
+
+
+  public function rechercherVide(DeckRepository $deckRepository)  {
+    $allMesDecks = $deckRepository->findBy(['public' => true]);
+
+    $allDecks = array();
+    for($i = 0; $i < count($allMesDecks) ; $i++)
+    {
+      if($allMesDecks[$i]->GetAuthor()->GetName() != $this->GetUser()->GetName())
+      {
+        array_push($allDecks, $allMesDecks[$i]);
+      }
+    }
+
+    // LA LIGNE CI DESSOUS EST LA A DES FINS DE TESTS SI VOUS VOULEZ LA TESTER, en attendant que la feature "ajouter aux favoris" soit faite ! 
+    $this->getUser()->addFavorite($deckRepository->findAll()[0]);
+
+    $allFavsDecks = $this->getUser()->getFavorites();
+
+    return $this->render("pages/user/recherche.html.twig", ["deck_all" => $allDecks, "favs_deck_all" => $allFavsDecks, "jeCherche" => '']);
+  }
+
+  public function rechercher(DeckRepository $deckRepository, $jeCherche)  {
+    $allMesDecks = $deckRepository->findBy(['public' => true]);
+
+    $jeCherche = (String)$jeCherche;
+    $allDecks = array();
+
+    for($i = 0; $i < count($allMesDecks) ; $i++)
+    {
+      if(str_contains((String)($allMesDecks[$i]->GetName()), $jeCherche) || str_contains($allMesDecks[$i]->GetDescription(), $jeCherche) || str_contains($allMesDecks[$i]->GetAuthor()->GetName(), $jeCherche))
+      {
+        array_push($allDecks, $allMesDecks[$i]);
+      }
+    }
+    
+    // LA LIGNE CI DESSOUS EST LA A DES FINS DE TESTS SI VOUS VOULEZ LA TESTER, en attendant que la feature "ajouter aux favoris" soit faite ! 
+    $this->getUser()->addFavorite($deckRepository->findAll()[0]);
+
+    $allFavsDecks = $this->getUser()->getFavorites();
+
+    return $this->render("pages/user/recherche.html.twig", ["deck_all" => $allDecks, "favs_deck_all" => $allFavsDecks, "jeCherche" => $jeCherche]);
+  }
+
+  public function rechercherDeck(DeckRepository $deckRepository, $deckId){
+    $monDeck = $deckRepository->findOneBy(['id' => $deckId]);
+    $mesCartes = $monDeck->GetCards();
+
+    return $this->render("pages/user/rechercheDeck.html.twig", ["deck" => $monDeck, "cards" => $mesCartes]);
   }
 }

@@ -1,0 +1,112 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+{% for message in app.flashes('success') %}
+
+		<div class="alert alert-success mt-4" role="alert">
+			{{ message }}
+		</div>
+
+{% endfor %}
+{% for message in app.flashes('info') %}
+
+		<div class="alert alert-info mt-4" role="alert">
+			{{ message }}
+		</div>
+
+{% endfor %}
+
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header card-header-info">
+            <h3 class="pb-2">Nom : {{ deck.name }}</h3>
+          </div>
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane active">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Status</th>
+                      <th>Langue</th>
+                      <th>Créée le</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>{% if deck.public %} Public {% else %} Privé {%endif%}</td>
+                      <td>{{ deck.author.languageLearn.name }}</td>
+                      <td>{{ deck.createdAt | date("d/m/Y") }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <p class="card-text">Description : {{ deck.description }}</p>
+            <p class="card-text">Tags associés : {{ deck.tags|json_encode() }}</p>
+
+            <p class="h3">
+              {% set count = 0 %} {% for card in deck.cards %} {% set count =
+              count + 1 %} {% endfor %} 
+              {% if count == 0 %}
+              <p class="text-info">Pas encore de carte.</p>
+              {% else %}
+              {{ count }} cartes associées :
+            </p>
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Catégorie</th>
+                  <th>Question</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for card in deck.cards%}
+
+                <tr>
+                  <td>{{ card.category.name }}</td>
+                  <td>{{ card.question }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          {% endif %}
+            <div class="text-center">
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header card-header-info">
+            <h3 class="pb-2">Actions</h3>
+          </div>
+          <div class="card-body">
+						<div class="tab-content">
+							<div class="tab-panel active">
+								{# ajouter aux favoris #}
+                                <a href="{{ path('deck-fav', { id: deck.id }) }}" type="button" class="btn btn-success">Ajouter aux favoris</a>
+							</div>
+						</div>
+
+                        <div class="tab-content">
+							<div class="tab-panel active">
+								{# signaler #}
+                                <a href="#" type="button" class="btn btn-danger">Signaler ce deck</a>
+							</div>
+						</div>
+					</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
