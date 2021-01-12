@@ -2,45 +2,48 @@
 
 {% block body %}
   <div class="container-fluid">
-    <h1 class="mb-5">Formulaire de decks</h1>
-  <div>
 
-  {{ form_start(deckForm) }}
-
-    <div class="form-group">
-      {{ form_label(deckForm.name, "Nom") }}
-      {{ form_widget(deckForm.name, {attr: {'class': 'form-control'}}) }}
+    <div class="alert alert-success mb-5">
+        <h2>Formulaire de decks</h2>
     </div>
+  
 
-    <div class="form-group">
-      {{ form_label(deckForm.description, "Description du deck") }}
-      {{ form_widget(deckForm.description, {attr: {'class': 'form-control'}}) }}
-    </div>
+    {{ form_start(deckForm) }}
 
-    <div class="form-check">
-        {{ form_label(deckForm.public, "Rendre le deck accessible aux autres utilisateurs ?") }}
-        {{ form_widget(deckForm.public) }}
-    </div>
+      <div class="form-group">
+        {{ form_label(deckForm.name, "Nom") }}
+        {{ form_widget(deckForm.name, {attr: {'class': 'form-control'}}) }}
+      </div>
 
-    <div class="form-group">
-      {{ form_label(deckForm.langague_learn, "Language à apprendre") }}
+      <div class="form-group">
+        {{ form_label(deckForm.description, "Description du deck") }}
+        {{ form_widget(deckForm.description, {attr: {'class': 'form-control'}}) }}
+      </div>
 
-      {% for vars in deckForm.langague_learn %}
-        <div class="form-check">
-          {{ form_widget(vars) }}
-          {{ form_label(vars) }}
-        </div>
-      {% endfor %}
-    </div>
+      <div class="form-check">
+          {{ form_label(deckForm.public, "Rendre le deck accessible aux autres utilisateurs ?") }}
+          {{ form_widget(deckForm.public) }}
+      </div>
 
-    <div class="form-group">
-      {% if not modeEdition %}
-        {{ form_widget(deckForm.Ajouter, {'label': 'Ajouter un deck', attr: {'class': 'btn btn-success'}}) }}
-      {% else %}
-        {{ form_widget(deckForm.Ajouter, {'label': 'Modifier ce deck', attr: {'class': 'btn btn-success'}}) }}
-      {% endif %}
-		</div>
+      <div class="form-group">
+        {{ form_label(deckForm.langague_learn, "Language à apprendre") }}
 
-  {{ form_end(deckForm) }}
+        {% for vars in deckForm.langague_learn %}
+          <div class="form-check">
+            {{ form_widget(vars) }}
+            {{ form_label(vars) }}
+          </div>
+        {% endfor %}
+      </div>
 
+      <div class="form-group">
+        {% if not modeEdition %}
+          {{ form_widget(deckForm.Ajouter, {'label': 'Ajouter un deck', attr: {'class': 'btn btn-success'}}) }}
+        {% else %}
+          {{ form_widget(deckForm.Ajouter, {'label': 'Modifier ce deck', attr: {'class': 'btn btn-success'}}) }}
+        {% endif %}
+      </div>
+
+    {{ form_end(deckForm) }}
+  </div>
 {% endblock %}

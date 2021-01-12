@@ -2,10 +2,15 @@
 
 {% block body %}
 
-
     <div class="container-fluid">
-      <h1>Formulaire de cartes</h1>
-      <h2 class='mb-5'>Category : {{category.name}} </h2>
+
+      <div class="alert alert-success">
+        <h2>Formulaire de cartes</h2>
+      </div>
+
+      <div class="alert alert-info mb-5">
+        Categorie : {{category.name}}
+      </div>
 
       {{ form_start(cardForm) }}
 
