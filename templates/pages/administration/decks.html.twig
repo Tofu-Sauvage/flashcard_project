@@ -7,7 +7,7 @@
         <div class="card-header card-header-tabs card-header-primary">
           <div class="nav-tabs-navigation">
             <p class="h3">
-              {% set count = 0 %} {% for deck in decks %} {% set count = count +
+              {% set count = 0 %} {% for deck in decksTable %} {% set count = count +
               1 %} {% endfor %} {{ count }} decks créés
             </p>
           </div>
@@ -104,6 +104,8 @@
                   {% endfor %}
                 </tbody>
               </table>
+              {{ knp_pagination_render(decks) }}
+
             </div>
           </div>
         </div>
