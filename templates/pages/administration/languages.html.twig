@@ -6,7 +6,7 @@
       <div class="card">
         <div class="card-header card-header-tabs card-header-warning">
           <p class="h3">
-            {% set count = 0 %} {% for language in languages %} {% set count =
+            {% set count = 0 %} {% for language in languagesTable %} {% set count =
             count + 1 %} {% endfor %} {{ count }} langages enregistrés
           </p>
           <p class="card-category">
@@ -100,6 +100,8 @@
                   {% endfor %}
                 </tbody>
               </table>
+              {{ knp_pagination_render(languages) }}
+
             </div>
           </div>
         </div>

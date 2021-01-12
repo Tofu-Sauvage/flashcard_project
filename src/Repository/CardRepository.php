@@ -3,10 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Card;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\Validator\Constraints\Type;
-
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Card|null find($id, $lockMode = null, $lockVersion = null)
@@ -16,6 +14,8 @@ use Symfony\Component\Validator\Constraints\Type;
  */
 class CardRepository extends ServiceEntityRepository
 {
+
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Card::class);

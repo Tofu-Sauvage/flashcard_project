@@ -2,23 +2,33 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Card;
 use App\Form\DeckType;
+use Doctrine\ORM\EntityManager;
 use App\Repository\CardRepository;
 use App\Repository\DeckRepository;
 use App\Repository\UserRepository;
-use DateTime;
-use Doctrine\Common\Collections\Criteria;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\Collections\Criteria;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DecksController extends AbstractController {
 
-  public function indexAction(DeckRepository $deckRepository) {
-    $decks = $deckRepository->findAll();
-    return $this->render('./pages/administration/decks.html.twig', ['decks'=>$decks]);
+  public function indexAction(DeckRepository $deckRepository, Request $request, PaginatorInterface $paginator) {
+    $decksTable = $deckRepository->findAll();
+
+    $limit = 10; 
+    $firstPage = 1;
+
+    $decks = $paginator->paginate(
+        $decksTable, // Requête contenant les données à paginer (ici nos articles)
+        $request->query->getInt('page', $firstPage), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+        $limit // Nombre de résultats par page
+    );
+    return $this->render('./pages/administration/decks.html.twig', ['decks'=>$decks, 'decksTable'=>$decksTable]);
   }
 
   public function deckCreateAction(Request $request, EntityManagerInterface $em)
