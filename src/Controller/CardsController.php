@@ -16,11 +16,15 @@ class CardsController extends AbstractController {
   public function indexAction(CardRepository $cardRepository, Request $request, PaginatorInterface $paginator) {
     $cardsTable = $cardRepository->findAll();
 
+    $limit = 10; 
+    $firstPage = 1;
+
     $cards = $paginator->paginate(
         $cardsTable, // Requête contenant les données à paginer (ici nos articles)
-        $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-        6 // Nombre de résultats par page
+        $request->query->getInt('page', $firstPage), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+        $limit // Nombre de résultats par page
     );
+    
     return $this->render('./pages/administration/cards.html.twig', ['cards'=>$cards, 'cardsTable'=>$cardsTable]);
   }
 

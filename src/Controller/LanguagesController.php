@@ -5,17 +5,27 @@ namespace App\Controller;
 use App\Form\LanguageType;
 use App\Repository\CardRepository;
 use App\Repository\DeckRepository;
-use App\Repository\LanguageRepository;
 use App\Repository\UserRepository;
+use App\Repository\LanguageRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class LanguagesController extends AbstractController {
 
-  public function indexAction(LanguageRepository $languageRepository) {
-    $languages = $languageRepository->findAll();
-    return $this->render('./pages/administration/languages.html.twig', ['languages'=>$languages]);
+  public function indexAction(LanguageRepository $languageRepository, Request $request, PaginatorInterface $paginator) {
+    $languagesTable = $languageRepository->findAll();
+
+    $limit = 3; 
+    $firstPage = 1;
+
+    $languages = $paginator->paginate(
+        $languagesTable, // Requête contenant les données à paginer (ici nos articles)
+        $request->query->getInt('page', $firstPage), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+        $limit // Nombre de résultats par page
+    );
+    return $this->render('./pages/administration/languages.html.twig', ['languages'=>$languages, 'languagesTable'=>$languagesTable]);
   }
 
   public function languageCreateAction(Request $request, EntityManagerInterface $em)

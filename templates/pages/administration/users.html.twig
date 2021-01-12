@@ -7,7 +7,7 @@
         <div class="card-header card-header-tabs card-header-info">
           <div class="nav-tabs-navigation">
             <p class="h3">
-              {% set count = 0 %} {% for user in users %} {% set count = count +
+              {% set count = 0 %} {% for user in usersTable %} {% set count = count +
               1 %} {% endfor %} {{ count }} utilisateurs inscrits
             </p>
           </div>
@@ -74,6 +74,8 @@
                   {% endfor %}
                 </tbody>
               </table>
+              {{ knp_pagination_render(users) }}
+
             </div>
           </div>
         </div>
