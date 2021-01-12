@@ -138,7 +138,7 @@
                   <td>{{ deck.name }}</td>
                   <td>{{deck.createdAt | date("d/m/Y") }}</td>
                   <td class="td-actions text-center">
-                    <a href="{{ path('admin-deck', { id: deck.id }) }}"
+                    <a href="{{ path('deck-detail', { id: deck.id }) }}"
                       ><button
                         type="button"
                         rel="tooltip"
