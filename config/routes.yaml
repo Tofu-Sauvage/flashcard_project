@@ -110,11 +110,19 @@ deckboard:
 
 rechercher:
   path: /profile/rechercher
-  controller: App\Controller\DeckboardController::rechercherVide
+  controller: App\Controller\DecksController::rechercherVide
 
 rechercherChaine:
   path: /profile/rechercher/{jeCherche}
-  controller: App\Controller\DeckboardController::rechercher
+  controller: App\Controller\DecksController::rechercher
+
+rechercherDeck:
+  path: /profile/rechercher/deck/{deckId}
+  controller: App\Controller\DecksController::rechercherDeck
+
+deck-fav:
+  path: /profile/fav/deck/{id}
+  controller: App\Controller\DecksController::deckFavAction
 
 # ____________ cards ________________
 
