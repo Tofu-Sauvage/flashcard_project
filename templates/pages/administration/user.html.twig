@@ -142,7 +142,7 @@
 
               <div class="tab-pane active" id="cards"  role="tabpanel">
                 <p class="h3">
-                {% set count = 0 %} {% for card in user.cards %} {% set count =
+                {% set count = 0 %} {% for card in usersCards %} {% set count =
                 count + 1 %} {% endfor %} 
                 {% if count == 0 %}
                 <p class="text-info">Pas encore de carte.</p>
@@ -159,8 +159,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {% for card in user.cards%}
-
+                    {% for card in cards%}
                     <tr>
                       <td>{{ card.id }}</td>
                       <td>{{ card.category.name }}</td>
@@ -182,12 +181,13 @@
                   </tbody>
                 </table>
                 {% endif %}
+                {{ knp_pagination_render(cards) }}
               </div>
 
 
               <div class="tab-pane" id="decks" role="tabpanel">
                 <p class="h3">
-                  {% set count = 0 %} {% for deck in user.decks %} {% set count =
+                  {% set count = 0 %} {% for deck in usersDecks %} {% set count =
                   count + 1 %} {% endfor %} 
                   {% if count == 0 %}
                   <p class="text-info">Pas encore de deck.</p>
@@ -205,7 +205,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {% for deck in user.decks%}
+                    {% for deck in decks%}
     
                     <tr>
                       <td>{{ deck.id }}</td>
@@ -228,6 +228,8 @@
                   </tbody>
                 </table>
                 {% endif %}
+                {{ knp_pagination_render(decks) }}
+
               </div>
 
               <div class="tab-pane" id="favorites">

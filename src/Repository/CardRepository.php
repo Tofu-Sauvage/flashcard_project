@@ -35,6 +35,16 @@ class CardRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findByUser($userId)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.author= :user')
+            ->setParameter('user', $userId)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // -------------- Version avec Doctrine (non-fonctionnel) ----------------------
 
     // public function custom($author, $deck)
