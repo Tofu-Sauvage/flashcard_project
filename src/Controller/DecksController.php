@@ -101,7 +101,7 @@ class DecksController extends AbstractController {
     $listeAllCards = $cardRepository->findBy(['author' => $activeUser]);
     $listeCards = [];
     
-    //  Tri entre les cartes de l'utilisateurs et celles déja associé au deck. Envoir les cartes non-associés.
+    //  Tri entre les cartes de l'utilisateurs et celles déja associé au deck. Renvoie les cartes non-associés.
     foreach($listeAllCards as $card) {
       $ajouterCard = true;
       foreach ($deck->getCards() as $cardDeck) {
