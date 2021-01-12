@@ -86,15 +86,15 @@ class DecksController extends AbstractController {
     return $this->render('./pages/user/deckForm.html.twig', ['deckForm' => $form->createView(), 'modeEdition' => $modeEdition]);
   }
 
-  public function deckFavAction(DeckRepository $deckRepository, EntityManagerInterface $em, $id)
+  public function deckFavAction(DeckRepository $deckRepository, EntityManagerInterface $em, $deckId)
   {
-    $deck = $deckRepository->findOneBy(['id' => $id]);
+    $deck = $deckRepository->findOneBy(['id' => $deckId]);
     $esTuDejaDansLesFavs = false;
 
     $decksFavoris = $this->getUser()->getFavorites();
     for ($i = 0 ; $i < count($decksFavoris) ; $i++)
     {
-      if($decksFavoris[$i]->getId() == $id)
+      if($decksFavoris[$i]->getId() == $deckId)
         $esTuDejaDansLesFavs = true;
     }
 
@@ -110,8 +110,18 @@ class DecksController extends AbstractController {
       $this->addFlash('info', "Ce deck est déjà dans vos favoris.");
     }
     return($this->rechercherDeck($deckRepository, $deck));
-}
+  }
 
+  public function deckSignalAction(DeckRepository $deckRepository, $deckId)
+  {
+    $deck = $deckRepository->findOneBy(['id' => $deckId]);
+
+    // le signalement aux administrateurs se ferait ici.
+
+    $this->addFlash('info', "Votre demande a bien été transmise.");
+
+    return($this->signalerDeck($deckRepository, $deck));
+  }
 
   public function detailAction(DeckRepository $deckRepository, $id, UserRepository $userRepository)
   {
@@ -256,5 +266,11 @@ class DecksController extends AbstractController {
     $mesCartes = $monDeck->getCards();
 
     return $this->render("pages/user/rechercheDeck.html.twig", ["deck" => $monDeck, "cards" => $mesCartes]);
+  }
+
+  public function signalerDeck(DeckRepository $deckRepository, $deckId){
+    $monDeck = $deckRepository->findOneBy(['id' => $deckId]);
+
+    return $this->render("pages/user/signalerDeck.html.twig", ["deck" => $monDeck]);
   }
 }
