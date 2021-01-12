@@ -121,8 +121,16 @@ rechercherDeck:
   controller: App\Controller\DecksController::rechercherDeck
 
 deck-fav:
-  path: /profile/fav/deck/{id}
+  path: /profile/fav/deck/{deckId}
   controller: App\Controller\DecksController::deckFavAction
+
+signalerDeck:
+  path: /profile/signaler/deck/{deckId}
+  controller: App\Controller\DecksController::signalerDeck
+
+deck-signale:
+  path: /profile/signalenvoye/deck/{deckId}
+  controller: App\Controller\DecksController::deckSignalAction
 
 # ____________ cards ________________
 
