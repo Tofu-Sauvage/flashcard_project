@@ -1,37 +1,29 @@
    {% if pageCount > 1 %}
     <div class="pagination">
         {% if first is defined and current != first %}
-            <span class="first page-link">
-                <a href="{{ path(route, query|merge({(pageParameterName): first})) }}">&lt;&lt;</a>
-            </span>
+            
+                <a href="{{ path(route, query|merge({(pageParameterName): first})) }}"><span class="first page-link"></span></a>
+        
         {% endif %}
 
         {% if previous is defined %}
-            <span class="previous page-link">
-                <a href="{{ path(route, query|merge({(pageParameterName): previous})) }}">&lt;</a>
-            </span>
+                <a href="{{ path(route, query|merge({(pageParameterName): previous})) }}"><span class="previous page-link"></span></a>
         {% endif %}
 
         {% for page in pagesInRange %}
             {% if page != current %}
-                <span class="page page-link">
-                    <a href="{{ path(route, query|merge({(pageParameterName): page})) }}">{{ page }}</a>
-                </span>
+                    <a href="{{ path(route, query|merge({(pageParameterName): page})) }}"><span class="page page-link">{{ page }}</span></a>
             {% else %}
                 <span class="current page-link text-muted">{{ page }}</span>
             {% endif %}
         {% endfor %}
 
         {% if next is defined %}
-            <span class="next page-link">
-                <a href="{{ path(route, query|merge({(pageParameterName): next})) }}">&gt;</a>
-            </span>
+                <a href="{{ path(route, query|merge({(pageParameterName): next})) }}"><span class="next page-link"></span></a>
         {% endif %}
 
         {% if last is defined and current != last %}
-            <span class="last page-link">
-                <a href="{{ path(route, query|merge({(pageParameterName): last})) }}">&gt;&gt;</a>
-            </span>
+                <a href="{{ path(route, query|merge({(pageParameterName): last})) }}"><span class="last page-link"></span></a>
         {% endif %}
     </div>
 {% endif %}
