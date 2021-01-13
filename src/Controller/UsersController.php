@@ -15,7 +15,7 @@ class UsersController extends AbstractController {
   public function indexAction(UserRepository $userRepository, Request $request, PaginatorInterface $paginator) {
     $usersTable = $userRepository->findAll();
 
-    $limit = 5; 
+    $limit = 10; 
     $firstPage = 1;
 
     $users = $paginator->paginate(

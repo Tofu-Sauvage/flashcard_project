@@ -28,12 +28,21 @@ class CardsController extends AbstractController {
     return $this->render('./pages/administration/cards.html.twig', ['cards'=>$cards, 'cardsTable'=>$cardsTable]);
   }
 
-  public function indexCardGestionAction(CategoryRepository $categoryRepository, CardRepository $cardRepository) {
+  public function indexCardGestionAction(CategoryRepository $categoryRepository, CardRepository $cardRepository, Request $request, PaginatorInterface $paginator) {
     $idActiveUser = $this->getUser()->getID();
     $listeCategories = $categoryRepository->findBy([], ['id' => 'desc']);
     $listeCards = $cardRepository->findBy(['author' => $idActiveUser]);
 
-    return $this->render('./pages/user/cardGestion.html.twig', ['categories' => $listeCategories, 'cards' => $listeCards]);
+    $limit = 10; 
+    $firstPage = 1;
+
+    $paginationCards = $paginator->paginate(
+        $listeCards, // Requête contenant les données à paginer (ici nos articles)
+        $request->query->getInt('page', $firstPage), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+        $limit // Nombre de résultats par page
+    );
+
+    return $this->render('./pages/user/cardGestion.html.twig', ['categories' => $listeCategories, 'cards' => $listeCards, 'paginationCards'=>$paginationCards]);
   }
 
   public function cardCreateAction(Request $request, EntityManagerInterface $em, $categoryId, CategoryRepository $categoryRepository)

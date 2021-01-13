@@ -45,10 +45,20 @@ class DecksController extends AbstractController {
     return $this->render('./pages/administration/deckForm.html.twig', ['deckForm' => $form->createView()]);
   }
 
-  public function indexGestionAction(DeckRepository $deckRepository) {
+  public function indexGestionAction(DeckRepository $deckRepository, Request $request, PaginatorInterface $paginator) {
     $idActiveUser = $this->getUser()->getID();
     $listeDecks = $deckRepository->findBy(['author' => $idActiveUser]);
-    return $this->render('./pages/user/deckGestion.html.twig', ['decks' => $listeDecks]);
+
+    $limit = 5; 
+    $firstPage = 1;
+
+    $paginationDecks = $paginator->paginate(
+        $listeDecks, // Requête contenant les données à paginer (ici nos articles)
+        $request->query->getInt('page', $firstPage), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+        $limit // Nombre de résultats par page
+    );
+
+    return $this->render('./pages/user/deckGestion.html.twig', ['decks' => $listeDecks, 'paginationDecks'=>$paginationDecks]);
   }
 
   public function deckUserCreateAction(Request $request, EntityManagerInterface $em)
