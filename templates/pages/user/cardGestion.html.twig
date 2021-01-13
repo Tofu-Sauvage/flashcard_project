@@ -68,7 +68,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										{% for card in cards %}
+										{% for card in paginationCards %}
 											<tr>
 												<td>{{ card.author.languageLearn.name }}</td>
 												<td>{{ card.category.name }}</td>
@@ -92,6 +92,8 @@
 										{% endfor %}
 									</tbody>
 								</table>
+								{{ knp_pagination_render(paginationCards) }}
+
 							</div>
 						</div>
 					</div>

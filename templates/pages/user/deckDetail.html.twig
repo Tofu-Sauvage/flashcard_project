@@ -52,7 +52,7 @@
             </p>
             <div class="tab-content table-responsive">
               <div class="tab-pane active">
-                <table class="table table-responsive">
+                <table class="table">
                   <thead>
                     <tr>
                       <th>Catégorie</th>
@@ -63,40 +63,54 @@
                   </thead>
                   <tbody>
                     {% for card in deck.cards%}
+            <div class="tab-content table-responsive">
+              <div class="tab-pane active">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Catégorie</th>
+                  <th>Question</th>
+                  <th>Voir</th>
+                  <th>Retirer<br>la carte</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for card in deck.cards%}
 
-                    <tr>
-                      <td>{{ card.category.name }}</td>
-                      <td>{{ card.question }}</td>
-                      <td class="td-actions text-left">
-                        <a href="{{ path('card-detail', { id: card.id }) }}"
-                          ><button
-                            type="button"
-                            rel="tooltip"
-                            title=""
-                            class="btn btn-white btn-link btn-sm"
-                          >
-                            <i class="material-icons">remove_red_eye</i>
-                          </button></a
-                        >
-                      </td>
-                      <td class="td-actions text-left">
-                        <a href="{{ path('remove-card-to-deck', { idCard: card.id, idDeck: deck.id }) }}"
-                          ><button
-                            type="button"
-                            rel="tooltip"
-                            title=""
-                            class="btn btn-white btn-link btn-sm"
-                          >
-                            <i class="material-icons">remove</i>
-                          </button></a
-                        >
-                      </td>
-                    </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+                <tr>
+                  <td>{{ card.category.name }}</td>
+                  <td>{{ card.question }}</td>
+                  <td class="td-actions text-left">
+                    <a href="{{ path('card-detail', { id: card.id }) }}"
+                      ><button
+                        type="button"
+                        rel="tooltip"
+                        title=""
+                        class="btn btn-white btn-link btn-sm"
+                      >
+                        <i class="material-icons">remove_red_eye</i>
+                      </button></a
+                    >
+                  </td>
+                  <td class="td-actions text-left">
+                    <a href="{{ path('remove-card-to-deck', { idCard: card.id, idDeck: deck.id }) }}"
+                      ><button
+                        type="button"
+                        rel="tooltip"
+                        title=""
+                        class="btn btn-white btn-link btn-sm"
+                      >
+                        <i class="material-icons">remove</i>
+                      </button></a
+                    >
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
           {% endif %}
             <div class="text-center">
               <form
@@ -144,7 +158,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										{% for card in cards %}
+										{% for card in paginationCards %}
 											<tr>
 												<td>{{ card.category.name }}</td>
 												<td>{{ card.question |length > 15 ? card.question|slice(0, 15) ~ '...' : card.question }}</td>
@@ -167,7 +181,9 @@
 											</tr>
 										{% endfor %}
 									</tbody>
-								</table>
+                </table>
+                {{ knp_pagination_render(paginationCards) }}
+
 							</div>
 						</div>
 					</div>
