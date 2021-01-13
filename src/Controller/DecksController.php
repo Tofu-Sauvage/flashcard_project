@@ -294,6 +294,24 @@ class DecksController extends AbstractController {
     return $this->render("pages/user/recherche.html.twig", ["deck_all" => $allDecks, "favs_deck_all" => $allFavsDecks, "jeCherche" => $jeCherche]);
   }
 
+  public function findDeckByTag(DeckRepository $deckRepository, $tag){
+    $allDecks =  $deckRepository->findBy(['public' => true]);
+
+    $deck->getTags();
+    $tagsTable = explode(" ", $tags);
+
+    $tag = (String)$tag;
+    $allDecksTable =[];
+
+    for($i = 0; $i < count($allDecks) ; $i++){
+      if(str_contains((String)($allDecks[$i]->getTags()), $tag))
+      {
+        array_push($allDecksTable, $allDecks[$i]);
+      }
+    }
+
+  }
+
   public function rechercherDeck(DeckRepository $deckRepository, $deckId){
     $monDeck = $deckRepository->findOneBy(['id' => $deckId]);
     $mesCartes = $monDeck->getCards();
