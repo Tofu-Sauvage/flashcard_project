@@ -22,9 +22,20 @@
       <div class="col-md-3">
         <div class="card">
           <div class="card-body">
-            <a class="btn btn-primary" 
+						{% set count = 0 %} 
+						{% for deck in decks %} 
+							{% set count = count + 1 %}
+						{% endfor %} 
+						{% if count <= limitNbDecks %}
+							<a class="btn btn-primary" 
               href="{{ path('deck-create') }}">
               Créer un nouveau deck</a>
+						{% else %}
+							<button type="button" class="btn btn-lg btn-primary" disabled>
+								Vous avez atteint la limite de {{ limitNbDecks }} Decks
+							</button>
+						{% endif %}
+            
           </div>
         </div>
         <a href="{{ path('deckboard') }}" 
@@ -52,8 +63,6 @@
 										<tr>
 											<th class="text-warning" style="cursor: pointer" onclick="sortTable(0)">Nom<i class="material-icons">import_export</i>
 											</th>
-											{# <th class="text-warning" style="cursor: pointer" onclick="sortTable(1)">Description<i class="material-icons">import_export</i>
-											</th> #}
 											<th class="text-warning" style="cursor: pointer" onclick="sortTable(1)">Status<i class="material-icons">import_export</i>
 											</th>
 											<th class="text-warning" style="cursor: pointer" onclick="sortTable(2)">Créée le<i class="material-icons">import_export</i>
@@ -70,9 +79,6 @@
 											<tr>
 												
 												<td>{{ deck.name }}</td>
-												{# <td>
-													{{ deck.description |length > 20 ? deck.description|slice(0, 20) ~ '...' : deck.description }}
-												</td> #}
                         <td>
                           {% if deck.public %}
                             Public

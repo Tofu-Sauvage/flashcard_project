@@ -6,9 +6,14 @@
     <div class="alert alert-success mb-5">
         <h2>Formulaire de decks</h2>
     </div>
-  
 
-    {{ form_start(deckForm) }}
+    {% set count = 0 %} 
+      {% for deck in decks %} 
+        {% set count = count + 1 %}
+      {% endfor %} 
+    {% if count < limitNbDecks %}
+
+      {{ form_start(deckForm) }}
 
       <div class="form-group">
         {{ form_label(deckForm.name, "Nom") }}
@@ -44,6 +49,29 @@
         {% endif %}
       </div>
 
-    {{ form_end(deckForm) }}
+      {{ form_end(deckForm) }}
+
+      {% else %}
+
+      <div class="container-fluid">
+        <div class="card">
+          <div class="card-body">
+            <button type="button" class="btn btn-lg btn-primary" disabled>
+              Vous avez atteint la limite de {{ limitNbDecks }} Decks
+            </button>
+          </div>
+        </div>
+
+        <a href="{{ path('deckboard') }}" 
+              type="button" 
+              class="btn btn-primary btn-round">
+              <span class="material-icons">keyboard_return</span>
+              Retour au deckboard
+        </a>
+
+      </div>
+
+      {% endif %}
+
   </div>
 {% endblock %}
