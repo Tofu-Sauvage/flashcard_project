@@ -94,6 +94,7 @@
                 {% endfor %}
               </tbody>
             </table>
+
           {% endif %}
             <div class="text-center">
               <form
@@ -141,7 +142,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										{% for card in cards %}
+										{% for card in paginationCards %}
 											<tr>
 												<td>{{ card.category.name }}</td>
 												<td>{{ card.question |length > 15 ? card.question|slice(0, 15) ~ '...' : card.question }}</td>
@@ -164,7 +165,9 @@
 											</tr>
 										{% endfor %}
 									</tbody>
-								</table>
+                </table>
+                {{ knp_pagination_render(paginationCards) }}
+
 							</div>
 						</div>
 					</div>
