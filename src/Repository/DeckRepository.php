@@ -32,6 +32,16 @@ class DeckRepository extends ServiceEntityRepository
         ;
     }
 
+    
+    public function findByUser($userId)
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.author= :user')
+            ->setParameter('user', $userId)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     /*
     public function findOneBySomeField($value): ?Deck
     {
