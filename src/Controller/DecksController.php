@@ -45,10 +45,20 @@ class DecksController extends AbstractController {
     return $this->render('./pages/administration/deckForm.html.twig', ['deckForm' => $form->createView()]);
   }
 
-  public function indexGestionAction(DeckRepository $deckRepository) {
+  public function indexGestionAction(DeckRepository $deckRepository, Request $request, PaginatorInterface $paginator) {
     $idActiveUser = $this->getUser()->getID();
     $listeDecks = $deckRepository->findBy(['author' => $idActiveUser]);
-    return $this->render('./pages/user/deckGestion.html.twig', ['decks' => $listeDecks]);
+
+    $limit = 5; 
+    $firstPage = 1;
+
+    $paginationDecks = $paginator->paginate(
+        $listeDecks, // Requête contenant les données à paginer (ici nos articles)
+        $request->query->getInt('page', $firstPage), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+        $limit // Nombre de résultats par page
+    );
+
+    return $this->render('./pages/user/deckGestion.html.twig', ['decks' => $listeDecks, 'paginationDecks'=>$paginationDecks]);
   }
 
   public function deckUserCreateAction(Request $request, EntityManagerInterface $em)
@@ -140,7 +150,7 @@ class DecksController extends AbstractController {
     return $this->render('./pages/administration/deck.html.twig', ['deck' => $deck, 'users'=>$users]);
   }
 
-  public function detailUserAction(DeckRepository $deckRepository, CardRepository $cardRepository, $id)
+  public function detailUserAction(DeckRepository $deckRepository, CardRepository $cardRepository, $id, Request $request, PaginatorInterface $paginator)
   {
     $deck =  $deckRepository->findOneBy(['id' => $id]);
 
@@ -160,8 +170,17 @@ class DecksController extends AbstractController {
       if($ajouterCard) 
         array_push($listeCards, $card); 
     }
+    
+    $limit = 10; 
+    $firstPage = 1;
 
-    return $this->render('./pages/user/deckDetail.html.twig', ['deck' => $deck, "cards" => $listeCards]);
+    $paginationCards = $paginator->paginate(
+        $listeCards, // Requête contenant les données à paginer (ici nos articles)
+        $request->query->getInt('page', $firstPage), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+        $limit // Nombre de résultats par page
+    );
+
+    return $this->render('./pages/user/deckDetail.html.twig', ['deck' => $deck, "cards" => $listeCards, 'paginationCards'=>$paginationCards]);
   }
 
   public function deleteAction(EntityManagerInterface $em, DeckRepository $deckRepository, $id)
