@@ -15,9 +15,9 @@
             </div>
           </div>
           <div class="card-body">
-            <div class="tab-content">
-              <div class="tab-pane active">
-                <table class="table table-responsive">
+            <div class="tab-content table-responsive">
+              <div class="tab-panel active">
+                <table class="table">
                   <thead>
                     <tr>
                       <th>ID</th>
@@ -60,40 +60,43 @@
               {% else %}
               {{ count }} cartes associées :
             </p>
+            <div class="tab-content table-responsive">
+              <div class="tab-panel active">
+                <table class="table text-left">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Catégorie</th>
+                      <th>Créée le</th>
+                      <th>Voir</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for card in deck.cards%}
 
-            <table class="table table-responsive text-left">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Catégorie</th>
-                  <th>Créée le</th>
-                  <th>Voir</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for card in deck.cards%}
-
-                <tr>
-                  <td>{{ card.id }}</td>
-                  <td><a href="{{ path('category-details', { id:  card.category.id }) }}"
-                    >{{ card.category.name }}</a></td>
-                  <td>{{card.createdAt | date("d/m/Y") }}</td>
-                  <td class="td-actions">
-                    <a href="{{ path('admin-card', { id: card.id }) }}"
-                      ><button
-                        type="button"
-                        rel="tooltip"
-                        title=""
-                        class="btn btn-white btn-link btn-sm"
-                      >
-                        <i class="material-icons">remove_red_eye</i>
-                      </button></a
-                    >
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
+                    <tr>
+                      <td>{{ card.id }}</td>
+                      <td><a href="{{ path('category-details', { id:  card.category.id }) }}"
+                        >{{ card.category.name }}</a></td>
+                      <td>{{card.createdAt | date("d/m/Y") }}</td>
+                      <td class="td-actions">
+                        <a href="{{ path('admin-card', { id: card.id }) }}"
+                          ><button
+                            type="button"
+                            rel="tooltip"
+                            title=""
+                            class="btn btn-white btn-link btn-sm"
+                          >
+                            <i class="material-icons">remove_red_eye</i>
+                          </button></a
+                        >
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
               {% endif %}
             <div class="text-center">
               <form
@@ -126,8 +129,8 @@
             </p>
 
           </div>
-          <div class="card-body">
-            <table class="table table-responsive text-left" id="table">
+          <div class="card-body table-responsive">
+            <table class="table text-left" id="table">
               <thead>
                 <tr>
                   <th class="text-info" style="cursor: pointer" onclick="sortTable(0)">ID<i class="material-icons">import_export</i></th>

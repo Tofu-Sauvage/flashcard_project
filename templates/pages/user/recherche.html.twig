@@ -6,108 +6,124 @@
             <div class="col-md-6"> {# Liste des decks, avec boutons mise en favori et consulter en détail #}
                 <div class="card">
                     <div class="card-header card-header-primary">
-						<h2 class="card-title">{% if not jeCherche %}Tous les decks externes.{% else %}{{ deck_all|length }} résultats.{% endif %}</h2>
-					</div>
-                    <div class="card-body">
-                            {% if deck_all|length == 0 %} {# Si il n'y a pas de decks #}
-								<p>Aucun deck ne correspond aux critères spécifiés.</p>
-							{% else %}
-                                <div class="card-header card-header-default"> 
-                                    <div class="row">
-										<h3>Résultats de votre recherche :</h3>
-										<table class="table table-responsive">
-											<thead>
-												<tr>
-													<th>Nom</th>
-													<th>Description</th>
-													<th>Favori ?</th>
-												</tr>
-											</thead>
-											<tbody>
-                                            {% for deck in deck_all %}
-												<tr>
-													<td>{{ deck.name }}</td>
-													<td>{{ deck.description }}<br>
-													Créé par {{ deck.author.name }} le{{ deck.createdAt | date("d/m/Y") }}</td>
-													{% if deck in favs_deck_all %}
-													<td><button type="button" class="btn btm-sm btn-success">Oui</button></td>
-													{% else %}
-													<td><button type="button" class="btn btm-sm btn-danger">Non</button></td></td>
-													{% endif %}
-													<td><a href="{{
-														path('rechercherDeck', { deckId: deck.id })
-														}}"><button
-														type="button"
-														rel="tooltip"
-														title=""
-														class="btn btn-white btn-link btn-sm"
-													>
-														<i class="material-icons">remove_red_eye</i>
-													</button></a></td>
-												</tr>
-                                            {% endfor %}
-											</tbody>
-										</table>
-									</div>
-                                </div>
-                            {% endif %}
-                    </div>
+											<h2 class="card-title">
+												{% if not jeCherche %}
+													Tous les decks externes.{% else %}{{ deck_all|length }} résultats.
+												{% endif %}
+											</h2>
+										</div>
 
-                </div>
-            </div>
+										<div class="card-body">
+                    	{% if deck_all|length == 0 %} {# Si il n'y a pas de decks #}
+												<p>Aucun deck ne correspond aux critères spécifiés.</p>
+											{% else %}
+
+												<div class="card-header card-header-default"> 
+													<div class="row">
+														<h3>Résultats de votre recherche :</h3>
+														<table class="table table-responsive">
+															<thead>
+																<tr>
+																	<th>Nom</th>
+																	<th>Description</th>
+																	<th>Favori ?</th>
+																</tr>
+															</thead>
+															<tbody>
+																{% for deck in deck_all %}
+																<tr>
+																	<td>{{ deck.name }}</td>
+																	<td>{{ deck.description }}<br>
+																	Créé par {{ deck.author.name }} le{{ deck.createdAt | date("d/m/Y") }}</td>
+																	{% if deck in favs_deck_all %}
+																	<td><button type="button" class="btn btm-sm btn-success">Oui</button></td>
+																	{% else %}
+																	<td><button type="button" class="btn btm-sm btn-danger">Non</button></td></td>
+																	{% endif %}
+																	<td><a href="{{
+																		path('rechercherDeck', { deckId: deck.id })
+																		}}"><button
+																		type="button"
+																		rel="tooltip"
+																		title=""
+																		class="btn btn-white btn-link btn-sm"
+																	>
+																		<i class="material-icons">remove_red_eye</i>
+																	</button></a></td>
+																</tr>
+																{% endfor %}
+															</tbody>
+														</table>
+													</div>
+												</div>
+											{% endif %}
+                    </div>
+                	</div>
+            		</div>
 
             <div class="col-md-6"> {# Formulaire pour affiner la recherche + liste des decks favoris de l'utilisateur #}
-                <div class="card">
-					<div class="card-header card-header-info">
-						<h2 class="card-title">Rechercher</h2>
-					</div>
-					<div class="card-body">
-						<div class="form-group">
-                            <label for="exampleInput1" class="bmd-label-floating">Quel deck recherchez-vous ?</label><br/>
-                            <input type="text" class="uneRecherche form-control" id="exampleInput1">
-                            <input type="submit" class="btn btn-primary" value="Lancer la Recherche !" {% if not jeCherche %}onclick="lancerRecherche()"{% else %}onclick="relancerRecherche()"{% endif %}>
-                        </div>
-					</div>
-				</div>
-				
-				<div class="card">
-                    <div class="card-header card-header-primary">
-						<h2 class="card-title">{% if favs_deck_all|length == 1 %}Vous avez 1 deck favori.{% else %}Vous avez {{ favs_deck_all|length }} decks favoris.{% endif %}</h2>
-					</div>
-                    <div class="card-body">
-                            {% if favs_deck_all|length == 0 %} {# Si il n'y a pas de decks favoris #}
-								<p>Vous n'avez aucun deck en favori.</p>
-							{% else %}
-                                <div class="card-header card-header-default"> 
-                                    <div class="row">
-										<h3>Vos decks favoris :</h3>
-										<table class="table table-responsive">
-											<thead>
-												<tr>
-													<th>Nom</th>
-													<th>Description</th>
-													<th>Auteur</th>
-													<th>Créé le</th>
-												</tr>
-											</thead>
-											<tbody>
-                                            {% for deck in favs_deck_all %}
-												<tr>
-													<td>{{ deck.name }}</td>
-													<td>{{ deck.description }}</td>
-													<td>{{ deck.author.name }}</td>
-													<td>{{ deck.createdAt | date("d/m/Y") }}</td>
-												</tr>
-                                            {% endfor %}
-											</tbody>
-										</table>
+              <div class="card">
+								<div class="card-header card-header-info">
+									<h2 class="card-title">Rechercher</h2>
+								</div>
+								<div class="card-body">
+									<div class="form-group">
+										<label for="exampleInput1" class="bmd-label-floating">Quel deck recherchez-vous ?</label><br/>
+										<input type="text" class="uneRecherche form-control" id="exampleInput1">
+										<input type="submit" class="btn btn-primary" value="Lancer la Recherche !" 
+											{% if not jeCherche %}
+												onclick="lancerRecherche()"
+											{% else %}
+												onclick="relancerRecherche()"
+											{% endif %}
+										>
 									</div>
-                                </div>
+								</div>
+							</div>
+				
+							<div class="card">
+                <div class="card-header card-header-primary">
+									<h2 class="card-title">
+										{% if favs_deck_all|length == 1 %}
+											Vous avez 1 deck favori.
+										{% else %}
+											Vous avez {{ favs_deck_all|length }} decks favoris.
+										{% endif %}
+									</h2>
+								</div>
+
+                <div class="card-body">
+                  {% if favs_deck_all|length == 0 %} {# Si il n'y a pas de decks favoris #}
+										<p>Vous n'avez aucun deck en favori.</p>
+									{% else %}
+										<div class="card-header card-header-default"> 
+											<div class="row">
+												<h3>Vos decks favoris :</h3>
+												<table class="table table-responsive">
+													<thead>
+														<tr>
+															<th>Nom</th>
+															<th>Description</th>
+															<th>Auteur</th>
+															<th>Créé le</th>
+														</tr>
+													</thead>
+													<tbody>
+																								{% for deck in favs_deck_all %}
+														<tr>
+															<td>{{ deck.name }}</td>
+															<td>{{ deck.description }}</td>
+															<td>{{ deck.author.name }}</td>
+															<td>{{ deck.createdAt | date("d/m/Y") }}</td>
+														</tr>
+																								{% endfor %}
+													</tbody>
+												</table>
+											</div>
+										</div>
                             {% endif %}
-                    </div>
-            </div>
-
-
+                </div>
+            	</div>
         </div>
     </div>
 {% endblock %}

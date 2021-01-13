@@ -18,9 +18,9 @@
             {% endif %}
 
             <div class="card-body">
-              <div class="tab-content">
+              <div class="tab-content table-responsive">
                 <div class="tab-panel active">
-                  <table class="table table-responsive">
+                  <table class="table">
                     <thead>
                       <tr>
                         <th>Langue</th>
@@ -123,34 +123,37 @@
             <div class="card-header card-header-info">
               {{ count }} deck associés :
             </div>
-
-            <table class="table table-responsive">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Créée le</th>
-                  <th>Voir</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for deck in card.decks %}
-                <tr>
-                  <td>{{ deck.name }}</td>
-                  <td>{{deck.createdAt | date("d/m/Y") }}</td>
-                  <td class="td-actions text-center">
-                    <a href="{{ path('deck-detail', { id: deck.id }) }}"
-                      ><button
-                        type="button"
-                        rel="tooltip"
-                        title=""
-                        class="btn btn-white btn-link btn-sm"
-                      >
-                        <i class="material-icons">remove_red_eye</i>
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
+            <div class="tab-content table-responsive">
+                <div class="tab-panel active">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Créée le</th>
+                        <th>Voir</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for deck in card.decks %}
+                      <tr>
+                        <td>{{ deck.name }}</td>
+                        <td>{{deck.createdAt | date("d/m/Y") }}</td>
+                        <td class="td-actions text-center">
+                          <a href="{{ path('deck-detail', { id: deck.id }) }}"
+                            ><button
+                              type="button"
+                              rel="tooltip"
+                              title=""
+                              class="btn btn-white btn-link btn-sm"
+                            >
+                              <i class="material-icons">remove_red_eye</i>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             {% endif %}
           </div>
         </div>

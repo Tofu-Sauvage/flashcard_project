@@ -70,22 +70,26 @@
 											{% set count = 0 %} {% for card in last_deck.cards %} {% set count = count + 1 %}{% endfor %} 
 											{{ count }} cartes.
 										</h5>
-										<table class="table table-responsive">
-											<thead>
-												<tr>
-													<th>Nom</th>
-													<th>Description</th>
-													<th>Créé le</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>{{ last_deck.name }}</td>
-													<td>{{ last_deck.description }}</td>
-													<td>{{ last_deck.createdAt | date("d/m/Y") }}</td>
-												</tr>
-											</tbody>
-										</table>
+										<div class="tab-content table-responsive">
+											<div class="tab-panel active">
+												<table class="table table-responsive">
+													<thead>
+														<tr>
+															<th>Nom</th>
+															<th>Description</th>
+															<th>Créé le</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>{{ last_deck.name }}</td>
+															<td>{{ last_deck.description }}</td>
+															<td>{{ last_deck.createdAt | date("d/m/Y") }}</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
 												
 											<a href="{{ path('deck-gestion') }}" type="button" class="btn btn-lg btn-primary">
 											<i class="material-icons">all_inbox</i>
