@@ -32,7 +32,7 @@ class UsersController extends AbstractController {
     $usersCards = $cardRepository->findByUser($id);
     $usersDecks = $deckRepository->findByUser($id);
 
-    $limit = 2; 
+    $limit = 10; 
     $firstPage = 1;
 
     $cards = $paginator->paginate(
