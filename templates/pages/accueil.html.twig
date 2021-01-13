@@ -9,8 +9,8 @@
 
   {% endfor %}
 
-  <div class="row">
-    <div class="col-sm">
+  <div class="row mt-5">
+    <div class="col-sm text-white">
       <h1>Bienvenue sur Projet Flashcards !</h1>
       <p>Votre espace de travail idéal pour apprendre les langues que vous voulez par le biais du célèbre système de flashcards !</p>
       <p>Projet Flashcards fonctionne sur le principe de l'auto-discipline. Définissez vos propres flashcards et révisez dès maintenant !</p>
@@ -89,11 +89,12 @@
             <h2>Bonjour, {{ app.user.name }}.</h2>
           </div>
           <div class="card-body">
-            <p>Vous avez {{ app.user.decks.count }} decks,</br>
-            {{ app.user.cards.count }} cartes</br>
-            et vous avez {{ app.user.favorites.count }} decks favoris.</p>
+            <p><span class="h3">Vous avez :</span><br/>
+            <span class="text-white">{{ app.user.decks.count }}</span> deck{% if app.user.decks.count >= 2 %}s{% endif %},</br>
+            <span class="text-white">{{ app.user.cards.count }}</span> carte{% if app.user.cards.count >= 2 %}s{% endif %},</br>
+            <span class="text-white">{{ app.user.favorites.count }}</span> deck{% if app.user.favorites.count >= 2 %}s{% endif %} favori{% if app.user.favorites.count >= 2 %}s{% endif %}.</p>
 
-             <a class="nav-link" href="{{ path('deckboard') }}"><button class="btn btn-primary">Mon deckboard</button></a>
+             <button class="btn btn-primary"><a class="nav-link" href="{{ path('deckboard') }}">Mon deckboard</a></button>
           </div>
         </div>
       {% endif %}
