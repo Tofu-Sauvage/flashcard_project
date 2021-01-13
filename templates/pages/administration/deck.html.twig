@@ -43,10 +43,11 @@
               Statut : {% if deck.public == 1 %} public {% else %} privé {%endif%}
             </p>
 
-            {% if deck.tags is not null %}
+            {% if tagsTable is not null %}
             <p class="card-text">Tags associés :
-            {% for tag in deck.tags %} {{ tag }}
-            {%endfor%} </p>
+              {% for tag in tagsTable[0] %}
+            {{ tagsTable[tag]}}
+          {% endfor %}</p>
             {% else %} 
             <p class="card-text">Pas de tags associés.</p>
             {% endif %}

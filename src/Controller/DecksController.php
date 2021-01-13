@@ -147,7 +147,11 @@ class DecksController extends AbstractController {
   {
     $deck =  $deckRepository->findOneBy(['id' => $id]);     
     $users = $userRepository->findAll();
-    return $this->render('./pages/administration/deck.html.twig', ['deck' => $deck, 'users'=>$users]);
+
+    $tags = $deck->getTags();
+    $tagsTable = explode(" ", $tags);
+
+    return $this->render('./pages/administration/deck.html.twig', ['deck' => $deck, 'users'=>$users, 'tagsTable'=>$tagsTable]);
   }
 
   public function detailUserAction(DeckRepository $deckRepository, CardRepository $cardRepository, $id, Request $request, PaginatorInterface $paginator)

@@ -20,6 +20,11 @@
         {{ form_widget(deckForm.description, {attr: {'class': 'form-control'}}) }}
       </div>
 
+      <div class="form-group">
+        {{ form_label(deckForm.tags, "Ajouter des tags") }}
+        {{ form_widget(deckForm.tags, {attr: {'class': 'form-control'}}) }}
+      </div>
+
       <div class="form-check">
           {{ form_label(deckForm.public, "Rendre le deck accessible aux autres utilisateurs ?") }}
           {{ form_widget(deckForm.public) }}
