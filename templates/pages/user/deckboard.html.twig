@@ -25,24 +25,28 @@
 								<div class="card-header card-header-default"> {# Carte au détail #}
 									<div class="row">
 										<h3>Dernière carte créée :</h3>
-										<table class="table">
-											<thead>
-												<tr>
-													<th>Catégorie</th>
-													<th>Question</th>
-													<th>Réponse</th>
-													<th>Créée le</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>{{ last_card.category.name }}</td>
-													<td>{{ last_card.question }}</td>
-													<td>{{ last_card.answer }}</td>
-													<td>{{ last_card.createdAt | date("d/m/Y") }}</td>
-												</tr>
-											</tbody>
-										</table>
+										<div class="tab-content table-responsive">
+											<div class="tab-panel active">
+												<table class="table">
+													<thead>
+														<tr>
+															<th>Catégorie</th>
+															<th>Question</th>
+															<th>Réponse</th>
+															<th>Créée le</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>{{ last_card.category.name }}</td>
+															<td>{{ last_card.question }}</td>
+															<td>{{ last_card.answer }}</td>
+															<td>{{ last_card.createdAt | date("d/m/Y") }}</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
 										{% if last_card %}
 											<a href="{{ path('card-gestion') }}" type="button" class="btn btn-lg btn-primary">
 											<i class="material-icons">view_agenda</i>
@@ -70,22 +74,26 @@
 											{% set count = 0 %} {% for card in last_deck.cards %} {% set count = count + 1 %}{% endfor %} 
 											{{ count }} cartes.
 										</h5>
-										<table class="table">
-											<thead>
-												<tr>
-													<th>Nom</th>
-													<th>Description</th>
-													<th>Créé le</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>{{ last_deck.name }}</td>
-													<td>{{ last_deck.description }}</td>
-													<td>{{ last_deck.createdAt | date("d/m/Y") }}</td>
-												</tr>
-											</tbody>
-										</table>
+										<div class="tab-content table-responsive">
+											<div class="tab-panel active">
+												<table class="table">
+													<thead>
+														<tr>
+															<th>Nom</th>
+															<th>Description</th>
+															<th>Créé le</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>{{ last_deck.name }}</td>
+															<td>{{ last_deck.description }}</td>
+															<td>{{ last_deck.createdAt | date("d/m/Y") }}</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
 												
 											<a href="{{ path('deck-gestion') }}" type="button" class="btn btn-lg btn-primary">
 											<i class="material-icons">all_inbox</i>

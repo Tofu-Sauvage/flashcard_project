@@ -30,88 +30,92 @@
           <p class="h6 card-category text-left">
             {{ count }} carte(s) concernée(s)
           </p>
-          <table class="table text-left" id="table">
-            <thead>
-              <tr>
-                <th
-                  class="text-info"
-                  style="cursor: pointer"
-                  onclick="sortTable(0)"
-                >
-                  ID carte<i class="material-icons">import_export</i>
-                </th>
-                <th
-                  class="text-info"
-                  style="cursor: pointer"
-                  onclick="sortTable(1)"
-                >
-                  Auteur<i class="material-icons">import_export</i>
-                </th>
-                <th
-                  class="text-info"
-                  style="cursor: pointer"
-                  onclick="sortTable(2)"
-                >
-                  Langue<i class="material-icons">import_export</i>
-                </th>
-                <th
-                  class="text-info"
-                  style="cursor: pointer"
-                  onclick="sortTable(3)"
-                >
-                  Question<i class="material-icons">import_export</i>
-                </th>
-                <th
-                  class="text-info"
-                  style="cursor: pointer"
-                  onclick="sortTable(4)"
-                >
-                  Créée le<i class="material-icons">import_export</i>
-                </th>
-                <th class="text-info">Voir</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for card in cards %}{% set count = 0 %} {% if card.category.id
-              == category.id %}
-              <tr>
-                <td>{{ card.id }}</td>
-                <td>
-                  <a href="{{ path('admin-user', { id: card.author.id }) }}">{{
-                    card.author.name
-                  }}</a>
-                </td>
-                <td>
-                  <a
-                    href="{{
-                      path('language-details', {
-                        id: card.author.languageLearn.id
-                      })
-                    }}"
-                    >{{ card.author.languageLearn.name }}</a
-                  >
-                </td>
-                <td>
-                  {{ card.question|length > 10 ? card.question|slice(0, 10) ~ '...' : card.question}}
-                </td>
-                <td>{{card.createdAt | date("d/m/Y") }}</td>
-                <td class="td-actions text-left">
-                  <a href="{{ path('admin-card', { id: card.id }) }}"
-                    ><button
-                      type="button"
-                      rel="tooltip"
-                      title=""
-                      class="btn btn-white btn-link btn-sm"
+          <div class="tab-content table-responsive">
+            <div class="tab-panel active">
+              <table class="table text-left" id="table">
+                <thead>
+                  <tr>
+                    <th
+                      class="text-info"
+                      style="cursor: pointer"
+                      onclick="sortTable(0)"
                     >
-                      <i class="material-icons">remove_red_eye</i>
-                    </button></a
-                  >
-                </td>
-              </tr>
-              {% endif %} {% endfor %}
-            </tbody>
-          </table>
-          {%endif%}
+                      ID carte<i class="material-icons">import_export</i>
+                    </th>
+                    <th
+                      class="text-info"
+                      style="cursor: pointer"
+                      onclick="sortTable(1)"
+                    >
+                      Auteur<i class="material-icons">import_export</i>
+                    </th>
+                    <th
+                      class="text-info"
+                      style="cursor: pointer"
+                      onclick="sortTable(2)"
+                    >
+                      Langue<i class="material-icons">import_export</i>
+                    </th>
+                    <th
+                      class="text-info"
+                      style="cursor: pointer"
+                      onclick="sortTable(3)"
+                    >
+                      Question<i class="material-icons">import_export</i>
+                    </th>
+                    <th
+                      class="text-info"
+                      style="cursor: pointer"
+                      onclick="sortTable(4)"
+                    >
+                      Créée le<i class="material-icons">import_export</i>
+                    </th>
+                    <th class="text-info">Voir</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for card in cards %}{% set count = 0 %} {% if card.category.id
+                  == category.id %}
+                  <tr>
+                    <td>{{ card.id }}</td>
+                    <td>
+                      <a href="{{ path('admin-user', { id: card.author.id }) }}">{{
+                        card.author.name
+                      }}</a>
+                    </td>
+                    <td>
+                      <a
+                        href="{{
+                          path('language-details', {
+                            id: card.author.languageLearn.id
+                          })
+                        }}"
+                        >{{ card.author.languageLearn.name }}</a
+                      >
+                    </td>
+                    <td>
+                      {{ card.question|length > 10 ? card.question|slice(0, 10) ~ '...' : card.question}}
+                    </td>
+                    <td>{{card.createdAt | date("d/m/Y") }}</td>
+                    <td class="td-actions text-left">
+                      <a href="{{ path('admin-card', { id: card.id }) }}"
+                        ><button
+                          type="button"
+                          rel="tooltip"
+                          title=""
+                          class="btn btn-white btn-link btn-sm"
+                        >
+                          <i class="material-icons">remove_red_eye</i>
+                        </button></a
+                      >
+                    </td>
+                  </tr>
+                  {% endif %} {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          {% endif %}
         </div>
       </div>
     </div>
