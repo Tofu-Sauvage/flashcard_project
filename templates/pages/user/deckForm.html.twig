@@ -11,7 +11,7 @@
       {% for deck in decks %} 
         {% set count = count + 1 %}
       {% endfor %} 
-    {% if count < limitNbDecks %}
+    {% if count <= limitNbDecks %}
 
       {{ form_start(deckForm) }}
 
