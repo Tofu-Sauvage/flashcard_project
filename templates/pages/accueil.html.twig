@@ -17,6 +17,7 @@
       <p>Toute une communauté de linguistes aussi passionnés que vous vous attends. Rejoignez-nous !</p>
       </div>
     <div class="col-sm">
+      {% if not app.user %}
       <h2 class="mb-4">Inscription</h2>
       {{ form_start(form) }}
 
@@ -81,6 +82,21 @@
 
           {{ form_widget(form.submit, {label: 'Valider', attr: {'class': 'btn btn-primary mt-3'}}) }}
       {{ form_end(form) }}
+      {% else %}
+      
+        <div class="card">
+          <div class="card-header card-header-info">
+            <h2>Bonjour, {{ app.user.name }}.</h2>
+          </div>
+          <div class="card-body">
+            <p>Vous avez {{ app.user.decks.count }} decks,</br>
+            {{ app.user.cards.count }} cartes</br>
+            et vous avez {{ app.user.favorites.count }} decks favoris.</p>
+
+             <a class="nav-link" href="{{ path('deckboard') }}"><button class="btn btn-primary">Mon deckboard</button></a>
+          </div>
+        </div>
+      {% endif %}
     </div>
   </div>
 
