@@ -21,39 +21,43 @@
 												<div class="card-header card-header-default"> 
 													<div class="row">
 														<h3>Résultats de votre recherche :</h3>
-														<table class="table table-responsive">
-															<thead>
-																<tr>
-																	<th>Nom</th>
-																	<th>Description</th>
-																	<th>Favori ?</th>
-																</tr>
-															</thead>
-															<tbody>
-																{% for deck in deck_all %}
-																<tr>
-																	<td>{{ deck.name }}</td>
-																	<td>{{ deck.description }}<br>
-																	Créé par {{ deck.author.name }} le{{ deck.createdAt | date("d/m/Y") }}</td>
-																	{% if deck in favs_deck_all %}
-																	<td><button type="button" class="btn btm-sm btn-success">Oui</button></td>
-																	{% else %}
-																	<td><button type="button" class="btn btm-sm btn-danger">Non</button></td></td>
-																	{% endif %}
-																	<td><a href="{{
-																		path('rechercherDeck', { deckId: deck.id })
-																		}}"><button
-																		type="button"
-																		rel="tooltip"
-																		title=""
-																		class="btn btn-white btn-link btn-sm"
-																	>
-																		<i class="material-icons">remove_red_eye</i>
-																	</button></a></td>
-																</tr>
-																{% endfor %}
-															</tbody>
-														</table>
+														<div class="tab-content table-responsive">
+              								<div class="tab-panel active">
+																<table class="table">
+																	<thead>
+																		<tr>
+																			<th>Nom</th>
+																			<th>Description</th>
+																			<th>Favori ?</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		{% for deck in deck_all %}
+																		<tr>
+																			<td>{{ deck.name }}</td>
+																			<td>{{ deck.description }}<br>
+																			Créé par {{ deck.author.name }} le{{ deck.createdAt | date("d/m/Y") }}</td>
+																			{% if deck in favs_deck_all %}
+																			<td><button type="button" class="btn btm-sm btn-success">Oui</button></td>
+																			{% else %}
+																			<td><button type="button" class="btn btm-sm btn-danger">Non</button></td></td>
+																			{% endif %}
+																			<td><a href="{{
+																				path('rechercherDeck', { deckId: deck.id })
+																				}}"><button
+																				type="button"
+																				rel="tooltip"
+																				title=""
+																				class="btn btn-white btn-link btn-sm"
+																			>
+																				<i class="material-icons">remove_red_eye</i>
+																			</button></a></td>
+																		</tr>
+																		{% endfor %}
+																	</tbody>
+																</table>
+															</div>
+														</div>
 													</div>
 												</div>
 											{% endif %}
@@ -99,26 +103,30 @@
 										<div class="card-header card-header-default"> 
 											<div class="row">
 												<h3>Vos decks favoris :</h3>
-												<table class="table table-responsive">
-													<thead>
-														<tr>
-															<th>Nom</th>
-															<th>Description</th>
-															<th>Auteur</th>
-															<th>Créé le</th>
-														</tr>
-													</thead>
-													<tbody>
-																								{% for deck in favs_deck_all %}
-														<tr>
-															<td>{{ deck.name }}</td>
-															<td>{{ deck.description }}</td>
-															<td>{{ deck.author.name }}</td>
-															<td>{{ deck.createdAt | date("d/m/Y") }}</td>
-														</tr>
-																								{% endfor %}
-													</tbody>
-												</table>
+												<div class="tab-content table-responsive">
+              						<div class="tab-panel active">
+														<table class="table">
+															<thead>
+																<tr>
+																	<th>Nom</th>
+																	<th>Description</th>
+																	<th>Auteur</th>
+																	<th>Créé le</th>
+																</tr>
+															</thead>
+															<tbody>
+																										{% for deck in favs_deck_all %}
+																<tr>
+																	<td>{{ deck.name }}</td>
+																	<td>{{ deck.description }}</td>
+																	<td>{{ deck.author.name }}</td>
+																	<td>{{ deck.createdAt | date("d/m/Y") }}</td>
+																</tr>
+																										{% endfor %}
+															</tbody>
+														</table>
+													</div>
+												</div>
 											</div>
 										</div>
                             {% endif %}

@@ -25,24 +25,28 @@
 								<div class="card-header card-header-default"> {# Carte au détail #}
 									<div class="row">
 										<h3>Dernière carte créée :</h3>
-										<table class="table table-responsive">
-											<thead>
-												<tr>
-													<th>Catégorie</th>
-													<th>Question</th>
-													<th>Réponse</th>
-													<th>Créée le</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>{{ last_card.category.name }}</td>
-													<td>{{ last_card.question }}</td>
-													<td>{{ last_card.answer }}</td>
-													<td>{{ last_card.createdAt | date("d/m/Y") }}</td>
-												</tr>
-											</tbody>
-										</table>
+										<div class="tab-content table-responsive">
+											<div class="tab-panel active">
+												<table class="table">
+													<thead>
+														<tr>
+															<th>Catégorie</th>
+															<th>Question</th>
+															<th>Réponse</th>
+															<th>Créée le</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>{{ last_card.category.name }}</td>
+															<td>{{ last_card.question }}</td>
+															<td>{{ last_card.answer }}</td>
+															<td>{{ last_card.createdAt | date("d/m/Y") }}</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
 										{% if last_card %}
 											<a href="{{ path('card-gestion') }}" type="button" class="btn btn-lg btn-primary">
 											<i class="material-icons">view_agenda</i>
@@ -72,7 +76,7 @@
 										</h5>
 										<div class="tab-content table-responsive">
 											<div class="tab-panel active">
-												<table class="table table-responsive">
+												<table class="table">
 													<thead>
 														<tr>
 															<th>Nom</th>
