@@ -63,21 +63,23 @@
               </div>
             </div>
 
-            <div class="m-3">
-              <table class="table text-left">
-                <thead>
-                  <tr>
-                    <th>Parle</th>
-                    <th>Apprend</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a href="{{ path('language-details', { id: user.languageNative.id }) }}">{{ user.languageNative.name}}</a></td>
-                    <td><a href="{{ path('language-details', { id: user.languageLearn.id }) }}">{{ user.languageLearn.name}}</a></td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="tab-content table-responsive">
+              <div class="m-3">
+                <table class="table text-left">
+                  <thead>
+                    <tr>
+                      <th>Parle</th>
+                      <th>Apprend</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><a href="{{ path('language-details', { id: user.languageNative.id }) }}">{{ user.languageNative.name}}</a></td>
+                      <td><a href="{{ path('language-details', { id: user.languageLearn.id }) }}">{{ user.languageLearn.name}}</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
 
             <div class="text-center">
@@ -137,10 +139,9 @@
           </div>
 
           <div class="card-body">
-            <div class="tab-content">
+            <div class="tab-content table-responsive">
 
-
-              <div class="tab-pane active" id="cards"  role="tabpanel">
+              <div class="tab-panel active" id="cards"  role="tabpanel">
                 <p class="h3">
                 {% set count = 0 %} {% for card in usersCards %} {% set count =
                 count + 1 %} {% endfor %} 
@@ -186,7 +187,7 @@
               </div>
 
 
-              <div class="tab-pane" id="decks" role="tabpanel">
+              <div class="tab-panel" id="decks" role="tabpanel">
                 <p class="h3">
                   {% set count = 0 %} {% for deck in usersDecks %} {% set count =
                   count + 1 %} {% endfor %} 
@@ -232,7 +233,7 @@
 
               </div>
 
-              <div class="tab-pane" id="favorites">
+              <div class="tab-panel" id="favorites">
                 <p class="h3">
                   {% set count = 0 %} {% for favorite in user.favorites %} {% set count =
                   count + 1 %} {% endfor %} 
