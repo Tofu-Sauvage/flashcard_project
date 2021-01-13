@@ -51,6 +51,7 @@ class DecksController extends AbstractController {
 
     $limit = 5; 
     $firstPage = 1;
+    $limitNbDecks = 10;
 
     $paginationDecks = $paginator->paginate(
         $listeDecks, // Requête contenant les données à paginer (ici nos articles)
@@ -58,12 +59,17 @@ class DecksController extends AbstractController {
         $limit // Nombre de résultats par page
     );
 
-    return $this->render('./pages/user/deckGestion.html.twig', ['decks' => $listeDecks, 'paginationDecks'=>$paginationDecks]);
+    return $this->render('./pages/user/deckGestion.html.twig', ['decks' => $listeDecks, 'paginationDecks'=>$paginationDecks, 'limitNbDecks' => $limitNbDecks]);
   }
 
-  public function deckUserCreateAction(Request $request, EntityManagerInterface $em)
+  public function deckUserCreateAction(Request $request, DeckRepository $deckRepository, EntityManagerInterface $em)
   {
     $modeEdition = false;
+
+    $idActiveUser = $this->getUser()->getID();
+    $decks = $deckRepository->findby(['author' => $idActiveUser]);
+
+    $limitNbDecks = 10;
 
     $form = $this->createForm(DeckType::class);
     $form->handleRequest($request);
@@ -80,7 +86,7 @@ class DecksController extends AbstractController {
       return $this->redirectToRoute('deck-gestion');
     }
 
-    return $this->render('./pages/user/deckForm.html.twig', ['deckForm' => $form->createView(), 'modeEdition' => $modeEdition]);
+    return $this->render('./pages/user/deckForm.html.twig', ['deckForm' => $form->createView(), 'modeEdition' => $modeEdition, 'limitNbDecks' => $limitNbDecks, 'decks' => $decks]);
   }
 
   public function deckUserUpdateAction(Request $request, DeckRepository $deckRepository, EntityManagerInterface $em, $id)
