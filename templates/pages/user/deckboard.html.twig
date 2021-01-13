@@ -25,7 +25,7 @@
 								<div class="card-header card-header-default"> {# Carte au détail #}
 									<div class="row">
 										<h3>Dernière carte créée :</h3>
-										<table class="table">
+										<table class="table table-responsive">
 											<thead>
 												<tr>
 													<th>Catégorie</th>
@@ -70,7 +70,7 @@
 											{% set count = 0 %} {% for card in last_deck.cards %} {% set count = count + 1 %}{% endfor %} 
 											{{ count }} cartes.
 										</h5>
-										<table class="table">
+										<table class="table table-responsive">
 											<thead>
 												<tr>
 													<th>Nom</th>
