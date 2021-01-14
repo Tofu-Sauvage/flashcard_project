@@ -157,7 +157,11 @@ class DecksController extends AbstractController {
   {
     $deck =  $deckRepository->findOneBy(['id' => $id]);     
     $users = $userRepository->findAll();
-    return $this->render('./pages/administration/deck.html.twig', ['deck' => $deck, 'users'=>$users]);
+
+    $tags = $deck->getTags();
+    $tagsTable = explode(" ", $tags);
+
+    return $this->render('./pages/administration/deck.html.twig', ['deck' => $deck, 'users'=>$users, 'tagsTable'=>$tagsTable]);
   }
 
   public function detailUserAction(DeckRepository $deckRepository, CardRepository $cardRepository, $id, Request $request, PaginatorInterface $paginator)
@@ -298,6 +302,27 @@ class DecksController extends AbstractController {
     $allFavsDecks = $this->getUser()->getFavorites();
 
     return $this->render("pages/user/recherche.html.twig", ["deck_all" => $allDecks, "favs_deck_all" => $allFavsDecks, "jeCherche" => $jeCherche]);
+  }
+
+  public function findDecksByTag(DeckRepository $deckRepository, $tag){
+    $allMesDecks =  $deckRepository->findAll();
+    $allDecks =[];
+    $mesTags = [];
+    $action = false;
+    
+    for($i = 0; $i < count($allMesDecks) ; $i++)
+    {
+      $mesTags[$i] = $allMesDecks[$i]->getTags();   
+      
+      for($j = 0; $j < count($mesTags) ; $j++)
+      {
+        if($mesTags[$j] != null && str_contains($mesTags[$j], $tag))
+          {
+            (in_array($allMesDecks[$j]->getId(),$allDecks)) ? $action : array_push($allDecks, $allMesDecks[$j]->getId()) ;
+          } 
+      }  
+    }
+    return $this->render('./pages/administration/decksFindByTag.html.twig', ["allDecks" => $allDecks, "tag" => $tag, "allMesDecks"=>$allMesDecks]);
   }
 
   public function rechercherDeck(DeckRepository $deckRepository, $deckId){

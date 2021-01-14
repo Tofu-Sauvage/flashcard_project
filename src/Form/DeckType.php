@@ -22,7 +22,10 @@ class DeckType extends AbstractType
             ->add('description', TextType::class)
             // ->add('created_at', DateType::class)
             ->add('public', CheckboxType::class, ['required' => false])
-            // ->add('tags', TextType::class) // A jouter plus tard
+            ->add('tags', TextType::class, [
+                'required'   => false
+            ])
+            // A jouter plus tard
             // ->add('author', TextType::class)
             // ->add('fans', TextType::class)
             // ->add('cards', EntityType::class, [

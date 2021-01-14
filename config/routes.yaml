@@ -62,6 +62,10 @@ admin-deck-delete:
   path: admin/delete/deck/{id}
   controller : App\Controller\DecksController::deleteAction
 
+admin-decks-search:
+  path: admin/search/decks/{tag}
+  controller : App\Controller\DecksController::findDecksByTag
+
 admin-categories:
   path: /admin/categories
   controller: App\Controller\CategoriesController::indexAction
