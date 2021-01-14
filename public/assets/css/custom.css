@@ -1,0 +1,27 @@
+/* FOOTER */
+
+.footer-spacer{
+  height: 9vh;
+}
+
+@media screen and (max-width: 990px) {
+  .footer-spacer{
+    height: 15vh;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer-spacer{
+    height: 13vh;
+  }
+  .footer ul li a{
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .footer-spacer{
+    height: 18vh;
+  }
+}
