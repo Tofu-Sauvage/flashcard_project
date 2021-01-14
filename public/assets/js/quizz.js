@@ -17,7 +17,7 @@ function initialiseQuiz()
 
 function verifierReponse(n, motOriginal, bonneReponse)
 {
-    if(document.getElementsByClassName("uneReponseUser")[n].value == bonneReponse)
+    if(document.getElementsByClassName("uneReponseUser")[n].value.toLowerCase() == bonneReponse.toLowerCase())
     {
       document.getElementsByClassName("alert-success")[n].style.display = "block";
       document.getElementsByClassName("bonnesReponses")[0].innerHTML = String(parseInt(document.getElementsByClassName("bonnesReponses")[0].innerHTML) + 1);
