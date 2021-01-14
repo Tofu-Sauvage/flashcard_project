@@ -1,0 +1,49 @@
+{% extends './pages/administration/admin.base.html.twig'%} {%block body%}
+
+<div class="col-lg-6 col-md-12">
+  <div class="card">
+    <div class="card-header card-header-primary">
+      <h4 class="card-title">Tag recherché : "{{ tag }}"</h4>
+      <p class="card-category">
+        {% set count = 0 %} {% for decks in allDecks %} {% set count = count + 1
+        %} {% endfor %} {{ count }} résultat(s)
+      </p>
+    </div>
+    <div class="card-body table-responsive">
+      <table class="table table-hover">
+        <thead class="text-warning">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Langue</th>
+            <th>Auteur</th>
+            <th>Voir</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for decks in allDecks %} {% for deck in allMesDecks %} {% if decks
+          == deck.id%}
+          <tr>
+            <td>{{ deck.id }}</td>
+            <td>{{ deck.name }}</td>
+            <td><a href="{{ path('language-details', { id: deck.author.languageLearn.id }) }}">{{ deck.author.languageLearn.name }}</a></td>
+            <td><a href="{{ path('admin-user', { id: deck.author.id }) }}">{{ deck.author.name }}</a></td>
+            <td><a href="{{ path('admin-deck', { id: deck.id }) }}">
+                <button
+                  type="button"
+                  rel="tooltip"
+                  title=""
+                  class="btn btn-white btn-link btn-sm"
+                  data-original-title="Edit Task"
+                >
+                  <i class="material-icons">remove_red_eye</i>
+                </button>
+              </a></td>
+          </tr>
+          {% endif %} {% endfor %} {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock body %}
