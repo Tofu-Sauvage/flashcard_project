@@ -318,7 +318,7 @@ class DecksController extends AbstractController {
           } 
       }  
     }
-    return $this->render('./pages/administration/decksFindByTag.html.twig', ["allDecks" => $allDecks, "tag" => $tag]);
+    return $this->render('./pages/administration/decksFindByTag.html.twig', ["allDecks" => $allDecks, "tag" => $tag, "allMesDecks"=>$allMesDecks]);
   }
 
   public function rechercherDeck(DeckRepository $deckRepository, $deckId){
