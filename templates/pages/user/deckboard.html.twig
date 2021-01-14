@@ -104,16 +104,15 @@
 							{% endif %}
 
 							{% if not last_card %} {# Si aucune carte présente en BDD cards == null #}
-									<a href="#" type="button" class="btn btn-lg btn-info">Veuillez créer votre première carte <br>AVANT de créer votre premier deck</a>
+									<a href="{{ path('card-create') }}" type="button" class="btn btn-lg btn-info">Veuillez créer votre première carte <br>AVANT de créer votre premier deck</a>
 							{% elseif last_card and not last_deck %}
-									<a href="#" type="button" class="btn btn-lg btn-info"><i class="material-icons">all_inbox</i>Créer votre premier deck</a>
+									<a href="{{ path('deck-gestion') }}" type="button" class="btn btn-lg btn-info"><i class="material-icons">all_inbox</i>Créer votre premier deck</a>
               {% endif %}
 						</div>
 					</div>{#  Fin Section "decks"#}
 				</div>
-				<div class="col-md-6">
-				
 
+				<div class="col-md-6">
 					<div class="card"> {# Section "révision" #}
 						<div class="card-header card-header-primary">
 							<h2 class="card-title">Révision</h2>

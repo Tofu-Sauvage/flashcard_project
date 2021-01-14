@@ -92,6 +92,10 @@ class DecksController extends AbstractController {
   public function deckUserUpdateAction(Request $request, DeckRepository $deckRepository, EntityManagerInterface $em, $id)
   {
     $modeEdition = true;
+    $idActiveUser = $this->getUser()->getID();
+    $decks = $deckRepository->findby(['author' => $idActiveUser]);
+
+    $limitNbDecks = 10;
 
     $deck = $deckRepository->findOneBy(['id' => $id]);
     $form = $this->createForm(DeckType::class, $deck);
@@ -109,7 +113,7 @@ class DecksController extends AbstractController {
       return $this->redirectToRoute('deck-detail', ['id' => $id]);
     }
 
-    return $this->render('./pages/user/deckForm.html.twig', ['deckForm' => $form->createView(), 'modeEdition' => $modeEdition]);
+    return $this->render('./pages/user/deckForm.html.twig', ['deckForm' => $form->createView(), 'modeEdition' => $modeEdition, 'limitNbDecks' => $limitNbDecks, 'decks' => $decks]);
   }
 
   public function deckFavAction(DeckRepository $deckRepository, EntityManagerInterface $em, $deckId)
