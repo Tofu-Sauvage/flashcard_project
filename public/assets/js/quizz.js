@@ -15,9 +15,13 @@ function initialiseQuiz()
   showElementQuiz(elementIndex);
 }
 
+function escapeCharas(s) {
+  return s.replace(/[\\^$.*+?()[\]{}|!]/g,"").trim();
+}
+
 function verifierReponse(n, motOriginal, bonneReponse)
 {
-    if(document.getElementsByClassName("uneReponseUser")[n].value.toLowerCase() == bonneReponse.toLowerCase())
+    if(escapeCharas(document.getElementsByClassName("uneReponseUser")[n].value.toLowerCase()) == escapeCharas(bonneReponse.toLowerCase()))
     {
       document.getElementsByClassName("alert-success")[n].style.display = "block";
       document.getElementsByClassName("bonnesReponses")[0].innerHTML = String(parseInt(document.getElementsByClassName("bonnesReponses")[0].innerHTML) + 1);
@@ -36,11 +40,6 @@ function verifierReponse(n, motOriginal, bonneReponse)
     setTimeout(showElementQuiz,1000, n+1);
 }
 
-
-/* Thumbnail image controls
-function currentElement(n) {
-  showElement(elementIndex = n);
-}*/
 
 function showElementQuiz(n) {
   var i;
