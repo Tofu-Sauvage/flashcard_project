@@ -17,11 +17,11 @@
           <li class="nav-item {{ 'rechercher' in app.request.uri ? 'active' : '' }}">
             <a class="nav-link" href="{{ path('rechercher') }}">Rechercher</a>
           </li>
-        {% endif %}
-        {% if "ROLE_ADMIN" in app.user.roles %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ path('admin-dashboard') }}">Admin Dashboard</a>
-          </li>
+            {% if "ROLE_ADMIN" in app.user.roles %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('admin-dashboard') }}">Admin Dashboard</a>
+            </li>
+          {% endif %}
         {% endif %}
       </ul>
       
