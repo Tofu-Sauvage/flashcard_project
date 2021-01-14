@@ -300,22 +300,25 @@ class DecksController extends AbstractController {
     return $this->render("pages/user/recherche.html.twig", ["deck_all" => $allDecks, "favs_deck_all" => $allFavsDecks, "jeCherche" => $jeCherche]);
   }
 
-  public function findDeckByTag(DeckRepository $deckRepository, $tag){
-    $allDecks =  $deckRepository->findBy(['public' => true]);
-
-    $deck->getTags();
-    $tagsTable = explode(" ", $tags);
-
-    $tag = (String)$tag;
-    $allDecksTable =[];
-
-    for($i = 0; $i < count($allDecks) ; $i++){
-      if(str_contains((String)($allDecks[$i]->getTags()), $tag))
+  public function findDecksByTag(DeckRepository $deckRepository, $tag){
+    $allMesDecks =  $deckRepository->findAll();
+    $allDecks =[];
+    $mesTags = [];
+    $action = false;
+    
+    for($i = 0; $i < count($allMesDecks) ; $i++)
+    {
+      $mesTags[$i] = $allMesDecks[$i]->getTags();   
+      
+      for($j = 0; $j < count($mesTags) ; $j++)
       {
-        array_push($allDecksTable, $allDecks[$i]);
-      }
+        if($mesTags[$j] != null && str_contains($mesTags[$j], $tag))
+          {
+            (in_array($allMesDecks[$j]->getId(),$allDecks)) ? $action : array_push($allDecks, $allMesDecks[$j]->getId()) ;
+          } 
+      }  
     }
-
+    return $this->render('./pages/administration/decksFindByTag.html.twig', ["allDecks" => $allDecks, "tag" => $tag]);
   }
 
   public function rechercherDeck(DeckRepository $deckRepository, $deckId){

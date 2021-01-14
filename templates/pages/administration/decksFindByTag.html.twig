@@ -1,0 +1,6 @@
+{% extends './pages/administration/admin.base.html.twig'%} {%block body%}
+
+{{ tag }}
+{{ allDecks | json_encode()}}
+
+{% endblock body %}

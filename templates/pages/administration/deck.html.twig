@@ -43,14 +43,16 @@
               Statut : {% if deck.public == 1 %} public {% else %} privé {%endif%}
             </p>
 
-            {% if tagsTable is not null %}
+            {% if tagsTable is not null%}
             <p class="card-text" style="display: inline;">Tags associés : 
             {% for tag in tagsTable %}
-              <button class="btn btn-info btn-sm" onclick="relancerRecherche()">{{tag}}</button>
-            {% endfor %}</p>
+            {% if tag %}
+              <a href="{{ path('admin-decks-search', { tag: tag }) }}"><button class="btn btn-info btn-sm">{{tag}}</button></a>
             {% else %} 
-            <p class="card-text text-info">Pas de tags associés.</p>
+            pas de tags.
             {% endif %}
+            {% endfor %}</p>{% endif %}
+            
 
             <p class="h3">
               {% set count = 0 %} {% for card in deck.cards %} {% set count =
