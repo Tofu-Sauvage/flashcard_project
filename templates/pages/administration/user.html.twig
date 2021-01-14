@@ -141,7 +141,7 @@
           <div class="card-body">
             <div class="tab-content table-responsive">
 
-              <div class="tab-panel active" id="cards"  role="tabpanel">
+              <div class="tab-pane active" id="cards"  role="tabpanel">
                 <p class="h3">
                 {% set count = 0 %} {% for card in usersCards %} {% set count =
                 count + 1 %} {% endfor %} 
@@ -187,7 +187,7 @@
               </div>
 
 
-              <div class="tab-panel" id="decks" role="tabpanel">
+              <div class="tab-pane" id="decks" role="tabpanel">
                 <p class="h3">
                   {% set count = 0 %} {% for deck in usersDecks %} {% set count =
                   count + 1 %} {% endfor %} 
@@ -200,9 +200,9 @@
                 <table class="table" id="table">
                   <thead>
                     <tr>
-                      <th class="text-info" style="cursor: pointer" onclick="sortTable(0)">ID<i class="material-icons">import_export</i></th>
-                      <th class="text-info" style="cursor: pointer" onclick="sortTable(1)">Nom<i class="material-icons">import_export</i></th>
-                      <th class="text-info" style="cursor: pointer" onclick="sortTable(2)">Créé le<i class="material-icons">import_export</i></th>
+                      <th class="text-info">ID</th>
+                      <th class="text-info">Nom</th>
+                      <th class="text-info">Créé le</th>
                       <th class="text-info">Voir</th>
                     </tr>
                   </thead>
@@ -233,7 +233,7 @@
 
               </div>
 
-              <div class="tab-panel" id="favorites">
+              <div class="tab-pane" id="favorites">
                 <p class="h3">
                   {% set count = 0 %} {% for favorite in user.favorites %} {% set count =
                   count + 1 %} {% endfor %} 
@@ -246,10 +246,10 @@
                 <table class="table" id="table">
                   <thead>
                     <tr>
-                      <th class="text-info" style="cursor: pointer" onclick="sortTable(0)">ID<i class="material-icons">import_export</i></th>
-                      <th class="text-info" style="cursor: pointer" onclick="sortTable(1)">Auteur<i class="material-icons">import_export</i></th>
-                      <th class="text-info" style="cursor: pointer" onclick="sortTable(2)">Nom<i class="material-icons">import_export</i></th>
-                      <th class="text-info" style="cursor: pointer" onclick="sortTable(3)">Créé le<i class="material-icons">import_export</i></th>
+                      <th class="text-info">ID</th>
+                      <th class="text-info">Auteur</th>
+                      <th class="text-info">Nom</th>
+                      <th class="text-info">Créé le</th>
                       <th class="text-info">Voir</th>
                     </tr>
                   </thead>
