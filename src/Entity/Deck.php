@@ -40,9 +40,9 @@ class Deck
     private $public;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $tags = [];
+    private $tags;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="author")
@@ -127,12 +127,12 @@ class Deck
         return $this;
     }
 
-    public function getTags(): ?array
+    public function getTags(): ?string
     {
         return $this->tags;
     }
 
-    public function setTags(?array $tags): self
+    public function setTags(?string $tags): self
     {
         $this->tags = $tags;
 

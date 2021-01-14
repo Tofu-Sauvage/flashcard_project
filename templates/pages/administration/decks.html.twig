@@ -44,12 +44,19 @@
                       style="cursor: pointer"
                       onclick="sortTable(3)"
                     >
-                      Créée le<i class="material-icons">import_export</i>
+                      Titre<i class="material-icons">import_export</i>
                     </th>
                     <th
                       class="text-primary"
                       style="cursor: pointer"
                       onclick="sortTable(4)"
+                    >
+                      Créée le<i class="material-icons">import_export</i>
+                    </th>
+                    <th
+                      class="text-primary"
+                      style="cursor: pointer"
+                      onclick="sortTable(5)"
                     >
                       Nbre de cartes concernées<i class="material-icons"
                         >import_export</i
@@ -58,7 +65,7 @@
                     <th
                       class="text-primary"
                       style="cursor: pointer"
-                      onclick="sortTable(5)"
+                      onclick="sortTable(6)"
                     >
                       Combien de fan(s)<i class="material-icons"
                         >import_export</i
@@ -79,6 +86,7 @@
                       >
                     </td>
                     <td><a href="{{ path('language-details', { id: deck.author.languageLearn.id }) }}">{{ deck.author.languageLearn.name }}</a></td>
+                    <td>{{deck.name | length > 10 ? deck.name|slice(0, 10) ~ '...' : deck.name }}</td>
                     <td>{{deck.createdAt | date("d/m/Y") }}</td>
                     <td>
                       {% set count = 0 %} {% for card in deck.cards %} {% set
