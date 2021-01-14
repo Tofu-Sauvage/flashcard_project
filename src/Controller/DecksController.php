@@ -297,7 +297,7 @@ class DecksController extends AbstractController {
       }
       else
       {
-        $mesTags = $allMesDecks[$i]->GetTags();
+        $mesTags = $allMesDecks[$i]->getTags();
         if(in_array($jeCherche, $mesTags))
         {
           array_push($allDecks, $allMesDecks[$i]);
