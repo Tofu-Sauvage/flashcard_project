@@ -139,7 +139,19 @@ class DecksController extends AbstractController {
     {
       $this->addFlash('info', "Ce deck est déjà dans vos favoris.");
     }
-    return($this->rechercherDeck($deckRepository, $deck));
+    return($this->rechercherDeck($deckRepository, $deckId));
+  }
+
+  public function deckRemoveFavAction(DeckRepository $deckRepository, EntityManagerInterface $em, $deckId)
+  {
+    $deck = $deckRepository->findOneBy(['id' => $deckId]);
+
+    $this->getUser()->removeFavorite($deck);
+    $em->persist($deck);
+    $em->flush();
+    $this->addFlash('success', "Le deck a été supprimé de vos favoris.");
+    
+    return($this->rechercherDeck($deckRepository, $deckId));
   }
 
   public function deckSignalAction(DeckRepository $deckRepository, $deckId)
@@ -297,6 +309,15 @@ class DecksController extends AbstractController {
       {
         array_push($allDecks, $allMesDecks[$i]);
       }
+      else
+      {
+        $mesTags = $allMesDecks[$i]->getTags();
+        for ($j = 0; $j < count($mesTags) ; $j++)
+        {
+          if($mesTags[$j] == $jeCherche)
+            array_push($allDecks, $allMesDecks[$i]);
+        }
+      }
     }
 
     $allFavsDecks = $this->getUser()->getFavorites();
@@ -329,7 +350,20 @@ class DecksController extends AbstractController {
     $monDeck = $deckRepository->findOneBy(['id' => $deckId]);
     $mesCartes = $monDeck->getCards();
 
-    return $this->render("pages/user/rechercheDeck.html.twig", ["deck" => $monDeck, "cards" => $mesCartes]);
+    $esTuFav = false;
+
+    $decksFavoris = $this->getUser()->getFavorites();
+
+    for ($i = 0 ; $i < count($decksFavoris) ; $i++)
+    {
+      if($decksFavoris[$i]->getId() == $monDeck->getId())
+        $esTuFav = true;
+    }
+    
+    // Ligne pour que vous testiez, décommentez-là si vous voulez des tags de test. :)
+    // $monDeck->SetTags(array("tag", "lol", "mdr"));
+
+    return $this->render("pages/user/rechercheDeck.html.twig", ["deck" => $monDeck, "cards" => $mesCartes, "isFav" => $esTuFav]);
   }
 
   public function signalerDeck(DeckRepository $deckRepository, $deckId){

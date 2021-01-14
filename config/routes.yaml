@@ -128,6 +128,10 @@ deck-fav:
   path: /profile/fav/deck/{deckId}
   controller: App\Controller\DecksController::deckFavAction
 
+deck-remove-fav:
+  path: /profile/unfav/deck/{deckId}
+  controller: App\Controller\DecksController::deckRemoveFavAction
+
 signalerDeck:
   path: /profile/signaler/deck/{deckId}
   controller: App\Controller\DecksController::signalerDeck

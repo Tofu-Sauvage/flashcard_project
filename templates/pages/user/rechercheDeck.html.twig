@@ -47,7 +47,12 @@
               </div>
             </div>
             <p class="card-text">Description : {{ deck.description }}</p>
-            <p class="card-text">Tags associés : {{ deck.tags|json_encode() }}</p>
+            <p class="card-text">Tags associés : </p>
+            <p>
+             {% for tag in deck.tags %}
+              <button class="btn btn-info btn-sm">{{ tag }}</button>
+             {% endfor %}
+            </p>
 
             <p class="h3">
               {% set count = 0 %} {% for card in deck.cards %} {% set count =
@@ -94,19 +99,22 @@
           <div class="card-body">
 						<div class="tab-content">
 							<div class="tab-panel active">
-                                <a href="{{ path('deck-fav', { deckId: deck.id }) }}" type="button" class="btn btn-success">Ajouter aux favoris</a>
+              {% if isFav == false %}
+                <a href="{{ path('deck-fav', { deckId: deck.id }) }}" type="button" class="btn btn-success">Ajouter aux favoris</a>
+              {% else %}
+                <a href="{{ path('deck-remove-fav', { deckId: deck.id }) }}" type="button" class="btn btn-info">Supprimer des favoris</a>
+              {% endif %}
+							</div>
+						</div>
+            <div class="tab-content">
+							<div class="tab-panel active">
+                <a href="{{ path('signalerDeck', { deckId: deck.id }) }}" type="button" class="btn btn-danger">Signaler ce deck</a>
 							</div>
 						</div>
 
-                        <div class="tab-content">
+            <div class="tab-content">
 							<div class="tab-panel active">
-                                <a href="{{ path('signalerDeck', { deckId: deck.id }) }}" type="button" class="btn btn-danger">Signaler ce deck</a>
-							</div>
-						</div>
-
-                        <div class="tab-content">
-							<div class="tab-panel active">
-                                <a href="{{ path('rechercher') }}" type="button" class="btn btn-info">Retour aux recherches</a>
+                <a href="{{ path('rechercher') }}" type="button" class="btn btn-info">Retour aux recherches</a>
 							</div>
 						</div>
 					</div>
