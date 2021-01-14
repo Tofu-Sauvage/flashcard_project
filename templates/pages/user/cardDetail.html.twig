@@ -137,7 +137,7 @@
                       {% for deck in card.decks %}
                       <tr>
                         <td>{{ deck.name }}</td>
-                        <td>{{deck.createdAt | date("d/m/Y") }}</td>
+                        <td>{{ deck.createdAt | date("d/m/Y") }}</td>
                         <td class="td-actions text-center">
                           <a href="{{ path('deck-detail', { id: deck.id }) }}"
                             ><button
