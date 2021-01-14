@@ -283,6 +283,14 @@ class DecksController extends AbstractController {
       {
         array_push($allDecks, $allMesDecks[$i]);
       }
+      else
+      {
+        $mesTags = $allMesDecks[$i]->GetTags();
+        if(in_array($jeCherche, $mesTags))
+        {
+          array_push($allDecks, $allMesDecks[$i]);
+        }
+      }
     }
 
     $allFavsDecks = $this->getUser()->getFavorites();
@@ -293,6 +301,9 @@ class DecksController extends AbstractController {
   public function rechercherDeck(DeckRepository $deckRepository, $deckId){
     $monDeck = $deckRepository->findOneBy(['id' => $deckId]);
     $mesCartes = $monDeck->getCards();
+    
+    // Ligne pour que vous testiez, décommentez-là si vous voulez des tags de test. :)
+    // $monDeck->SetTags(array("tag", "lol", "mdr"));
 
     return $this->render("pages/user/rechercheDeck.html.twig", ["deck" => $monDeck, "cards" => $mesCartes]);
   }
