@@ -5,21 +5,29 @@
 {% block body %}
 
     <div class="container-fluid">
-        <div class="card">
+        <div class="card mt-5">
             <div class="card-header card-header-primary">
 				<h2 class="card-title">Révision</h2>
 			</div>
             {% set compteur = 0 %}
+            {% set allcompteur = 0 %}{% for q in cartes %} {% set allcompteur = allcompteur + 1 %} {% endfor %}
             {% for q in cartes %}
-            <div class="uneCarteRevision card-body">
+            <div class="uneCarteRevision card-body text-center">
                 
                 <div class="form-group">
-                    <h3><span class="numeroRevision">{{ compteur +1 }}</span>. {{ q.question }}</h3>
-                    <h4>se dit...</h4>
-                    <h3>{{ q.answer }} !</h3>
-                    <div class="navRevision form-group">
-                        <button class="btn btn-primary btn-sm rev-precedent" role="button" onclick="RevisionNavigation({{compteur}},'precedent')">Précédent</button>
-                        <button class="btn btn-primary btn-sm rev-suivant" role="button" onclick="RevisionNavigation({{compteur}},'suivant')">Suivant</button>
+                    <h3>Carte numéro <span class="numeroRevision">{{ compteur +1 }} sur {{ allcompteur }}</span></h3>
+                    <h2 class="text-info font-weight-bold"><u>{{ q.question }}</u></h2>
+                    <h4 class="font-italic">se dit...</h4>
+                    <h2 class="text-success font-weight-bold"><u>{{ q.answer }} !</u></h2>
+                    <div class="navRevision form-group mt-5">
+                        <button class="btn btn-primary rev-precedent mr-3 btn-lg" role="button" onclick="RevisionNavigation({{compteur}},'precedent')">
+                            <span class="material-icons">arrow_back_ios</span>
+                            Précédent
+                        </button>
+                        <button class="btn btn-primary rev-suivant ml-3 btn-lg" role="button" onclick="RevisionNavigation({{compteur}},'suivant')">
+                            Suivant
+                            <span class="material-icons">arrow_forward_ios</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -27,9 +35,17 @@
             {% endfor %} 
             <div class='card-footer'> 
                 <div class="form-group">
-                    <button class="btn btn-primary btn-sm recom-button" role="button" onclick="location.reload()" disabled>Recommencer</button>
+                    <button class="btn btn-info recom-button" role="button" onclick="location.reload()" disabled>
+                        <span class="material-icons">history</span>
+                        Recommencer
+                    </button>
                 
-                    <a href="/profile/deckboard" class="btn btn-info btn-sm" role="button">Retourner au deckboard</a>
+                    <a href="{{ path('deckboard') }}" 
+                       type="button" 
+                       class="btn btn-primary btn-round">
+                       <span class="material-icons">keyboard_return</span>
+                       Retour au deckboard
+                    </a>
                 </div>
             </div>
             
