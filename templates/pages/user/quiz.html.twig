@@ -6,20 +6,24 @@
 {% block body %}
 
     <div class="container-fluid">
-        <div class="card">
+        <div class="card mt-5">
             <div class="card-header card-header-primary">
 				<h2 class="card-title">Quiz</h2>
 			</div>
 
             <div class="card-body">
                 {% set compteur = 0 %}
+                {% set allcompteur = 0 %}{% for q in cartes %} {% set allcompteur = allcompteur + 1 %} {% endfor %}
                 {% for q in cartes %}
                 <div class="uneCarteQuestion form-group">
-                    <h3>Que signifie "{{ q.question }}" ?</h3>
-                        <div class="form-group">
-                            <label for="exampleInput1" class="bmd-label-floating">Question numéro {{ compteur + 1 }}. Tapez votre réponse ci-dessous.</label><br/>
+                    <h5>Question numéro {{ compteur + 1 }} sur {{ allcompteur }}</h5>
+                    <h3>Que signifie <u class="text-info font-weight-bold">{{ q.question }}</u> ?</h3>
+                        <div class="form-group mt-5">
+                            
                             <input type="text" class="uneReponseUser form-control" id="exampleInput1">
-                            <input type="submit" class="btn btn-primary" value="Envoyer la réponse" onclick="verifierReponse({{ compteur}},'{{ q.question }}','{{ q.answer }}')">
+                            <label for="exampleInput1" class="bmd-label-floating">Entrez votre réponse.</label><br/>
+                            <input type="submit" class="btn btn-primary" value="Envoyer la réponse" 
+                                   onclick="verifierReponse({{ compteur }},'{{ q.question }}','{{ q.answer }}')">
                             <div class="alert alert-success" role="alert">
                                 Bonne réponse !
                             </div>
@@ -31,12 +35,21 @@
                 </div>
                 {% endfor %}
                 <div class="uneCarteResultats form-group">
-                    <p class="votreScore">Vous avez donné <span class="bonnesReponses">0</span> <span class="bonnesReponsesTexte"></span> !</p>
-                    <p><span class="listeMauvaisesReponses"></p>
-                    <input type="submit" class="btn btn-primary" value="Recommencer" onclick="location.reload()">
+                    <h3 class="votreScore">
+                        Vous avez donné 
+                        <span class="bonnesReponses text-info font-weight-bold">0</span> 
+                        <span class="bonnesReponsesTexte text-success"></span> !</h3>
+                    <h4 class="listeMauvaisesReponses"></h4>
+                    
+                    <input type="submit" class="btn btn-primary mt-4i" value="Recommencer" onclick="location.reload()">
                 </div>
                 <div class="form-group">
-                    <a href="/profile/deckboard" class="btn btn-info btn-sm" role="button">Retourner au deckboard</a>
+                    <a href="{{ path('deckboard') }}" 
+                       type="button" 
+                       class="btn btn-primary btn-round">
+                       <span class="material-icons">keyboard_return</span>
+                       Retour au deckboard
+                    </a>
                 </div>
             </div>
 
