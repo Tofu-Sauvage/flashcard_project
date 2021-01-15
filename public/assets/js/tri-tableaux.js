@@ -1,4 +1,5 @@
 function sortTable(n) {
+  changeIcon(n);
   var table,
     rows,
     switching,
@@ -15,7 +16,7 @@ function sortTable(n) {
   /* Make a loop that will continue until
   no switching has been done: */
   while (switching) {
-    // Start by saying: no switching is done:
+      // Start by saying: no switching is done:
     switching = false;
     rows = table.rows;
     /* Loop through all table rows (except the
@@ -60,3 +61,20 @@ function sortTable(n) {
     }
   }
 }
+
+
+function changeIcon(index) {
+   var x = document.getElementsByClassName("icon");
+
+   for (i = 0; i < x.length; i++) {
+    x[i].style.visibility='hidden';
+
+     if (x[i].innerHTML === "keyboard_arrow_up") {
+       x[i].innerHTML = "keyboard_arrow_down";
+     } else {
+       x[i].innerHTML = "keyboard_arrow_up";
+     }
+   }
+
+   x[index].style.visibility='visible';
+ }
