@@ -1,5 +1,5 @@
 function sortTable(n) {
-  changeIcon();
+  changeIcon(n);
   var table,
     rows,
     switching,
@@ -62,16 +62,19 @@ function sortTable(n) {
   }
 }
 
-function changeIcon() {
 
-  var x = document.getElementsByClassName("icon");
+function changeIcon(index) {
+   var x = document.getElementsByClassName("icon");
 
-  for (i = 0; i < x.length; i++) {
-    if (x[i].innerHTML === "keyboard_arrow_up") {
-      x[i].innerHTML = "keyboard_arrow_down";
-    } else {
-      x[i].innerHTML = "keyboard_arrow_up";
-    }
-  }
+   for (i = 0; i < x.length; i++) {
+    x[i].style.visibility='hidden';
 
-}
+     if (x[i].innerHTML === "keyboard_arrow_up") {
+       x[i].innerHTML = "keyboard_arrow_down";
+     } else {
+       x[i].innerHTML = "keyboard_arrow_up";
+     }
+   }
+
+   x[index].style.visibility='visible';
+ }

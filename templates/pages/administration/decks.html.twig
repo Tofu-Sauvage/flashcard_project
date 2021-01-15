@@ -7,8 +7,8 @@
         <div class="card-header card-header-tabs card-header-primary">
           <div class="nav-tabs-navigation">
             <p class="h3">
-              {% set count = 0 %} {% for deck in decksTable %} {% set count = count +
-              1 %} {% endfor %} {{ count }} decks créés
+              {% set count = 0 %} {% for deck in decksTable %} {% set count =
+              count + 1 %} {% endfor %} {{ count }} decks créés
             </p>
           </div>
         </div>
@@ -23,43 +23,45 @@
                       style="cursor: pointer"
                       onclick="sortTable(0)"
                     >
-                      ID<i class="material-icons">import_export</i>
+                      ID<i class="material-icons icon">keyboard_arrow_up</i>
                     </th>
                     <th
                       class="text-primary"
                       style="cursor: pointer"
                       onclick="sortTable(1)"
                     >
-                      Auteur<i class="material-icons">import_export</i>
+                      Auteur<i class="material-icons icon">keyboard_arrow_up</i>
                     </th>
                     <th
                       class="text-primary"
                       style="cursor: pointer"
                       onclick="sortTable(2)"
                     >
-                      Langue<i class="material-icons">import_export</i>
+                      Langue<i class="material-icons icon">keyboard_arrow_up</i>
                     </th>
                     <th
                       class="text-primary"
                       style="cursor: pointer"
                       onclick="sortTable(3)"
                     >
-                      Titre<i class="material-icons">import_export</i>
+                      Titre<i class="material-icons icon">keyboard_arrow_up</i>
                     </th>
                     <th
                       class="text-primary"
                       style="cursor: pointer"
                       onclick="sortTable(4)"
                     >
-                      Créée le<i class="material-icons">import_export</i>
+                      Créée le<i class="material-icons icon"
+                        >keyboard_arrow_up</i
+                      >
                     </th>
                     <th
                       class="text-primary"
                       style="cursor: pointer"
                       onclick="sortTable(5)"
                     >
-                      Nbre de cartes concernées<i class="material-icons"
-                        >import_export</i
+                      Nbre de cartes concernées<i class="material-icons icon"
+                        >keyboard_arrow_up</i
                       >
                     </th>
                     <th
@@ -67,9 +69,7 @@
                       style="cursor: pointer"
                       onclick="sortTable(6)"
                     >
-                      Combien de fan(s)<i class="material-icons"
-                        >import_export</i
-                      >
+                      Combien de fan(s)<i class="material-icons icon">keyboard_arrow_up</i>
                     </th>
 
                     <th class="text-primary">Voir</th>
@@ -85,8 +85,19 @@
                         >{{ deck.author.name }}</a
                       >
                     </td>
-                    <td><a href="{{ path('language-details', { id: deck.author.languageLearn.id }) }}">{{ deck.author.languageLearn.name }}</a></td>
-                    <td>{{deck.name | length > 10 ? deck.name|slice(0, 10) ~ '...' : deck.name }}</td>
+                    <td>
+                      <a
+                        href="{{
+                          path('language-details', {
+                            id: deck.author.languageLearn.id
+                          })
+                        }}"
+                        >{{ deck.author.languageLearn.name }}</a
+                      >
+                    </td>
+                    <td>
+                      {{deck.name | length > 10 ? deck.name|slice(0, 10) ~ '...' : deck.name }}
+                    </td>
                     <td>{{deck.createdAt | date("d/m/Y") }}</td>
                     <td>
                       {% set count = 0 %} {% for card in deck.cards %} {% set
@@ -113,7 +124,6 @@
                 </tbody>
               </table>
               {{ knp_pagination_render(decks) }}
-
             </div>
           </div>
         </div>
