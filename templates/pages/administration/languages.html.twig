@@ -1,6 +1,5 @@
-{% extends './pages/administration/admin.base.html.twig'%}
-{% block title %}Langues{% endblock %}
-{% block body %}
+{% extends './pages/administration/admin.base.html.twig'%} {% block title
+%}Langues{% endblock %} {% block body %}
 
 <div class="content">
   <div class="container-fluid">
@@ -8,8 +7,8 @@
       <div class="card">
         <div class="card-header card-header-tabs card-header-warning">
           <p class="h3">
-            {% set count = 0 %} {% for language in languagesTable %} {% set count =
-            count + 1 %} {% endfor %} {{ count }} langages enregistrés
+            {% set count = 0 %} {% for language in languagesTable %} {% set
+            count = count + 1 %} {% endfor %} {{ count }} langages enregistrés
           </p>
           <p class="card-category">
             <i class="material-icons">add</i>
@@ -41,7 +40,9 @@
                       style="cursor: pointer"
                       onclick="sortTable(2)"
                     >
-                      Drapeau<i class="material-icons icon">keyboard_arrow_up</i>
+                      Drapeau<i class="material-icons icon"
+                        >keyboard_arrow_up</i
+                      >
                     </th>
                     <th class="text-warning">Actions</th>
                   </tr>
@@ -59,17 +60,25 @@
                       >
                     </td>
                     <td>
-                      {% if language.flag is not null%}
-                      <img
-                        src="/uploads/images/{{ language.flag }}"
-                        width="20px"
-                        height="auto"
-                        focusable="false"
-                        role="img"
-                        preserveAspectRatio="xMidYMid slice"
-                      />{% endif %}
+                      <a
+                        href="{{
+                          path('language-details', { id: language.id })
+                        }}"
+                      >
+                        {% if language.flag is not null %}
+                        <img
+                          src="/uploads/images/{{ language.flag }}"
+                          width="20px"
+                          height="auto"
+                          focusable="false"
+                          role="img"
+                          preserveAspectRatio="xMidYMid slice"
+                        />
+                        {% else %}
+                        <i class="material-icons text-warning">flag</i>
+                        {% endif %}</a
+                      >
                     </td>
-
                     <td class="td-actions text-left">
                       <button
                         type="button"
@@ -103,7 +112,6 @@
                 </tbody>
               </table>
               {{ knp_pagination_render(languages) }}
-
             </div>
           </div>
         </div>

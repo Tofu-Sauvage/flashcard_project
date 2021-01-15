@@ -75,7 +75,7 @@
                   user.languageLearn.id == language.id %}
                   <tr>
                     <td>{{ user.id }}</td>
-                    <td>{{ user.name }}</td>
+                    <td><a href="{{ path('admin-user', { id: user.id }) }}">{{ user.name }}</a></td>
                     <td>{{user.createdAt | date("d/m/Y") }}</td>
                     <td class="td-actions text-right">
                       <a href="{{ path('admin-user', { id: user.id }) }}"
@@ -123,7 +123,7 @@
                   language.id %}
                   <tr>
                     <td>{{ user.id }}</td>
-                    <td>{{ user.name }}</td>
+                    <td><a href="{{ path('admin-user', { id: user.id }) }}">{{ user.name }}</a></td>
                     <td>{{user.createdAt | date("d/m/Y") }}</td>
                     <td class="td-actions text-right">
                       <a href="{{ path('admin-user', { id: user.id }) }}"
@@ -153,7 +153,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col-lg-6 col-md-6">
-              {% set count = 0 %} {% for card in cards%} {% for user in users%}
+              {% set count = 0 %} {% for card in allCards%} {% for user in users%}
               {% if card.author.id == user.id and user.languageLearn.id ==
               language.id %} {% set count = count + 1
               %}{%endif%}{%endfor%}{%endfor%} {% if count == 0 %}
@@ -181,8 +181,10 @@
                   language.id %}
                   <tr>
                     <td>{{ card.id }}</td>
-                    <td>{{ card.author.name }}</td>
-                    <td>{{ card.category.name }}</td>
+                    <td><a href="{{ path('admin-user', { id:card.author.id }) }}"
+                      >{{ card.author.name }}</a></td>
+                    <td><a href="{{ path('category-details', { id:card.category.id }) }}"
+                      >{{ card.category.name }}</a></td>
                     <td>{{card.createdAt | date("d/m/Y") }}</td>
                     <td class="td-actions text-right">
                       <a href="{{ path('admin-card', { id: card.id }) }}"
@@ -198,6 +200,8 @@
                     </td>
                   </tr>
                   {% endif %} {% endfor %} {% endfor %}
+                  {{ knp_pagination_render(cards) }}
+
                 </tbody>
               </table>
               {%endif%}
@@ -232,8 +236,10 @@
                   language.id %}
                   <tr>
                     <td>{{ deck.id }}</td>
-                    <td>{{ deck.author.name }}</td>
-                    <td>{{ deck.name }}</td>
+                    <td><a href="{{ path('admin-user', { id:deck.author.id }) }}"
+                      >{{ deck.author.name }}</td>
+                    <td><a href="{{ path('admin-deck', { id:deck.id }) }}"
+                      >{{ deck.name }}</a></td>
                     <td>{{ deck.createdAt | date("d/m/Y") }}</td>
                     <td class="td-actions text-right">
                       <a href="{{ path('admin-deck', { id: deck.id }) }}"
