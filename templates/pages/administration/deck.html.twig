@@ -57,7 +57,7 @@
             
 
             <p class="h3">
-              {% set count = 0 %} {% for card in deck.cards %} {% set count =
+              {% set count = 0 %} {% for card in allCards %} {% set count =
               count + 1 %} {% endfor %} 
               {% if count == 0 %}
               <p class="text-info">Pas encore de carte.</p>
@@ -65,17 +65,17 @@
               {{ count }} cartes associées :
             </p>
 
-            <table class="table text-left">
+            <table class="table text-left" id="table">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Catégorie</th>
-                  <th>Créée le</th>
-                  <th>Voir</th>
+                  <th class="text-info" style="cursor: pointer" onclick="sortTable(0)">ID<i class="material-icons icon">keyboard_arrow_up</i></th>
+                  <th class="text-info" style="cursor: pointer" onclick="sortTable(1)">Catégorie<i class="material-icons icon">keyboard_arrow_up</i></th>
+                  <th class="text-info" style="cursor: pointer" onclick="sortTable(2)">Créée le<i class="material-icons icon">keyboard_arrow_up</i></th>
+                  <th class="text-info">Voir</th>
                 </tr>
               </thead>
               <tbody>
-                {% for card in deck.cards%}
+                {% for card in cards%}
 
                 <tr>
                   <td>{{ card.id }}</td>
@@ -96,6 +96,7 @@
                   </td>
                 </tr>
                 {% endfor %}
+                {{ knp_pagination_render(cards) }}
               </tbody>
             </table>
               {% endif %}
@@ -131,11 +132,11 @@
 
           </div>
           <div class="card-body">
-            <table class="table text-left" id="table">
+            <table class="table text-left">
               <thead>
                 <tr>
-                  <th class="text-info" style="cursor: pointer" onclick="sortTable(0)">ID<i class="material-icons icon">keyboard_arrow_up</i></th>
-                  <th class="text-info" style="cursor: pointer" onclick="sortTable(1)">Nom<i class="material-icons icon">keyboard_arrow_up</i></th>
+                  <th class="text-info">ID</th>
+                  <th class="text-info">Nom</th>
                   <th class="text-info">Voir</th>
                 </tr>
               </thead>
@@ -159,6 +160,7 @@
                     >
                   </td>
                 </tr>
+
                 {%endif%}{% endfor %}{% endfor %}
               </tbody>
             </table>
