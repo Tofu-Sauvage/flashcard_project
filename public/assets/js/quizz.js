@@ -35,7 +35,12 @@ function verifierReponse(n, motOriginal, bonneReponse)
     {
       document.getElementsByClassName("alert-danger")[n].style.display = "block";
 
-      document.getElementsByClassName("listeMauvaisesReponses")[0].innerHTML += "La bonne traduction de <em>" + motOriginal + "</em> était <em>" + bonneReponse + "</em>.<br/>"; 
+      document.getElementsByClassName("listeMauvaisesReponses")[0].innerHTML += 
+      "La bonne traduction de <u class='font-italic text-info'>" 
+      + motOriginal 
+      + "</u> était <u class='font-italic text-danger'>" 
+      + bonneReponse + "</u>.<br/>"
+      ; 
     }
     setTimeout(showElementQuiz,1000, n+1);
 }
