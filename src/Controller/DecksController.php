@@ -165,7 +165,7 @@ class DecksController extends AbstractController {
     return($this->signalerDeck($deckRepository, $deck));
   }
 
-  public function detailAction(DeckRepository $deckRepository, $id, UserRepository $userRepository)
+  public function detailAction(DeckRepository $deckRepository, $id, UserRepository $userRepository, Request $request, PaginatorInterface $paginator)
   {
     $deck =  $deckRepository->findOneBy(['id' => $id]);     
     $users = $userRepository->findAll();
@@ -173,7 +173,18 @@ class DecksController extends AbstractController {
     $tags = $deck->getTags();
     $tagsTable = explode(" ", $tags);
 
-    return $this->render('./pages/administration/deck.html.twig', ['deck' => $deck, 'users'=>$users, 'tagsTable'=>$tagsTable]);
+    $allCards = $deck->getCards();
+
+    $limit = 10; 
+    $firstPage = 1;
+
+    $cards = $paginator->paginate(
+        $allCards, // Requête contenant les données à paginer (ici nos articles)
+        $request->query->getInt('page', $firstPage), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+        $limit // Nombre de résultats par page
+    );
+
+    return $this->render('./pages/administration/deck.html.twig', ['deck' => $deck, 'users'=>$users, 'tagsTable'=>$tagsTable, 'cards'=>$cards, 'allCards'=>$allCards]);
   }
 
   public function detailUserAction(DeckRepository $deckRepository, CardRepository $cardRepository, $id, Request $request, PaginatorInterface $paginator)

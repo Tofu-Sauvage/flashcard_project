@@ -17,7 +17,7 @@ class LanguagesController extends AbstractController {
   public function indexAction(LanguageRepository $languageRepository, Request $request, PaginatorInterface $paginator) {
     $languagesTable = $languageRepository->findAll();
 
-    $limit = 3; 
+    $limit = 10; 
     $firstPage = 1;
 
     $languages = $paginator->paginate(
@@ -88,12 +88,22 @@ class LanguagesController extends AbstractController {
     $this->addFlash('success-language', 'Le langage a bien été supprimé !');
     return $this->redirectToRoute('admin-languages');  }
 
-    public function detailAction(LanguageRepository $languageRepository, $id, UserRepository $userRepository, CardRepository $cardRepository, DeckRepository $deckRepository)
+    public function detailAction(LanguageRepository $languageRepository, $id, UserRepository $userRepository, CardRepository $cardRepository, DeckRepository $deckRepository, Request $request, PaginatorInterface $paginator)
     {
       $language =  $languageRepository->findOneBy(['id' => $id]);
       $users = $userRepository->findAll();
-      $cards = $cardRepository->findAll();
+      $allCards = $cardRepository->findAll();
       $decks = $deckRepository->findAll();
-      return $this->render('./pages/administration/language.html.twig', ['language' => $language, 'users'=>$users, 'cards'=>$cards, 'decks'=>$decks]);
+
+      $limit = 10; 
+      $firstPage = 1;
+  
+      $cards = $paginator->paginate(
+          $allCards, // Requête contenant les données à paginer (ici nos articles)
+          $request->query->getInt('page', $firstPage), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+          $limit // Nombre de résultats par page
+      );
+
+      return $this->render('./pages/administration/language.html.twig', ['language' => $language, 'users'=>$users, 'cards'=>$cards, 'decks'=>$decks, 'allCards'=>$allCards]);
     }
 }
