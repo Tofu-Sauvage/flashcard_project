@@ -199,12 +199,12 @@
                   {{ count }} deck(s) créé(s) :
                 </p>
     
-                <table class="table" id="table">
+                <table class="table" id="decktable">
                   <thead>
                     <tr>
-                      <th class="text-info">ID</th>
-                      <th class="text-info">Nom</th>
-                      <th class="text-info">Créé le</th>
+                      <th class="text-info" style="cursor: pointer" onclick="sortTable('decktable', 0)">ID<i class="material-icons icon">keyboard_arrow_up</i></th>
+                      <th class="text-info" style="cursor: pointer" onclick="sortTable('decktable', 1)">Nom<i class="material-icons icon">keyboard_arrow_up</i></th>
+                      <th class="text-info" style="cursor: pointer" onclick="sortTable('decktable', 2)">Créé le<i class="material-icons icon">keyboard_arrow_up</i></th>
                       <th class="text-info">Voir</th>
                     </tr>
                   </thead>
@@ -245,13 +245,13 @@
                   {{ count }} favori(s) :
                 </p>
     
-                <table class="table" id="table">
+                <table class="table" id="favtable">
                   <thead>
                     <tr>
-                      <th class="text-info">ID</th>
-                      <th class="text-info">Auteur</th>
-                      <th class="text-info">Nom</th>
-                      <th class="text-info">Créé le</th>
+                      <th class="text-info" style="cursor: pointer" onclick="sortTable('favtable', 0)">ID<i class="material-icons icon">keyboard_arrow_up</i></th>
+                      <th class="text-info" style="cursor: pointer" onclick="sortTable('favtable', 1)">Auteur<i class="material-icons icon">keyboard_arrow_up</i></th>
+                      <th class="text-info" style="cursor: pointer" onclick="sortTable('favtable', 2)">Nom<i class="material-icons icon">keyboard_arrow_up</i></th>
+                      <th class="text-info" style="cursor: pointer" onclick="sortTable('favtable', 3)">Créé le<i class="material-icons icon">keyboard_arrow_up</i></th>
                       <th class="text-info">Voir</th>
                     </tr>
                   </thead>
