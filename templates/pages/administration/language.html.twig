@@ -43,27 +43,27 @@
               {% else %}
 
               <p class="h6 card-category text-left">{{ count }} Apprenant(s)</p>
-              <table class="table text-left" id="table">
+              <table class="table text-left" id="apptable">
                 <thead>
                   <tr>
                     <th
                       class="text-warning"
                       style="cursor: pointer"
-                      onclick="sortTable(0)"
+                      onclick="sortTable('apptable', 0)"
                     >
                       ID user<i class="material-icons icon">keyboard_arrow_up</i>
                     </th>
                     <th
                       class="text-warning"
                       style="cursor: pointer"
-                      onclick="sortTable(1)"
+                      onclick="sortTable('apptable', 1)"
                     >
                       Nom<i class="material-icons icon">keyboard_arrow_up</i>
                     </th>
                     <th
                       class="text-warning"
                       style="cursor: pointer"
-                      onclick="sortTable(2)"
+                      onclick="sortTable('apptable', 2)"
                     >
                       Inscrit le<i class="material-icons icon">keyboard_arrow_up</i>
                     </th>
@@ -109,12 +109,15 @@
 
               <p class="h6 card-category text-left">{{ count }} Natif(s)</p>
 
-              <table class="table text-left">
+              <table class="table text-left" id="natiftable">
                 <thead>
                   <tr>
-                    <th class="text-warning">ID user</th>
-                    <th class="text-warning">Nom</th>
-                    <th class="text-warning">Inscrit le</th>
+                    <th class="text-warning"  style="cursor: pointer"
+                      onclick="sortTable('natiftable', 0)">ID user<i class="material-icons icon">keyboard_arrow_up</i></th>
+                    <th class="text-warning"  style="cursor: pointer"
+                      onclick="sortTable('natiftable', 1)">Nom<i class="material-icons icon">keyboard_arrow_up</i></th>
+                    <th class="text-warning"  style="cursor: pointer"
+                      onclick="sortTable('natiftable', 2)">Inscrit le<i class="material-icons icon">keyboard_arrow_up</i></th>
                     <th class="text-warning">Voir</th>
                   </tr>
                 </thead>
@@ -165,13 +168,17 @@
               <p class="h6 card-category text-left">
                 {{ count }} Carte(s) concernée(s)
               </p>
-              <table class="table text-left">
+              <table class="table text-left" id="cartetable">
                 <thead>
                   <tr>
-                    <th class="text-warning">ID carte</th>
-                    <th class="text-warning">Auteur</th>
-                    <th class="text-warning">Catégorie</th>
-                    <th class="text-warning">Créée le</th>
+                    <th class="text-warning" style="cursor: pointer"
+                      onclick="sortTable('cartetable', 0)">ID carte<i class="material-icons icon">keyboard_arrow_up</i></th>
+                    <th class="text-warning" style="cursor: pointer"
+                      onclick="sortTable('cartetable', 1)">Auteur<i class="material-icons icon">keyboard_arrow_up</i></th>
+                    <th class="text-warning" style="cursor: pointer"
+                      onclick="sortTable('cartetable', 2)">Catégorie<i class="material-icons icon">keyboard_arrow_up</i></th>
+                    <th class="text-warning" style="cursor: pointer"
+                      onclick="sortTable('cartetable', 3)">Créée le<i class="material-icons icon">keyboard_arrow_up</i></th>
                     <th class="text-warning">Voir</th>
                   </tr>
                 </thead>
@@ -220,13 +227,17 @@
               <p class="h6 card-category text-left">
                 {{ count }} Deck(s) concerné(s)
               </p>
-              <table class="table text-left" id="table3">
+              <table class="table text-left" id="decktable">
                 <thead>
                   <tr>
-                    <th class="text-warning">ID deck</th>
-                    <th class="text-warning">Auteur</th>
-                    <th class="text-warning">Nom</th>
-                    <th class="text-warning">Créée le</th>
+                    <th class="text-warning" style="cursor: pointer"
+                      onclick="sortTable('decktable', 0)">ID deck<i class="material-icons icon">keyboard_arrow_up</i></th>
+                    <th class="text-warning" style="cursor: pointer"
+                      onclick="sortTable('decktable', 1)">Auteur<i class="material-icons icon">keyboard_arrow_up</i></th>
+                    <th class="text-warning" style="cursor: pointer"
+                      onclick="sortTable('decktable', 2)">Nom<i class="material-icons icon">keyboard_arrow_up</i></th>
+                    <th class="text-warning" style="cursor: pointer"
+                      onclick="sortTable('decktable', 3)">Créée le<i class="material-icons icon">keyboard_arrow_up</i></th>
                     <th class="text-warning">Voir</th>
                   </tr>
                 </thead>
