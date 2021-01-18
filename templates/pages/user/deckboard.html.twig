@@ -5,28 +5,24 @@
 
 		<div class="container-fluid">
 
-			<div class="row">
-			<div class="col-md-1">
-				<div class="alert alert-warning col-md-1">
-					{% if language_learn.flag is not null%}
-						<img
-							class="img"
-							src=" /uploads/images/{{ language_learn.flag }}"
-							width="60px"
-							height="auto"
-						/>
-					{% else %}
-						<i class="material-icons">flag</i>
-					{% endif %}
-        </div>
-			</div>
-						
-				
-				<div class="alert alert-primary col-md-10 offset-md-1">
-					<h2>Deckboard de {{ app.user.name }}</h2>
+				<div class="alert alert-primary row">
+					<div class="alert alert-warning mb-0 col-auto">
+						{% if language_learn.flag is not null%}
+							<img
+								class="img"
+								src=" /uploads/images/{{ language_learn.flag }}"
+								width="60px"
+								height="auto"
+							/>
+						{% else %}
+							<i class="material-icons">flag</i>
+						{% endif %}
+					</div>
+					<div class="col-auto">
+					<h2 class="mt-4 ml-3">Deckboard de {{ app.user.name }}</h2>
 				</div>
-
-			</div>
+				</div>
+				
 
 			<div class="row">
 				<div class="col-md-6"> {# Colonne contenant section "cartes" et "decks" #}
