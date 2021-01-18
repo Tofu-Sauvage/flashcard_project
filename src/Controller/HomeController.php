@@ -8,18 +8,25 @@ use App\Repository\LanguageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class HomeController extends AbstractController {
+
+  public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
 
   public function homeAction(Request $request, EntityManagerInterface $em, LanguageRepository $languageRepository) {
     $user = new User();
     $form = $this->createForm(InscriptionType::class);
-
+    
     $form->handleRequest($request);
 
     if($form->isSubmitted() && $form->isValid()){
-      
+
       $user = $form->getData();
+
       $image = $form->get('image')->getData();
       
       if($image){
@@ -27,21 +34,20 @@ class HomeController extends AbstractController {
         $image->move($this->getParameter('uploads'), $newFileName);
         $user->setImage($newFileName);
       } else {
-        $user->setImage('user-blanck.png'); // Image "blanche" par défaut
+        $user->setImage('lapin.jpg'); // Image "blanche" de lapin par défaut
       }
 
       $user->setCreatedAt(new \DateTime()); // Date et heure au moment de la création
       $user->setRoles(['ROLE_USER']);
-      $language = $languageRepository->findOneBy(['id' => 8]); // Français par défaut
+      $language = $languageRepository->findOneBy(['name' => 'Français']); // Français par défaut
       $user->setLanguageNative($language);
-      $user->setLanguageLearn($language);
+      $user->setPassword($this->encoder->encodePassword($user, $form->get('password')->getData()));
 
-      // dd($user);
       $em->persist($user);
       $em->flush();
-
-      $this->addFlash('success', "L'utilisateur a bien été ajouté");
-      return $this->redirectToRoute('index');
+      
+      $this->addFlash('success', "Bienvenue " . $user->getName() . " !");
+      return $this->redirectToRoute('deckboard');
     }
     return $this->render("pages/accueil.html.twig", ['form' => $form->createView(), 'errors' => $form->getErrors()]);
   }
