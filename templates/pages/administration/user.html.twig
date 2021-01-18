@@ -152,12 +152,12 @@
                 {% else %}
                 {{ count }} carte(s) créée(s) :
                 </p>
-                <table class="table" id="table">
+                <table class="table" id="usertable">
                   <thead>
                     <tr>
-                      <th class="text-info" style="cursor: pointer" onclick="sortTable(0)">ID<i class="material-icons icon">keyboard_arrow_up</i></th>
-                      <th class="text-info" style="cursor: pointer" onclick="sortTable(1)">Catégorie<i class="material-icons icon">keyboard_arrow_up</i></th>
-                      <th class="text-info" style="cursor: pointer" onclick="sortTable(2)">Créée le<i class="material-icons icon">keyboard_arrow_up</i></th>
+                      <th class="text-info" style="cursor: pointer" onclick="sortTable('usertable', 0)">ID<i class="material-icons icon">keyboard_arrow_up</i></th>
+                      <th class="text-info" style="cursor: pointer" onclick="sortTable('usertable', 1)">Catégorie<i class="material-icons icon">keyboard_arrow_up</i></th>
+                      <th class="text-info" style="cursor: pointer" onclick="sortTable('usertable', 2)">Créée le<i class="material-icons icon">keyboard_arrow_up</i></th>
                       <th class="text-info">Voir</th>
                     </tr>
                   </thead>
