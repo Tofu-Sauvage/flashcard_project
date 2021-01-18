@@ -6,7 +6,6 @@ use App\Entity\Language;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -44,12 +43,12 @@ class InscriptionType extends AbstractType
             // 'multiple' => 'false',
             // 'expanded' => 'false'
             // ])
-            // ->add('language_learn', EntityType::class, 
-            // ['class'=>Language::class, 
-            // 'choice_label' => 'name',
-            // 'multiple' => 'false',
-            // 'expanded' => 'false'
-            // ])
+            ->add('language_learn', EntityType::class, 
+            ['class'=>Language::class, 
+            'choice_label' => 'name',
+            'multiple' => false,
+            'expanded' => true
+            ])
             ->add('submit', SubmitType::class)
         ;
     }
