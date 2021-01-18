@@ -1,5 +1,4 @@
-function sortTable(n) {
-  changeIcon(n);
+function sortTable(tableId, n) {
   var table,
     rows,
     switching,
@@ -9,7 +8,8 @@ function sortTable(n) {
     shouldSwitch,
     dir,
     switchcount = 0;
-  table = document.getElementById("table");
+  table = document.getElementById(tableId);
+  changeIcon(table, n);
   switching = true;
   // Set the sorting direction to ascending:
   dir = "asc";
@@ -63,8 +63,8 @@ function sortTable(n) {
 }
 
 
-function changeIcon(index) {
-   var x = document.getElementsByClassName("icon");
+function changeIcon(table, index) {
+   var x = table.getElementsByClassName("icon");
 
    for (i = 0; i < x.length; i++) {
     x[i].style.visibility='hidden';
