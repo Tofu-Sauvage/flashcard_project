@@ -12,6 +12,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class HomeController extends AbstractController {
 
+  private $encoder;
+
   public function __construct(UserPasswordEncoderInterface $encoder)
     {
         $this->encoder = $encoder;
