@@ -48,7 +48,7 @@ class HomeController extends AbstractController {
       $em->persist($user);
       $em->flush();
       
-      $this->addFlash('success', "Vous avez été bien inscrit. Connectez-vous !");
+      $this->addFlash('success', "Vous êtes bien inscrit. Connectez-vous !");
       return $this->redirectToRoute('accueil');
     }
     return $this->render("pages/accueil.html.twig", ['form' => $form->createView(), 'errors' => $form->getErrors()]);

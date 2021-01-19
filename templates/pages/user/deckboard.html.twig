@@ -19,8 +19,8 @@
 						{% endif %}
 					</div>
 					<div class="col-auto">
-					<h2 class="mt-4 ml-3">Deckboard de {{ app.user.name }}</h2>
-				</div>
+						<h2 class="mt-4 ml-3">Deckboard de {{ app.user.name }}</h2>
+					</div>
 				</div>
 				
 
@@ -74,15 +74,13 @@
 						</div>
 					</div> {# Fin Section "cartes"#}
 
-					<div class="card"> {# Section "decks"#}
+					<div class="card mt-5"> {# Section "decks"#}
 						<div class="card-header card-header-info">
 							<h2 class="card-title">Decks</h2>
 						</div>
 
 						<div class="card-body">
-
 							{% if last_deck %}
-
 								<div class="card-header card-header-default"> {# deckau détail #}
 									<div class="row">
 										<h3>Dernier deck créé :</h3>
@@ -159,12 +157,10 @@
 								{% endif %}
 								</div>
 							</div>
-						
-
 						{% endif %} 
 						</div>
 					</div>
-						<div class="card"> {# Section "quiz" #}
+						<div class="card mt-5"> {# Section "quiz" #}
 							<div class="card-header card-header-info">
 								<h2 class="card-title">Quiz</h2>
 							</div>
