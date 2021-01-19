@@ -18881,6 +18881,15 @@ Copyright (c) 2015 Daniel Eden
     transform: translate3d(-260px, 0, 0);
   }
 
+  #navbar-responsive-user-burger-menu { /* Ici modif le 19/01/2021 pour que le menu burger, une fois déployé, ne disparaisse pas */
+    left: 0;
+    -webkit-transform: translate3d(-260px, 0, 0);
+    -moz-transform: translate3d(-260px, 0, 0);
+    -o-transform: translate3d(-260px, 0, 0);
+    -ms-transform: translate3d(-260px, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
   .nav-open .sidebar {
     box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
   }
