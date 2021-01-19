@@ -41,7 +41,13 @@
               </div>
             </div>
             <p class="card-text">Description : {{ deck.description }}</p>
-            <p class="card-text">Tags associés : {{ deck.tags|json_encode() }}</p>
+            <p class="card-text">Tags associés : 
+              {% if deck.tags is not null %}
+                {{ deck.tags | json_encode()}}
+              {% else %} 
+                pas de tags.
+              {% endif %}
+            </p>
 
             <p class="h3">
               {% set count = 0 %} {% for card in deck.cards %} {% set count =

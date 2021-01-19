@@ -49,11 +49,12 @@
               </div>
             </div>
             <p class="card-text">Description : {{ deck.description }}</p>
-            <p class="card-text">Tags associés : </p>
-            <p>
-             {% for tag in deck.tags %}
-              <button class="btn btn-info btn-sm">{{ tag }}</button>
-             {% endfor %}
+            <p class="card-text">Tags associés : 
+              {% if deck.tags is not null %}
+                {{ deck.tags | json_encode()}}
+              {% else %} 
+                pas de tags.
+              {% endif %}
             </p>
 
             <p class="h3">

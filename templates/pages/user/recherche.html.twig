@@ -10,7 +10,7 @@
                     <div class="card-header card-header-primary">
 											<h2 class="card-title">
 												{% if not jeCherche %}
-													Tous les decks externes.{% else %}{{ deck_all|length }} résultats.
+													Tous les decks externes ({{deck_all|length}}) {% else %}{{ deck_all|length }} résultats.
 												{% endif %}
 											</h2>
 										</div>
@@ -25,18 +25,23 @@
 														<h3>Résultats de votre recherche :</h3>
 														<div class="tab-content table-responsive">
               								<div class="tab-panel active">
-																<table class="table">
+																<table class="table" id="decktable">
 																	<thead>
 																		<tr>
-																			<th>Nom</th>
-																			<th>Description</th>
-																			<th>Favori ?</th>
+																			<th class="text-primary" style="cursor: pointer" onclick="sortTable('decktable', 0)">Nom<br/><i class="material-icons icon">keyboard_arrow_up</i></th>
+																			<th class="text-primary" style="cursor: pointer" onclick="sortTable('decktable', 1)">Langue<br/><i class="material-icons icon">keyboard_arrow_up</i></th>
+																			<th class="text-primary" style="cursor: pointer" onclick="sortTable('decktable', 2)">Description<br/><i class="material-icons icon">keyboard_arrow_up</i></th>
+																			<th class="text-primary" style="cursor: pointer" onclick="sortTable('decktable', 3)">Favori ?<br/><i class="material-icons icon">keyboard_arrow_up</i></th>
+																			<th class="text-primary">Voir</th>
 																		</tr>
 																	</thead>
 																	<tbody>
 																		{% for deck in deck_all %}
 																		<tr>
-																			<td>{{ deck.name }}</td>
+																			<td><a href="{{
+																				path('rechercherDeck', { deckId: deck.id })
+																				}}">{{ deck.name }}</a></td>
+																			<td>{{ deck.author.languageLearn.name }}</td>
 																			<td>{{ deck.description }}<br>
 																			Créé par {{ deck.author.name }} le{{ deck.createdAt | date("d/m/Y") }}</td>
 																			{% if deck in favs_deck_all %}
@@ -111,6 +116,7 @@
 															<thead>
 																<tr>
 																	<th>Nom</th>
+																	<th>Langue</th>
 																	<th>Description</th>
 																	<th>Auteur</th>
 																	<th>Créé le</th>
@@ -119,7 +125,10 @@
 															<tbody>
 																										{% for deck in favs_deck_all %}
 																<tr>
-																	<td>{{ deck.name }}</td>
+																	<td><a href="{{
+																		path('rechercherDeck', { deckId: deck.id })
+																		}}">{{ deck.name }}</a></td>
+																	<td>{{ deck.author.languageLearn.name }}</td>
 																	<td>{{ deck.description }}</td>
 																	<td>{{ deck.author.name }}</td>
 																	<td>{{ deck.createdAt | date("d/m/Y") }}</td>
