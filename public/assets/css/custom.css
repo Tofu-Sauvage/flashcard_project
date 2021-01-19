@@ -15,11 +15,14 @@
     padding-top: 8px;
     padding-bottom: 8px;
   }
-}
-
-@media screen and (max-width: 425px) {
   .footer-spacer {
     height: 18vh;
+  }
+}
+
+@media screen and (min-width: 540px) and (max-width: 576px) {
+  .footer-spacer {
+    height: 12vh;
   }
 }
 
@@ -37,6 +40,9 @@ h4 {
 
 @media (min-width: 991px) {
   #nav-responsive {
+    display: none;
+  }
+  .li-responsive {
     display: none;
   }
 }
