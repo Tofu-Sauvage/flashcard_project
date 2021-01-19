@@ -1,60 +1,86 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-primary d-flex justify-content-between">
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-primary d-flex justify-content-between"
+  id="navigation-example"
+>
   <div class="container">
-    <p class="navbar-brand"><a class="nav-link" href="{{ path('index') }}">Flashcards Project</a></p>
-    {# <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button> #}
-    <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
+    <div class="navbar-wrapper con">
+      <a class="nav-link" href="{{ path('index') }}">Flashcards Project</a>
+    </div>
+    <button
+      id="navbar-responsive-user-burger-menu"
+      class="navbar-toggler collapsed"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      data-target="#navigation-example"
+    >
+      <span class="sr-only">Toggle navigation</span>
+      <span class="navbar-toggler-icon icon-bar"></span>
+      <span class="navbar-toggler-icon icon-bar"></span>
+      <span class="navbar-toggler-icon icon-bar"></span>
+    </button>
+    <div
+      class="collapse navbar-collapse d-flex justify-content-between"
+      id="navbarNav"
+    >
       <ul class="navbar-nav">
-        {# <li class="nav-item">
+        {#
+        <li class="nav-item">
           <a class="nav-link" href="{{ path('index') }}">Accueil</a>
-        </li> #}
-
-        {% if app.user %}
-          <li class="nav-item {{ 'deckboard' in app.request.uri ? 'active' : '' }}">
-            <a class="nav-link" href="{{ path('deckboard') }}">Deckboard</a>
-          </li>
-          <li class="nav-item {{ 'rechercher' in app.request.uri ? 'active' : '' }}">
-            <a class="nav-link" href="{{ path('rechercher') }}">Rechercher</a>
-          </li>
-            {% if "ROLE_ADMIN" in app.user.roles %}
-            <li class="nav-item">
-              <a class="nav-link" href="{{ path('admin-dashboard') }}">Admin Dashboard</a>
-            </li>
-          {% endif %}
-        {% endif %}
+        </li>
+        #} {% if app.user %}
+        <li
+          class="nav-item {{ 'deckboard' in app.request.uri ? 'active' : '' }}"
+        >
+          <a class="nav-link" href="{{ path('deckboard') }}">Deckboard</a>
+        </li>
+        <li
+          class="nav-item {{ 'rechercher' in app.request.uri ? 'active' : '' }}"
+        >
+          <a class="nav-link" href="{{ path('rechercher') }}">Rechercher</a>
+        </li>
+        {% if "ROLE_ADMIN" in app.user.roles %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('admin-dashboard') }}"
+            >Admin Dashboard</a
+          >
+        </li>
+        {% endif %} {% endif %}
       </ul>
-      
+
       <ul class="navbar-nav">
         {% if not app.user %}
-          <li class="nav-item {{ 'login' in app.request.uri ? 'active' : '' }}">
-            <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
-          </li>
+        <li class="nav-item {{ 'login' in app.request.uri ? 'active' : '' }}">
+          <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+        </li>
         {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
-          </li>
-              {% if app.user.image is not null %}
-                <p style="width:80% ; height:80%" class="m-0 p-0">
-                  <img
-                    src="/uploads/images/{{ app.user.image }}"
-                    class="img avatar rounded"
-                    width="70px"
-                    height="auto"
-                  />
-                </p>
-              {% else %}
-                <p style="width:80% ; height:80%" class="m-0 p-0">
-                  <img
-                    src="/uploads/images/lapin.jpg"
-                    class="img avatar rounded"
-                    width="80px"
-                    height="auto"
-                  />
-                </p>
-              {% endif %}
-        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+        </li>
+        {% if app.user.image is not null %}
+        <p style="width: 80%; height: 80%" class="m-0 p-0">
+          <img
+            src="/uploads/images/{{ app.user.image }}"
+            class="img avatar rounded"
+            width="70px"
+            height="auto"
+          />
+        </p>
+        {% else %}
+        <p style="width: 80%; height: 80%" class="m-0 p-0">
+          <img
+            src="/uploads/images/lapin.jpg"
+            class="img avatar rounded"
+            width="80px"
+            height="auto"
+          />
+        </p>
+        {% endif %} {% endif %}
       </ul>
     </div>
-  </div> {# Fin container #}
+  </div>
+  {# Fin container #}
 </nav>
