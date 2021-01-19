@@ -317,10 +317,11 @@ class DecksController extends AbstractController {
 
     for($i = 0; $i < count($allMesDecks) ; $i++)
     {
+      $jeDoisPush = false;
       if(str_contains(strtolower(($allMesDecks[$i]->getName())), strtolower($jeCherche)) ||
       str_contains(strtolower(($allMesDecks[$i]->getDescription())), strtolower($jeCherche)))
       {
-        array_push($allDecks, $allMesDecks[$i]);
+        $jeDoisPush = true;
       }
       else
       {
@@ -332,9 +333,14 @@ class DecksController extends AbstractController {
           str_contains(strtolower(($lesCartes[$j]->getAnswer())), strtolower($jeCherche)) ||
           str_contains(strtolower($lesTags), strtolower($jeCherche)))
           {
-            array_push($allDecks, $allMesDecks[$i]);
+            $jeDoisPush = true;
           }
         }
+      }
+      if($jeDoisPush)
+      {
+        array_push($allDecks, $allMesDecks[$i]);
+        $jeDoisPush = false;
       }
     }
 
