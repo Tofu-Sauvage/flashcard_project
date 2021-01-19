@@ -317,8 +317,30 @@ class DecksController extends AbstractController {
     for($i = 0; $i < count($allMesDecks) ; $i++)
     {
       if(str_contains((String)($allMesDecks[$i]->getName()), $jeCherche) || str_contains($allMesDecks[$i]->getDescription(), $jeCherche) || str_contains($allMesDecks[$i]->getAuthor()->getName(), $jeCherche || str_contains($allMesDecks[$i]->getTags(), $jeCherche)))
+      $jeDoisPush = false;
+      if(str_contains(strtolower(($allMesDecks[$i]->getName())), strtolower($jeCherche)) ||
+      str_contains(strtolower(($allMesDecks[$i]->getDescription())), strtolower($jeCherche)))
+      {
+        $jeDoisPush = true;
+      }
+      else
+      {
+        $lesCartes = $allMesDecks[$i]->getCards();
+        $lesTags = $allMesDecks[$i]->getTags();
+        for($j = 0; $j <count($lesCartes) ; $j++)
+        {
+          if(str_contains(strtolower(($lesCartes[$j]->getQuestion())), strtolower($jeCherche)) ||
+          str_contains(strtolower(($lesCartes[$j]->getAnswer())), strtolower($jeCherche)) ||
+          str_contains(strtolower($lesTags), strtolower($jeCherche)))
+          {
+            $jeDoisPush = true;
+          }
+        }
+      }
+      if($jeDoisPush)
       {
         array_push($allDecks, $allMesDecks[$i]);
+        $jeDoisPush = false;
       }
     }
 
