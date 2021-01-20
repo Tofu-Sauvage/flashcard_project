@@ -199,30 +199,32 @@ class DecksController extends AbstractController {
       $ajouterCard = true;
 
       foreach ($deck->getCards() as $cardDeck) {
-        if ($card->getId() == $cardDeck->getId()) {
+        if ($card->getId() == $cardDeck->getId()) 
           $ajouterCard = false;
-        }
-      }
-      
-      if($ajouterCard) {
-        
-        array_push($listeCards, $card); 
       }
 
+      if($ajouterCard) 
+        array_push($listeCards, $card);
     }
-    
-    
+
+    $listeCardsInsideDeck = $deck->getCards();
+    $numberOfCardsAvaiable = count($listeCards); // Nombre de carts disponible (non accocié à ce deck)
     
     $limit = 10; 
     $firstPage = 1;
 
     $paginationCards = $paginator->paginate(
-        $listeCards, // Requête contenant les données à paginer (ici nos articles)
+        $listeCards, // Requête contenant les données à paginer (ici les carts non-inclus dans le deck)
         $request->query->getInt('page', $firstPage), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
         $limit // Nombre de résultats par page
     );
 
-    return $this->render('./pages/user/deckDetail.html.twig', ['deck' => $deck, "cards" => $listeCards, 'paginationCards'=>$paginationCards]);
+    return $this->render('./pages/user/deckDetail.html.twig', [
+      'deck' => $deck, 
+      "cards" => $listeCardsInsideDeck,
+      'paginationCards'=>$paginationCards, 
+      "numberOfCard" => $numberOfCardsAvaiable
+      ]);
   }
 
   public function deleteAction(EntityManagerInterface $em, DeckRepository $deckRepository, $id)
