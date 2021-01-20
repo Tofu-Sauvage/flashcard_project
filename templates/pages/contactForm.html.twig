@@ -11,55 +11,33 @@ app.flashes('success-message') %}
 {% endfor %}
 
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-8 mt-5">
     <div class="card">
       <div class="card-header card-header-primary">
         <h4 class="card-title">Contactez-nous</h4>
-        <p class="card-category">
-          Nous vous répondrons dans les meilleurs délais.
-        </p>
       </div>
       <div class="card-body">
         {{ form_start(formulaire) }}
-        <form data-np-checked="1">
-          <fieldset>
+        <form>
             <div class="form-group">
-              {{ form_label(formulaire.sender) }}
-              {{form_widget(formulaire.sender, {attr: {'class' :"form-control"
-
-
-
-              }})}}
+              {{ form_label(formulaire.sender, "Votre nom") }}
+              {{form_widget(formulaire.sender, {attr: {'class' :"form-control"}})}}
             </div>
             <div class="form-group">
-              {{ form_label(formulaire.email) }}
-              {{form_widget(formulaire.email, {attr: {'class' :"form-control"
-
-              }})}}
+              {{ form_label(formulaire.email, "Votre adresse email") }}
+              {{form_widget(formulaire.email, {attr: {'class' :"form-control"}})}}
             </div>
             <div class="form-group">
-              {{ form_label(formulaire.subject) }}
-              {{form_widget(formulaire.subject, {attr: {'class' :"form-control"
-
-
-
-              }})}}
+              {{ form_label(formulaire.subject, "Sujet") }}
+              {{form_widget(formulaire.subject, {attr: {'class' :"form-control"}})}}
             </div>
             <div class="form-group">
-              {{ form_label(formulaire.content) }}
-              {{form_widget(formulaire.content, {attr: {'class' :"form-control"
-
-
-
-              }})}}
+              {{ form_label(formulaire.content, "Message") }}
+              {{form_widget(formulaire.content, {attr: {'class' :"form-control"}})}}
             </div>
             <div class="form-group">
               {{ form_label(formulaire.Envoyer) }}
-              {{form_widget(formulaire.Envoyer, {attr: {'class' :"btn btn-primary"
-
-
-
-              }})}}
+              {{form_widget(formulaire.Envoyer, {attr: {'class' :"btn btn-primary"}})}}
             </div>
           </fieldset>
         </form>
@@ -75,12 +53,14 @@ app.flashes('success-message') %}
         </a>
       </div>
       <div class="card-body">
-        <h6 class="card-category">Ici un truc</h6>
-        <h4 class="card-title">Là un autre truc</h4>
-        <p class="card-description">
-          Ici un texte cool pour dire qu'on est vraiment trop forts... 
+        <h6 class="card-category">FlashCards Team</h6>
+        <h4 class="card-title">Dites-nous tout !</h4>
+        <i class="material-icons">mail_outline</i>
+        <p class="card-description text-white">
+          Une suggestion ?<br/>Un soucis technique ?<br/>Un petit mot gentil ?
         </p>
-      
+        <p class="card-description text-white">Quelque soit l'objet de votre message, notre équipe vous répondra dans les meilleurs délais.
+        </p>
       </div>
     </div>
   </div>
