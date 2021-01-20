@@ -10,7 +10,6 @@ use App\Repository\CardRepository;
 use App\Repository\DeckRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Common\Collections\Criteria;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -200,13 +199,19 @@ class DecksController extends AbstractController {
       $ajouterCard = true;
 
       foreach ($deck->getCards() as $cardDeck) {
-        if ($card->getId() == $cardDeck->getId()) 
+        if ($card->getId() == $cardDeck->getId()) {
           $ajouterCard = false;
+        }
+      }
+      
+      if($ajouterCard) {
+        dd($ajouterCard);
+        array_push($listeCards, $card); 
       }
 
-      if($ajouterCard) 
-        array_push($listeCards, $card); 
     }
+    
+    
     
     $limit = 10; 
     $firstPage = 1;
