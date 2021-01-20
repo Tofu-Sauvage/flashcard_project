@@ -205,7 +205,7 @@ class DecksController extends AbstractController {
       }
       
       if($ajouterCard) {
-        dd($ajouterCard);
+        
         array_push($listeCards, $card); 
       }
 
