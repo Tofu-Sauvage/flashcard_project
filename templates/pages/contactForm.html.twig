@@ -18,7 +18,6 @@ app.flashes('success-message') %}
       </div>
       <div class="card-body">
         {{ form_start(formulaire) }}
-        <form>
             <div class="form-group">
               {{ form_label(formulaire.sender, "Votre nom") }}
               {{form_widget(formulaire.sender, {attr: {'class' :"form-control"}})}}
@@ -39,8 +38,6 @@ app.flashes('success-message') %}
               {{ form_label(formulaire.Envoyer) }}
               {{form_widget(formulaire.Envoyer, {attr: {'class' :"btn btn-primary"}})}}
             </div>
-          </fieldset>
-        </form>
         {{ form_end(formulaire) }}
       </div>
     </div>
