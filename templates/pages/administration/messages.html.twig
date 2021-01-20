@@ -1,0 +1,87 @@
+{% extends './pages/administration/admin.base.html.twig'%} {% block title
+%}Messages{% endblock %} {% block body %}
+<div class="content">
+  <div class="container-fluid">
+    <div>
+      <div class="card">
+        <div class="card-header card-header-tabs card-header-primary">
+          <p class="h3 card-title">
+            {% set count = 0 %} {% for message in messagesTable %} {% set count
+            = count + 1 %} {% endfor %}
+            {% if count == 0 %}
+            Aucun message :(
+            {% else %}
+            {{ count }} messages reçus
+            {% endif %}
+          </p>
+          <p class="card-category">
+            <i class="material-icons">mail_outline</i>
+          </p>
+        </div>
+        <div class="card-body">
+          <div class="tab-content table-responsive">
+            <table class="table" id="message">
+              <thead>
+                <tr>
+                  <th
+                    class="text-primary"
+                    style="cursor: pointer"
+                    onclick="sortTable('message', 0)"
+                  >
+                    ID<i class="material-icons icon">keyboard_arrow_up</i>
+                  </th>
+                  <th
+                    class="text-primary"
+                    style="cursor: pointer"
+                    onclick="sortTable('message', 1)"
+                  >
+                    Expéditeur<i class="material-icons icon"
+                      >keyboard_arrow_up</i
+                    >
+                  </th>
+                  <th
+                    class="text-primary"
+                    style="cursor: pointer"
+                    onclick="sortTable('message', 2)"
+                  >
+                    Email<i class="material-icons icon">keyboard_arrow_up</i>
+                  </th>
+                  <th
+                    class="text-primary"
+                    style="cursor: pointer"
+                    onclick="sortTable('message', 3)"
+                  >
+                    Sujet<i class="material-icons icon">keyboard_arrow_up</i>
+                  </th>
+                  <th class="text-primary">Message</th>
+                  <th
+                    class="text-primary"
+                    class="text-primary"
+                    style="cursor: pointer"
+                    onclick="sortTable('message', 4)"
+                  >
+                    Reçu le<i class="material-icons icon">keyboard_arrow_up</i>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for message in messages %}
+                <tr>
+                  <td>{{ message.id }}</td>
+                  <td>{{ message.sender }}</td>
+                  <td>{{ message.email }}</td>
+                  <td>{{ message.subject }}</td>
+                  <td>{{ message.content }}</td>
+                  <td>{{ message.createdAt | date("m/d/Y")}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>{{ knp_pagination_render(messages) }}
+            </table>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}

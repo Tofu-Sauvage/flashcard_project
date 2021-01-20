@@ -106,6 +106,10 @@ language-details:
   path: /admin/language/{id}
   controller : App\Controller\LanguagesController::detailAction
 
+admin-messages:
+  path: /admin/messages
+  controller :  App\Controller\MessageController::indexAction
+
 # ------------- USER ---------------------
 
 deckboard:
