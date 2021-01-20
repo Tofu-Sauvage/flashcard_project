@@ -37,17 +37,17 @@
         </div>
 
         <div class="form-group">
-          {{ form_label(cardForm.sentence1, "Description question (facultatif)") }}
+          {{ form_label(cardForm.sentence1, "(facultatif) Phrase d'exemple, description, définition, dans la langue que vous apprenez") }}
           {{ form_widget(cardForm.sentence1, {attr: {'class': 'form-control'}}) }}
         </div>
 
         <div class="form-group">
-          {{ form_label(cardForm.sentence2, "Description réponse (facultatif)") }}
+          {{ form_label(cardForm.sentence2, "(facultatif) Phrase d'exemple, description, définition, dans votre langue natale") }}
           {{ form_widget(cardForm.sentence2, {attr: {'class': 'form-control'}}) }}
         </div>
 
         <div class="form-group">
-          {{ form_label(cardForm.image, "Une image d'illustration ? (facultatif)") }}
+          {{ form_label(cardForm.image, "(facultatif) Une image d'illustration ?") }}
           {{ form_widget(cardForm.image, {attr: {'class': 'form-control-file mt-4', 'style': 'opacity:1; z-index:1'}}) }}
         </div>
 
