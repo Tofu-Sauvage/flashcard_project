@@ -18,6 +18,21 @@
 		</span>
 	  </div>
 
+  {% endfor %} {% for flash in app.flashes('success-message') %}
+  <div class="alert alert-success">
+    <button
+    type="button"
+    class="close"
+    data-dismiss="alert"
+    aria-label="Close"
+    onclick="delete_flash(this)"
+    >
+    <i class="material-icons">close</i>
+    </button>
+    <span>
+    {{ flash }}
+    </span>
+  </div>
   {% endfor %}
 
   <div class="row mt-5">

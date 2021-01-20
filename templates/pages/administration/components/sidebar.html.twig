@@ -55,6 +55,13 @@
                   <p>Voir les langues</p>
                 </a>
               </li>
+              <li  class="nav-item {{'messages' in  app.request.uri ? 'active':'' }}">
+                <a class="nav-link" href="{{ path('admin-messages') }}">
+                  <i class="material-icons">mail_outline</i>
+                  <p>Voir les messages</p>
+                </a>
+              </li>
+              <p class="logo"></p>
               <li class="nav-item">
                 <a class="nav-link" href="{{ path('deckboard') }}">
                   <i class="material-icons">account_circle</i>
