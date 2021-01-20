@@ -42,8 +42,8 @@
             <li class="nav-item li-responsive">
             <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
           </li>
+          <li class="nav-item li-responsive text-center">
           {% if app.user.image is not null %}
-            <li class="nav-item li-responsive d-flex">
               <img
                 src="{{ app.user.image }}"
                 class="img avatar rounded m-auto"
@@ -57,8 +57,8 @@
                 width="80px"
                 height="auto"
               />
-            </li>
           {% endif %}
+          </li>
         {% endif %}
         </ul>
 
