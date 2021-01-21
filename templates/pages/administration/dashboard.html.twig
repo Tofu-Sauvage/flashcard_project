@@ -4,6 +4,48 @@
 
 <div class="content">
   <div class="container-fluid">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">Derniers messages reçus</h4>
+        <p class="card-category text-white">
+          {% set count = 0 %} {% for message in allMessages %} {% set
+            count = count + 1 %} {% endfor %}
+          {% if count == 0 %}
+          Vous n'avez aucun message
+          {% else %}
+          <a href="{{ path('admin-messages') }}" class=" text-white">Voir tous les messages 
+              (total : {{ count }})
+            </a>
+          {% endif %}
+        </p>
+      </div>
+      <div class="card-body table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th class="text-primary">ID</th>
+              <th class="text-primary">Expéditeur</th>
+              <th class="text-primary">Email</th>
+              <th class="text-primary">Sujet</th>
+              <th class="text-primary">Contenu</th>
+              <th class="text-primary">Reçu le</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for message in messages %}
+            <tr>
+              <td>{{ message.id }}</td>
+              <td>{{ message.sender }}</td>
+              <td>{{ message.email }}</td>
+              <td>{{ message.subject }}</td>
+              <td>{{ message.content }}</td>
+              <td>{{message.createdAt | date("d/m/Y") }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
     <div class="row">
       <div class="col-lg-4 col-md-12">
         <div class="card">
