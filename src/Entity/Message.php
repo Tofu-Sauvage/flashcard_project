@@ -38,7 +38,7 @@ class Message
     private $content;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      */
     private $created_at;
 
