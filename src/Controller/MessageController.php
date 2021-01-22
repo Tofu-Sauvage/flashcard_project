@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Message;
 use App\Form\ContactType;
 use App\Repository\MessageRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,8 +35,8 @@ class MessageController extends AbstractController
     $form->handleRequest($request);
     if ($form->isSubmitted()) {
       $message = new Message();
-      
       $message = $form->getData();
+      $message->setCreatedAt(new DateTime('now'));
       $em->persist($message);
       $em->flush();
 
