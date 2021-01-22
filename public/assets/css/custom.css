@@ -42,7 +42,7 @@ h4 {
   margin-left: 0;
 }
 
-@media (min-width: 991px) {
+@media (min-width: 992px) {
   #nav-responsive {
     display: none;
   }
