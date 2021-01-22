@@ -47,7 +47,7 @@ class LanguagesController extends AbstractController {
 
       $em->persist($language);
       $em->flush();
-      //$this->addFlash('success-category', 'La catégorie a bien été ajoutée !');
+      $this->addFlash('success-create-language', 'La langue a bien été ajoutée !');
       return $this->redirectToRoute('admin-languages');
     }
     return $this->render('./pages/administration/languageForm.html.twig', ['languageForm' => $form->createView()]);

@@ -109,7 +109,7 @@
                       {% set countFan = 0 %} {% for fan in deck.fans %} {% set
                       countFan = countFan + 1 %} {% endfor %}{{ countFan }}
                     </td>
-                    <td class="td-actions text-right">
+                    <td class="td-actions text-left">
                       <a href="{{ path('admin-deck', { id: deck.id }) }}"
                         ><button
                           type="button"

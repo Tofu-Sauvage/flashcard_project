@@ -130,7 +130,7 @@
           <div class="card-body">
             <div class="tab-content table-responsive">
               <div class="tab-panel active">
-                <table class="table">
+                <table class="table text-left">
                   <thead>
                     <tr>
                       <th>ID</th>
@@ -145,7 +145,7 @@
                       <td>{{ deck.id }}</td>
                       <td>{{ deck.name }}</td>
                       <td>{{deck.createdAt | date("d/m/Y") }}</td>
-                      <td class="td-actions text-right">
+                      <td class="td-actions">
                         <a href="{{ path('admin-deck', { id: deck.id }) }}"
                           ><button
                             type="button"
