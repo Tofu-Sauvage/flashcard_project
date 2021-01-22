@@ -6,17 +6,21 @@
 
 @media screen and (max-width: 990px) {
   .footer-spacer {
-    height: 15vh;
+    height: 12vh;
   }
-}
-
-@media screen and (max-width: 768px) {
   .footer ul li a{
     padding-top: 8px;
     padding-bottom: 8px;
   }
+  footer {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+@media screen and (max-width: 768px) {
+  
   .footer-spacer {
-    height: 18vh;
+    height: 15vh;
   }
 }
 
