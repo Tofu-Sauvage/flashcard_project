@@ -51,24 +51,29 @@
         <div class="card">
           <div class="card-header card-header-primary">
             <h4 class="card-title">Derniers inscrits</h4>
-            <p>
-              (total : {% set count = 0 %} {% for user in allUsers %} {% set
-              count = count + 1 %} {% endfor %}
-              {{ count }}
-              )
+            <p class="card-category text-white">
+              {% set count = 0 %} {% for user in allUsers %} {% set
+                count = count + 1 %} {% endfor %}
+              {% if count == 0 %}
+              Il n'y a aucun inscrit
+              {% else %}
+              <a href="{{ path('admin-users') }}" class=" text-white">Voir tous les inscrits 
+                  (total : {{ count }})
+                </a>
+              {% endif %}
             </p>
           </div>
           <div class="card-body table-responsive">
             <table class="table table-hover">
-              <thead class="text-warning">
+              <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Nom</th>
-                  <th>Langue mat.</th>
-                  <th>Apprend le</th>
-                  <th>Inscrit depuis</th>
-                  <th>Cartes créées</th>
-                  <th>Decks crées</th>
+                  <th class="text-primary">ID</th>
+                  <th class="text-primary">Nom</th>
+                  <th class="text-primary">Langue mat.</th>
+                  <th class="text-primary">Apprend le</th>
+                  <th class="text-primary">Inscrit depuis</th>
+                  <th class="text-primary">Cartes créées</th>
+                  <th class="text-primary">Decks crées</th>
                 </tr>
               </thead>
               <tbody>
@@ -105,21 +110,28 @@
       <div class="col-lg-4 col-md-12">
         <div class="card">
           <div class="card-header card-header-info">
-            <h4 class="card-title">Dernières cards</h4>
-            <p>
-              (total : {% set count = 0 %} {% for card in allCards %} {% set
-              count = count + 1 %} {% endfor %} {{ count }})
+            <h4 class="card-title">Dernières cartes</h4>
+            <p class="card-category text-white">
+              {% set count = 0 %} {% for card in allCards %} {% set
+                count = count + 1 %} {% endfor %}
+              {% if count == 0 %}
+              Il n'y a aucune carte
+              {% else %}
+              <a href="{{ path('admin-cards') }}" class=" text-white">Voir toutes les cartes 
+                  (total : {{ count }})
+                </a>
+              {% endif %}
             </p>
           </div>
           <div class="card-body table-responsive">
             <table class="table table-hover">
-              <thead class="text-warning">
+              <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Langue</th>
-                  <th>Catégorie</th>
-                  <th>Créé le</th>
-                  <th>Auteur</th>
+                  <th class="text-info">ID</th>
+                  <th class="text-info">Langue</th>
+                  <th class="text-info">Catégorie</th>
+                  <th class="text-info">Créé le</th>
+                  <th class="text-info">Auteur</th>
                 </tr>
               </thead>
               <tbody>
@@ -143,20 +155,27 @@
         <div class="card">
           <div class="card-header card-header-warning">
             <h4 class="card-title">Derniers decks</h4>
-            <p>
-              (total : {% set count = 0 %} {% for deck in allDecks %} {% set
-              count = count + 1 %} {% endfor %} {{ count }})
+            <p class="card-category text-white">
+              {% set count = 0 %} {% for deck in allDecks %} {% set
+                count = count + 1 %} {% endfor %}
+              {% if count == 0 %}
+              Il n'y a aucun deck
+              {% else %}
+              <a href="{{ path('admin-decks') }}" class=" text-white">Voir tous les decks 
+                  (total : {{ count }})
+                </a>
+              {% endif %}
             </p>
           </div>
           <div class="card-body table-responsive">
             <table class="table table-hover">
-              <thead class="text-warning">
+              <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Nom</th>
-                  <th>Langue</th>
-                  <th>Créé le</th>
-                  <th>Auteur</th>
+                  <th class="text-warning">ID</th>
+                  <th class="text-warning">Nom</th>
+                  <th class="text-warning">Langue</th>
+                  <th class="text-warning">Créé le</th>
+                  <th class="text-warning">Auteur</th>
                 </tr>
               </thead>
               <tbody>
