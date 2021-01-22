@@ -25,7 +25,7 @@ class CategoriesController extends AbstractController {
 
       $em->persist($category);
       $em->flush();
-      //$this->addFlash('success-category', 'La catégorie a bien été ajoutée !');
+      $this->addFlash('success-create-category', 'La catégorie a bien été ajoutée !');
       return $this->redirectToRoute('admin-categories');
     }
     return $this->render('./pages/administration/categoryForm.html.twig', ['categoryForm' => $form->createView()]);

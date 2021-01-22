@@ -116,7 +116,52 @@
               {{ flash }}
             </span>
           </div>
+          {% endfor %} {% for flash in app.flashes('success-create-language') %}
+          <div class="alert alert-success">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+              onclick="delete_flash(this)"
+            >
+              <i class="material-icons">close</i>
+            </button>
+            <span>
+              {{ flash }}
+            </span>
+          </div>
+          {% endfor %} {% for flash in app.flashes('success-edit-language') %}
+          <div class="alert alert-success">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+              onclick="delete_flash(this)"
+            >
+              <i class="material-icons">close</i>
+            </button>
+            <span>
+              {{ flash }}
+            </span>
+          </div>
           {% endfor %} {% for flash in app.flashes('success-language') %}
+          <div class="alert alert-success">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+              onclick="delete_flash(this)"
+            >
+              <i class="material-icons">close</i>
+            </button>
+            <span>
+              {{ flash }}
+            </span>
+          </div>
+          {% endfor %}  {% for flash in app.flashes('success-create-category') %}
           <div class="alert alert-success">
             <button
               type="button"
@@ -147,21 +192,6 @@
             </span>
           </div>
           {% endfor %} {% for flash in app.flashes('success-edit-category') %}
-          <div class="alert alert-success">
-            <button
-              type="button"
-              class="close"
-              data-dismiss="alert"
-              aria-label="Close"
-              onclick="delete_flash(this)"
-            >
-              <i class="material-icons">close</i>
-            </button>
-            <span>
-              {{ flash }}
-            </span>
-          </div>
-          {% endfor %}{% for flash in app.flashes('success-edit-language') %}
           <div class="alert alert-success">
             <button
               type="button"
