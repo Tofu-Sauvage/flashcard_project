@@ -18,7 +18,9 @@
 		</span>
 	  </div>
 
-  {% endfor %} {% for flash in app.flashes('success-message') %}
+  {% endfor %} 
+  
+  {% for flash in app.flashes('success-message') %}
   <div class="alert alert-success">
     <button
     type="button"
@@ -33,6 +35,25 @@
     {{ flash }}
     </span>
   </div>
+  {% endfor %}
+
+  {% for message in app.flashes('error') %}
+
+  <div class="alert alert-danger mt-4">
+		<button
+		  type="button"
+		  class="close"
+		  data-dismiss="alert"
+		  aria-label="Close"
+		  onclick="delete_flash(this)"
+		>
+		  <i class="material-icons">close</i>
+		</button>
+		<span>
+		  {{ message }}
+		</span>
+	  </div>
+
   {% endfor %}
 
   <div class="row mt-5">

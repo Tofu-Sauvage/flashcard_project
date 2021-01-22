@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\InscriptionType;
 use App\Repository\LanguageRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +20,7 @@ class HomeController extends AbstractController {
         $this->encoder = $encoder;
     }
 
-  public function homeAction(Request $request, EntityManagerInterface $em, LanguageRepository $languageRepository) {
+  public function homeAction(Request $request, EntityManagerInterface $em, LanguageRepository $languageRepository, UserRepository $userRepository) {
     $user = new User();
     $form = $this->createForm(InscriptionType::class);
     
@@ -28,6 +29,13 @@ class HomeController extends AbstractController {
     if($form->isSubmitted() && $form->isValid()){
 
       $user = $form->getData();
+
+      $test = $userRepository->findOneBy(['email' => $user->getEmail()]);
+
+      if($test) {
+        $this->addFlash('error', "Ce mail est déja utilisé !");
+      return $this->redirectToRoute('index');
+      }
 
       $image = $form->get('image')->getData();
       
@@ -49,7 +57,7 @@ class HomeController extends AbstractController {
       $em->flush();
       
       $this->addFlash('success', "Vous êtes bien inscrit. Connectez-vous !");
-      return $this->redirectToRoute('accueil');
+      return $this->redirectToRoute('index');
     }
     return $this->render("pages/accueil.html.twig", ['form' => $form->createView(), 'errors' => $form->getErrors()]);
   }
