@@ -72,7 +72,7 @@
                   <td>{{ message.email }}</td>
                   <td>{{ message.subject }}</td>
                   <td>{{ message.content }}</td>
-                  <td>{{ message.createdAt | date("m/d/Y")}}</td>
+                  <td>{{ message.createdAt | date("d/m/Y")}}</td>
                 </tr>
                 {% endfor %}
               </tbody>{{ knp_pagination_render(messages) }}
