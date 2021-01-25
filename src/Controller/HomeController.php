@@ -44,7 +44,7 @@ class HomeController extends AbstractController {
         $image->move($this->getParameter('uploads'), $newFileName);
         $user->setImage($newFileName);
       } else {
-        $user->setImage('lapin.jpg'); // Image "blanche" de lapin par défaut
+        $user->setImage('default-user.png'); // Image "blanche" de lapin par défaut
       }
 
       $user->setCreatedAt(new \DateTime()); // Date et heure au moment de la création
