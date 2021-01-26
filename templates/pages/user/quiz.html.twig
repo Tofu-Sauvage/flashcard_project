@@ -23,7 +23,7 @@
                             <input type="text" class="uneReponseUser form-control" id="exampleInput1">
                             <label for="exampleInput1" class="bmd-label-floating">Entrez votre réponse.</label><br/>
                             <input type="submit" class="btn btn-primary" value="Envoyer la réponse" 
-                                   onclick="verifierReponse({{ compteur }},'{{ q.question }}','{{ q.answer }}')">
+                                   onclick='verifierReponse({{ compteur }},"{{ q.question }}","{{ q.answer }}")'>
                             <div class="alert alert-success" role="alert">
                                 Bonne réponse !
                             </div>
