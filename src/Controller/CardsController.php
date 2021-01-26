@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CardsController extends AbstractController {
 
+  /* Vue Admin : affiche l'intégralité des cartes créées */
   public function indexAction(CardRepository $cardRepository, Request $request, PaginatorInterface $paginator) {
     $cardsTable = $cardRepository->findAll();
 
@@ -20,14 +21,15 @@ class CardsController extends AbstractController {
     $firstPage = 1;
 
     $cards = $paginator->paginate(
-        $cardsTable, // Requête contenant les données à paginer (ici nos articles)
-        $request->query->getInt('page', $firstPage), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-        $limit // Nombre de résultats par page
+        $cardsTable,
+        $request->query->getInt('page', $firstPage),
+        $limit
     );
     
     return $this->render('./pages/administration/cards.html.twig', ['cards'=>$cards, 'cardsTable'=>$cardsTable]);
   }
 
+  /* Vue User : affiche l'intégralité des cartes créées */
   public function indexCardGestionAction(CategoryRepository $categoryRepository, CardRepository $cardRepository, Request $request, PaginatorInterface $paginator) {
     $idActiveUser = $this->getUser()->getID();
     $listeCategories = $categoryRepository->findBy([], ['id' => 'desc']);
@@ -37,14 +39,15 @@ class CardsController extends AbstractController {
     $firstPage = 1;
 
     $paginationCards = $paginator->paginate(
-        $listeCards, // Requête contenant les données à paginer (ici nos articles)
-        $request->query->getInt('page', $firstPage), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-        $limit // Nombre de résultats par page
+        $listeCards,
+        $request->query->getInt('page', $firstPage),
+        $limit
     );
 
     return $this->render('./pages/user/cardGestion.html.twig', ['categories' => $listeCategories, 'cards' => $listeCards, 'paginationCards'=>$paginationCards]);
   }
 
+  /* Vue User : affiche le formulaire de création de cartes */
   public function cardCreateAction(Request $request, EntityManagerInterface $em, $categoryId, CategoryRepository $categoryRepository)
   {
     $categorySelected = $categoryRepository->findOneBy(['id' => $categoryId]);
@@ -79,6 +82,7 @@ class CardsController extends AbstractController {
     return $this->render('./pages/user/cardForm.html.twig', ['cardForm' => $form->createView(), 'category' => $categorySelected, 'modeEdition' => $modeEdition]);
   }
 
+  /* Vue User : affiche le formulaire de modification de cartes */
   public function cardUpdateAction(Request $request, EntityManagerInterface $em, CardRepository $cardRepository, CategoryRepository $categoryRepository, $categoryId, $cardId) {
     
     $categorySelected = $categoryRepository->findOneBy(['id' => $categoryId]);
@@ -113,18 +117,21 @@ class CardsController extends AbstractController {
     return $this->render('./pages/user/cardForm.html.twig', ['cardForm' => $form->createView(), 'category' => $categorySelected, 'modeEdition' => $modeEdition]);
   }
 
+  /* Vue Admin : affiche le détail d'une carte */
   public function detailAction(CardRepository $cardRepository, $id)
   {
     $card =  $cardRepository->findOneBy(['id' => $id]);
     return $this->render('./pages/administration/card.html.twig', ['card' => $card]);
   }
 
+  /* Vue User : affiche le détail d'une carte */
   public function detailCardUserAction(CardRepository $cardRepository, $id)
   {
     $card =  $cardRepository->findOneBy(['id' => $id]);
     return $this->render('./pages/user/cardDetail.html.twig', ['card' => $card]);
   }
 
+  /* Vue Admin : suppression d'une carte */
   public function deleteAction(EntityManagerInterface $em, CardRepository $cardRepository, $id)
   {
     $card = $cardRepository->find($id);
@@ -134,6 +141,7 @@ class CardsController extends AbstractController {
     return $this->redirectToRoute('admin-cards');
   }
 
+  /* Vue User : suppression d'une carte */
   public function deleteCardUserAction(EntityManagerInterface $em, CardRepository $cardRepository, $id)
   {
     $card = $cardRepository->find($id);

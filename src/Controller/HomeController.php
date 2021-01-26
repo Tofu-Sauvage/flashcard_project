@@ -20,6 +20,7 @@ class HomeController extends AbstractController {
         $this->encoder = $encoder;
     }
 
+  /* Vue User : affiche la page d'accueil avec le formulaire d'inscription */ 
   public function homeAction(Request $request, EntityManagerInterface $em, LanguageRepository $languageRepository, UserRepository $userRepository) {
     $user = new User();
     $form = $this->createForm(InscriptionType::class);

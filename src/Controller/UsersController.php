@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class UsersController extends AbstractController {
 
+  /* Vue Admin : affiche la liste des inscrits */
   public function indexAction(UserRepository $userRepository, Request $request, PaginatorInterface $paginator) {
     $usersTable = $userRepository->findAll();
 
@@ -26,6 +27,7 @@ class UsersController extends AbstractController {
     return $this->render('./pages/administration/users.html.twig', ['users'=>$users, 'usersTable'=>$usersTable]);
   }
 
+  /* Vue Admin : affiche les détails d'un inscrit */
   public function detailAction(UserRepository $userRepository, $id, CardRepository $cardRepository, Request $request, PaginatorInterface $paginator, DeckRepository $deckRepository)
   {
     $user =  $userRepository->findOneBy(['id' => $id]);
@@ -36,19 +38,20 @@ class UsersController extends AbstractController {
     $firstPage = 1;
 
     $cards = $paginator->paginate(
-        $usersCards, // Requête contenant les données à paginer (ici nos articles)
-        $request->query->getInt('page', $firstPage), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-        $limit // Nombre de résultats par page
+        $usersCards,
+        $request->query->getInt('page', $firstPage),
+        $limit
     );
 
     $decks = $paginator->paginate(
-      $usersDecks, // Requête contenant les données à paginer (ici nos articles)
-      $request->query->getInt('page', $firstPage), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-      $limit // Nombre de résultats par page
+      $usersDecks,
+      $request->query->getInt('page', $firstPage),
+      $limit 
   );
     return $this->render('./pages/administration/user.html.twig', ['user' => $user, 'cards'=>$cards, 'usersCards'=>$usersCards, 'decks'=>$decks, 'usersDecks'=>$usersDecks]);
   }
 
+  /* Admin : gère la suppression d'un inscrit */
   public function deleteAction(EntityManagerInterface $em, UserRepository $userRepository, $id)
   {
     $user = $userRepository->find($id);

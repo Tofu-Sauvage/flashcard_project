@@ -16,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DecksController extends AbstractController {
 
+  /* Vue Admin : affiche l'intégralité des decks créés */
   public function indexAction(DeckRepository $deckRepository, Request $request, PaginatorInterface $paginator) {
     $decksTable = $deckRepository->findAll();
 
@@ -23,13 +24,14 @@ class DecksController extends AbstractController {
     $firstPage = 1;
 
     $decks = $paginator->paginate(
-        $decksTable, // Requête contenant les données à paginer (ici nos articles)
-        $request->query->getInt('page', $firstPage), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-        $limit // Nombre de résultats par page
+        $decksTable,
+        $request->query->getInt('page', $firstPage),
+        $limit
     );
     return $this->render('./pages/administration/decks.html.twig', ['decks'=>$decks, 'decksTable'=>$decksTable]);
   }
 
+  /* Vue User : affiche le formulaire de création de deck */
   public function deckCreateAction(Request $request, EntityManagerInterface $em)
   {
     $form = $this->createForm(DeckType::class);
@@ -44,6 +46,7 @@ class DecksController extends AbstractController {
     return $this->render('./pages/administration/deckForm.html.twig', ['deckForm' => $form->createView()]);
   }
 
+  /* Vue User : tous les decks créés par ce User */
   public function indexGestionAction(DeckRepository $deckRepository, Request $request, PaginatorInterface $paginator) {
     $idActiveUser = $this->getUser()->getID();
     $listeDecks = $deckRepository->findBy(['author' => $idActiveUser]);
@@ -53,14 +56,15 @@ class DecksController extends AbstractController {
     $limitNbDecks = 10;
 
     $paginationDecks = $paginator->paginate(
-        $listeDecks, // Requête contenant les données à paginer (ici nos articles)
-        $request->query->getInt('page', $firstPage), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-        $limit // Nombre de résultats par page
+        $listeDecks,
+        $request->query->getInt('page', $firstPage),
+        $limit
     );
 
     return $this->render('./pages/user/deckGestion.html.twig', ['decks' => $listeDecks, 'paginationDecks'=>$paginationDecks, 'limitNbDecks' => $limitNbDecks]);
   }
 
+  /* Vue User : affiche le formulaire de création de deck */
   public function deckUserCreateAction(Request $request, DeckRepository $deckRepository, EntityManagerInterface $em)
   {
     $modeEdition = false;
@@ -88,6 +92,7 @@ class DecksController extends AbstractController {
     return $this->render('./pages/user/deckForm.html.twig', ['deckForm' => $form->createView(), 'modeEdition' => $modeEdition, 'limitNbDecks' => $limitNbDecks, 'decks' => $decks]);
   }
 
+  /* Vue User : affiche le formulaire de modification de deck */
   public function deckUserUpdateAction(Request $request, DeckRepository $deckRepository, EntityManagerInterface $em, $id)
   {
     $modeEdition = true;
@@ -115,6 +120,7 @@ class DecksController extends AbstractController {
     return $this->render('./pages/user/deckForm.html.twig', ['deckForm' => $form->createView(), 'modeEdition' => $modeEdition, 'limitNbDecks' => $limitNbDecks, 'decks' => $decks]);
   }
 
+  /* Vue User : permet de mettre un deck externe en favori */
   public function deckFavAction(DeckRepository $deckRepository, EntityManagerInterface $em, $deckId)
   {
     $deck = $deckRepository->findOneBy(['id' => $deckId]);
@@ -141,6 +147,7 @@ class DecksController extends AbstractController {
     return($this->rechercherDeck($deckRepository, $deckId));
   }
 
+  /* Vue User : permet de supprimer un deck externe des favoris */
   public function deckRemoveFavAction(DeckRepository $deckRepository, EntityManagerInterface $em, $deckId)
   {
     $deck = $deckRepository->findOneBy(['id' => $deckId]);
@@ -153,6 +160,7 @@ class DecksController extends AbstractController {
     return($this->rechercherDeck($deckRepository, $deckId));
   }
 
+  /* Vue User : permet de signaler un deck inadapté */
   public function deckSignalAction(DeckRepository $deckRepository, $deckId)
   {
     $deck = $deckRepository->findOneBy(['id' => $deckId]);
@@ -164,6 +172,7 @@ class DecksController extends AbstractController {
     return($this->signalerDeck($deckRepository, $deck));
   }
 
+  /* Vue Admin : affiche le détail d'un deck */
   public function detailAction(DeckRepository $deckRepository, $id, UserRepository $userRepository, Request $request, PaginatorInterface $paginator)
   {
     $deck =  $deckRepository->findOneBy(['id' => $id]);     
@@ -186,6 +195,7 @@ class DecksController extends AbstractController {
     return $this->render('./pages/administration/deck.html.twig', ['deck' => $deck, 'users'=>$users, 'tagsTable'=>$tagsTable, 'cards'=>$cards, 'allCards'=>$allCards]);
   }
 
+  /* Vue User : affiche le détail d'un deck ainsi que toutes les cartes de l'utilisateur */
   public function detailUserAction(DeckRepository $deckRepository, CardRepository $cardRepository, $id, Request $request, PaginatorInterface $paginator)
   {
     $deck =  $deckRepository->findOneBy(['id' => $id]);
@@ -214,9 +224,9 @@ class DecksController extends AbstractController {
     $firstPage = 1;
 
     $paginationCards = $paginator->paginate(
-        $listeCards, // Requête contenant les données à paginer (ici les carts non-inclus dans le deck)
-        $request->query->getInt('page', $firstPage), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-        $limit // Nombre de résultats par page
+        $listeCards,
+        $request->query->getInt('page', $firstPage),
+        $limit
     );
 
     return $this->render('./pages/user/deckDetail.html.twig', [
@@ -227,6 +237,7 @@ class DecksController extends AbstractController {
       ]);
   }
 
+  /* Vue Admin : gère la suppression d'un deck */
   public function deleteAction(EntityManagerInterface $em, DeckRepository $deckRepository, $id)
   {
     $deck = $deckRepository->find($id);
@@ -236,6 +247,7 @@ class DecksController extends AbstractController {
     return $this->redirectToRoute('admin-decks');
   }
 
+  /* Vue User : gère la suppression d'un deck */
   public function deleteUserAction(EntityManagerInterface $em, DeckRepository $deckRepository, $id)
   {
     $deck = $deckRepository->find($id);
@@ -245,6 +257,7 @@ class DecksController extends AbstractController {
     return $this->redirectToRoute('deck-gestion');
   }
 
+  /* Vue User : pour ajouter une carte à un deck */
   public function addCardToDeckFromDeckDetailAction(DeckRepository $deckRepository, CardRepository $cardRepository, EntityManagerInterface $em, $idCard, $idDeck) {
     $deck = $deckRepository->findOneBy(["id" => $idDeck]);
     $card = $cardRepository->findOneBy(["id" => $idCard]);
@@ -257,6 +270,7 @@ class DecksController extends AbstractController {
     return $this->redirectToRoute('deck-detail', ["id" => $idDeck]);
   }
 
+  /* Vue User : pour oter une carte d'un deck */
   public function removeCardToDeckFromDeckDetailAction(DeckRepository $deckRepository, CardRepository $cardRepository, EntityManagerInterface $em, $idCard, $idDeck) {
     $deck = $deckRepository->findOneBy(["id" => $idDeck]);
     $card = $cardRepository->findOneBy(["id" => $idCard]);
@@ -269,6 +283,7 @@ class DecksController extends AbstractController {
     return $this->redirectToRoute('deck-detail', ["id" => $idDeck]);
   }
 
+  /* User : pour mélanger les cartes d'un deck avant quizz ou révision */
   public function shuffleLesCartes($deckRepository, $deckId)
   {
     $deck = $deckRepository->findOneBy(['id' => $deckId]);
@@ -285,19 +300,21 @@ class DecksController extends AbstractController {
     return $arrayCards;
   }
 
+  /* Vue User : pour lancer une révision */
   public function launchRevisionAction(DeckRepository $deckRepository, $deckId)
   {
     $mesCartes = $this->shuffleLesCartes($deckRepository, $deckId);
     return $this->render('./pages/user/revision.html.twig', ['cartes' => $mesCartes]);
   }
 
+  /* Vue User : pour lancer un quizz */
   public function launchQuizAction(DeckRepository $deckRepository, $deckId)
   {
     $mesCartes = $this->shuffleLesCartes($deckRepository, $deckId);
     return $this->render('./pages/user/quiz.html.twig', ['cartes' => $mesCartes]);
   }
 
-
+  /* Vue User : page de recherche avec formulaire de recherche et affichage des decks externes publics */
   public function rechercherVide(DeckRepository $deckRepository)  {
     $allMesDecks = $deckRepository->findBy(['public' => true]);
 
@@ -315,6 +332,7 @@ class DecksController extends AbstractController {
     return $this->render("pages/user/recherche.html.twig", ["deck_all" => $allDecks, "favs_deck_all" => $allFavsDecks, "jeCherche" => '']);
   }
 
+  /* Vue User : affiche le résultat de la recherche de decks externes sur plusieurs critères */
   public function rechercher(DeckRepository $deckRepository, $jeCherche)  {
     $allMesDecks = $deckRepository->findBy(['public' => true]);
 
@@ -355,6 +373,7 @@ class DecksController extends AbstractController {
     return $this->render("pages/user/recherche.html.twig", ["deck_all" => $allDecks, "favs_deck_all" => $allFavsDecks, "jeCherche" => $jeCherche]);
   }
 
+  /* Vue Admin : rechercher les decks par mots-clef */
   public function findDecksByTag(DeckRepository $deckRepository, $tag){
     $allMesDecks =  $deckRepository->findAll();
     $allDecks =[];
@@ -376,6 +395,7 @@ class DecksController extends AbstractController {
     return $this->render('./pages/administration/decksFindByTag.html.twig', ["allDecks" => $allDecks, "tag" => $tag, "allMesDecks"=>$allMesDecks]);
   }
 
+  /* Vue user : affiche le deck rechercher en détails */
   public function rechercherDeck(DeckRepository $deckRepository, $deckId){
     $monDeck = $deckRepository->findOneBy(['id' => $deckId]);
     $mesCartes = $monDeck->getCards();
@@ -396,6 +416,7 @@ class DecksController extends AbstractController {
     return $this->render("pages/user/rechercheDeck.html.twig", ["deck" => $monDeck, "cards" => $mesCartes, "isFav" => $esTuFav]);
   }
 
+  /* Vue user : affiche un formulaire pour justifier le signalement */
   public function signalerDeck(DeckRepository $deckRepository, $deckId){
     $monDeck = $deckRepository->findOneBy(['id' => $deckId]);
 
