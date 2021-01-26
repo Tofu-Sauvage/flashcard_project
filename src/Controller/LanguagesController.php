@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class LanguagesController extends AbstractController {
 
+  /* Vue Admin : affiche la liste des langues */
   public function indexAction(LanguageRepository $languageRepository, Request $request, PaginatorInterface $paginator) {
     $languagesTable = $languageRepository->findAll();
 
@@ -21,13 +22,14 @@ class LanguagesController extends AbstractController {
     $firstPage = 1;
 
     $languages = $paginator->paginate(
-        $languagesTable, // Requête contenant les données à paginer (ici nos articles)
-        $request->query->getInt('page', $firstPage), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-        $limit // Nombre de résultats par page
+        $languagesTable, 
+        $request->query->getInt('page', $firstPage),
+        $limit
     );
     return $this->render('./pages/administration/languages.html.twig', ['languages'=>$languages, 'languagesTable'=>$languagesTable]);
   }
 
+  /* Vue Admin : affiche le formulaire de création de langue */
   public function languageCreateAction(Request $request, EntityManagerInterface $em)
   {
     $form = $this->createForm(LanguageType::class);
@@ -53,6 +55,7 @@ class LanguagesController extends AbstractController {
     return $this->render('./pages/administration/languageForm.html.twig', ['languageForm' => $form->createView()]);
   }
 
+  /* Vue Admin : affiche le formulaire d'édition de langue */
   public function languageEditAction(Request $request, LanguageRepository $languageRepository, EntityManagerInterface $em, $id)
   {
 
@@ -80,6 +83,7 @@ class LanguagesController extends AbstractController {
     return $this->render('./pages/administration/languageForm.html.twig', ['languageForm' => $languageForm->createView()]);
   }
 
+  /* Vue Admin : affiche le formulaire de suppression de langue */
   public function languageDeleteAction(EntityManagerInterface $em, LanguageRepository $languageRepository, $id)
   {
     $language = $languageRepository->find($id);

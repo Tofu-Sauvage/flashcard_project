@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminController extends AbstractController
 {
+  /* Affiche les dernières inofs dans le dashboard Admin */
   public function indexAction(UserRepository $userRepository, CardRepository $cardRepository, DeckRepository $deckRepository, MessageRepository $messageRepository)
   {
     $lastUsers = $userRepository->findLastestUsers();

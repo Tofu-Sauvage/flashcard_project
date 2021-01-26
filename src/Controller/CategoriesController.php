@@ -11,11 +11,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CategoriesController extends AbstractController {
 
+  /* Vue Admin : affiche toutes les catégories */
   public function indexAction(CategoryRepository $categoryRepository) {
     $categories = $categoryRepository->findAll();
     return $this->render('./pages/administration/categories.html.twig', ['categories'=>$categories]);
   }
 
+  /* Vue Admin : affiche le formulaire de création de catégorie */
   public function categoryCreateAction(Request $request, EntityManagerInterface $em)
   {
     $form = $this->createForm(CategoryType::class);
@@ -31,6 +33,7 @@ class CategoriesController extends AbstractController {
     return $this->render('./pages/administration/categoryForm.html.twig', ['categoryForm' => $form->createView()]);
   }
 
+  /* Vue Admin : affiche le formulaire de modification de catégorie */
   public function categoryEditAction(Request $request, CategoryRepository $categoryRepository, EntityManagerInterface $em, $id)
   {
     $category = $categoryRepository->find($id);
@@ -47,7 +50,7 @@ class CategoriesController extends AbstractController {
     return $this->render('./pages/administration/categoryForm.html.twig', ['categoryForm' => $categoryForm->createView()]);
   }
 
-
+  /* Vue Admin : affiche le formulaire de suppression de catégorie */
   public function categoryDeleteAction(EntityManagerInterface $em, CategoryRepository $categoryRepository, $id)
   {
     $category = $categoryRepository->find($id);
@@ -57,6 +60,7 @@ class CategoriesController extends AbstractController {
     return $this->redirectToRoute('admin-categories');  
   }
 
+  /* Vue Admin : affiche le détail d'une catégorie avec les cartes s'y rapportant */
   public function detailAction(CategoryRepository $categoryRepository, $id, CardRepository $cardRepository)
   {
     $category =  $categoryRepository->findOneBy(['id' => $id]);

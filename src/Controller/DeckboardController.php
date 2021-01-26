@@ -10,6 +10,7 @@ use DateTime;
 
 class DeckboardController extends AbstractController {
 
+  /* Vue User : affiche le deckboard du User avec ses dernièrs enregistrements */
   public function indexAction(CardRepository $cardRepository, DeckRepository $deckRepository, LanguageRepository $languageRepository) {
     $idActiveUser = $this->getUser()->getId();
     $lastCard = $cardRepository->findOneBy(['author' => $idActiveUser], ['id' => 'desc']);
