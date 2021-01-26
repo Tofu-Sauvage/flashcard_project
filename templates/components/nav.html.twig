@@ -27,6 +27,12 @@
       id="navbarNav"
     >
       <ul class="navbar-nav">
+        {% if not app.user %}
+          <li class="nav-item {{ 'login' in app.request.uri ? 'active' : '' }} li-responsive">
+            <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+          </li>
+        {% endif %}
+
         {% if app.user %}
           <li class="nav-item {{ 'deckboard' in app.request.uri ? 'active' : '' }}">
             <a class="nav-link" href="{{ path('deckboard') }}">Deckboard</a>
@@ -40,9 +46,9 @@
             </li>
           {% endif %}
             <li class="nav-item li-responsive">
-            <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
-          </li>
-          <li class="nav-item li-responsive text-center">
+              <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+            </li>
+            <li class="nav-item li-responsive text-center">
           {% if app.user.image is not null %}
               <img
                 src="/uploads/images/{{ app.user.image }}"
@@ -58,7 +64,7 @@
                 height="auto"
               />
           {% endif %}
-          </li>
+            </li>
         {% endif %}
         </ul>
 
