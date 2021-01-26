@@ -15,7 +15,7 @@ class CardsController extends AbstractController {
 
   /* Vue Admin : affiche l'intégralité des cartes créées */
   public function indexAction(CardRepository $cardRepository, Request $request, PaginatorInterface $paginator) {
-    $cardsTable = $cardRepository->findAll();
+    $cardsTable = $cardRepository->findCardsDesc();
 
     $limit = 10; 
     $firstPage = 1;

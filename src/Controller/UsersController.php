@@ -14,7 +14,7 @@ class UsersController extends AbstractController {
 
   /* Vue Admin : affiche la liste des inscrits */
   public function indexAction(UserRepository $userRepository, Request $request, PaginatorInterface $paginator) {
-    $usersTable = $userRepository->findAll();
+    $usersTable = $userRepository->findUsersDesc();
 
     $limit = 10; 
     $firstPage = 1;

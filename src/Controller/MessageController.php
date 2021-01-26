@@ -15,7 +15,7 @@ class MessageController extends AbstractController
 {
   /* Afficher l'intégralité des messages de contact dans la vue admin */
   public function indexAction(MessageRepository $messageRepository, Request $request, PaginatorInterface $paginator) {
-    $messagesTable = $messageRepository->findAll();
+    $messagesTable = $messageRepository->findMessagesDesc();
 
     $limit = 10; 
     $firstPage = 1;

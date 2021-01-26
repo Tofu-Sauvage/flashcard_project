@@ -32,7 +32,15 @@ class DeckRepository extends ServiceEntityRepository
         ;
     }
 
-    
+    public function findDecksDesc()
+    {
+        return $this->createQueryBuilder('d')
+            ->orderBy('d.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     public function findByUser($userId)
     {
         return $this->createQueryBuilder('d')
