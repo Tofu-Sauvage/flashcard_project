@@ -29,6 +29,15 @@ class MessageRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findMessagesDesc()
+    {
+        return $this->createQueryBuilder('m')
+            ->orderBy('m.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Message[] Returns an array of Message objects
     //  */

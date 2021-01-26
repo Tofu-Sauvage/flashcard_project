@@ -18,7 +18,7 @@ class DecksController extends AbstractController {
 
   /* Vue Admin : affiche l'intégralité des decks créés */
   public function indexAction(DeckRepository $deckRepository, Request $request, PaginatorInterface $paginator) {
-    $decksTable = $deckRepository->findAll();
+    $decksTable = $deckRepository->findDecksDesc();
 
     $limit = 10; 
     $firstPage = 1;

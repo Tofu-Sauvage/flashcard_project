@@ -35,6 +35,15 @@ class CardRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findCardsDesc()
+    {
+        return $this->createQueryBuilder('c')
+            ->orderBy('c.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     public function findByUser($userId)
     {
         return $this->createQueryBuilder('c')
