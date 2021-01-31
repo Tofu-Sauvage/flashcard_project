@@ -35,22 +35,14 @@
     <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
   </head>
   <body class="dark-edition" {% block attributBody %}{% endblock %}>
-    <div
-      class="sidebar"
-      data-color="purple"
-      data-background-color="black"
-      id="nav-responsive"
-    >
-      {% include './components/sidebarResp.html.twig' %}
-    </div>
-
+    {% include "./components/sidebarResp.html.twig" %}
     {% include "./components/nav.html.twig" %}
     <div class="container">
       {% block body %}{% endblock %}
-      <div class="footer-spacer"></div>
-      {% include "./components/footer.html.twig" %}
+      <div class="footer-spacer">
+        {% include "./components/footer.html.twig" %}
+      </div>
     </div>
-
     {% include "./components/script_js.html.twig" %} {% block javascripts %}{%
     endblock %}
   </body>
