@@ -47,5 +47,34 @@ class UserFixtures extends Fixture
         ->setImage("");
         $manager->persist($admin);
         $manager->flush();
+
+        $lulu = new User();
+        $lulu->setEmail("lulu@lulu.com")
+        ->setPassword($this->encoder->encodePassword($lulu, 'lulu'))
+        ->setRoles(['ROLE_USER'])
+        ->setName("Lulu")
+        ->setCreatedAt(new DateTime("now"))
+        ->setLanguageNative($french)
+        ->setLanguageLearn($english)
+        ->setImage("");
+        $manager->persist($lulu);
+        $manager->flush();
+
+        // CARDS TYPE
+        $conjuguaison = new Category();
+        $conjuguaison->setName("Conjuguaison");
+        $manager->persist($conjuguaison);
+        $manager->flush();
+
+        $vocabulaire = new Category();
+        $vocabulaire->setName("Vocabulaire");
+        $manager->persist($vocabulaire);
+        $manager->flush();
+
+        $dicton = new Category();
+        $dicton->setName("Dicton");
+        $manager->persist($dicton);
+        $manager->flush();
+
     }
 }
